@@ -9,8 +9,6 @@ export const CreateSubscription = async ({
   id,
   price_id,
   status,
-  created_at,
-  period_starts_at,
   period_ends_at
 }: Subscription) => {
   const user = await GetUser();
@@ -20,8 +18,6 @@ export const CreateSubscription = async ({
     id,
     price_id,
     status,
-    created_at,
-    period_starts_at,
     period_ends_at,
     user: { connect: { id: user_id } }
   };
@@ -37,15 +33,11 @@ export const UpdateSubscription = async ({
   id,
   price_id,
   status,
-  created_at,
-  period_starts_at,
   period_ends_at
 }: Partial<Subscription>) => {
   const data: Prisma.SubscriptionUpdateInput = {
     price_id,
     status,
-    created_at,
-    period_starts_at,
     period_ends_at
   };
 

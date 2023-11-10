@@ -12,7 +12,6 @@ import { Login, GoogleLogin } from '@/lib/API/Services/auth/login';
 
 import config from '@/lib/config/auth';
 import { useRouter } from 'next/navigation';
-
 interface AuthFormPropsI {
   submit_text: string;
 }
