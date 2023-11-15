@@ -1,10 +1,6 @@
-module.exports = {
-  images: {
-    remotePatterns: [
-      {
-        protocol: 'https',
-        hostname: 'tailwindui.com'
-      }
-    ]
-  }
-};
+const withNextra = require('nextra')({
+  theme: 'nextra-theme-docs',
+  themeConfig: './theme.config.jsx'
+});
+
+module.exports = withNextra();
