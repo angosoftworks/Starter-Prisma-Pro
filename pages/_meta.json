@@ -1,3 +1,13 @@
 {
-  "docs": { "title": "Documentation", "type": "page" }
+  "docs": {
+    "title": "Documentation",
+    "type": "page",
+    "theme": {
+      "breadcrumb": false,
+      "footer": true,
+      "sidebar": true,
+      "toc": true,
+      "pagination": false
+    }
+  }
 }
