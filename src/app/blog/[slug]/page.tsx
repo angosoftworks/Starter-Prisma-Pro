@@ -1,8 +1,19 @@
 import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
-
+import { mdxComponents } from '../_PageSections/MdxComponents';
 import { MDXRemote } from 'next-mdx-remote/rsc';
+
+import remarkGfm from 'remark-gfm';
+import rehypeSlug from 'rehype-slug';
+import rehypeAutolinkHeadings from 'rehype-autolink-headings';
+interface UrlParamsI {
+  params: { slug: string };
+}
+
+interface GetPostI {
+  slug: string;
+}
 
 export async function generateStaticParams() {
   const files = fs.readdirSync(path.join('posts'));
@@ -14,7 +25,7 @@ export async function generateStaticParams() {
   return paths;
 }
 
-export async function generateMetadata({ params }: any) {
+export async function generateMetadata({ params }: UrlParamsI) {
   const blog = getPost(params);
 
   return {
@@ -23,7 +34,7 @@ export async function generateMetadata({ params }: any) {
   };
 }
 
-function getPost({ slug }: { slug: string }) {
+function getPost({ slug }: GetPostI) {
   const markdownFile = fs.readFileSync(path.join('posts', slug + '.mdx'), 'utf-8');
 
   const { data: frontMatter, content } = matter(markdownFile);
@@ -35,14 +46,22 @@ function getPost({ slug }: { slug: string }) {
   };
 }
 
-export default function Post({ params }: any) {
-  const props = getPost(params);
+export default function Post({ params }: UrlParamsI) {
+  const post = getPost(params);
 
   return (
-    <article className="prose prose-sm md:prose-base lg:prose-lg prose-slate !prose-invert mx-auto">
-      <h1>{props.frontMatter.title}</h1>
-
-      <MDXRemote source={props.content} />
+    <article>
+      <h1>{post.frontMatter.title}</h1>
+      <MDXRemote
+        options={{
+          mdxOptions: {
+            remarkPlugins: [remarkGfm],
+            rehypePlugins: [rehypeSlug, rehypeAutolinkHeadings]
+          }
+        }}
+        components={mdxComponents}
+        source={post.content}
+      />
     </article>
   );
 }
