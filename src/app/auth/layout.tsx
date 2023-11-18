@@ -4,6 +4,8 @@ import { LayoutProps } from '@/lib/types/types';
 import { ThemeDropDownMenu } from '../../components/ThemeDropdown';
 
 export default async function AuthLayout({ children }: LayoutProps) {
+  //if logged in and not onboarding redirect
+
   return (
     <div>
       <header className="p-6 mb-4">

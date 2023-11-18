@@ -41,7 +41,19 @@ export const UpdatePasswordFormSchema = z.object({
     })
 });
 
+export const OrgFormSchema = z.object({
+  name: z
+    .string()
+    .min(3, {
+      message: 'Org name must be at least 3 characters.'
+    })
+    .max(24, {
+      message: 'Org name must not be longer than 24 characters.'
+    })
+});
+
 export type DisplayNameFormValues = z.infer<typeof DisplayNameFormSchema>;
 export type EmailFormValues = z.infer<typeof EmailFormSchema>;
 export type UpdatePasswordFormValues = z.infer<typeof UpdatePasswordFormSchema>;
 export type todoFormValues = z.infer<typeof todoFormSchema>;
+export type OrgFormValues = z.infer<typeof OrgFormSchema>;

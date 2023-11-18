@@ -20,6 +20,7 @@ const config = {
     toLogin: '/auth/login',
     requireAuth: '/auth/required',
     authConfirm: '/auth/confirmed',
+    toOnboarding: '/auth/onboarding',
     callback: '/api/auth-callback',
     toProfile: '/dashboard/settings/profile',
     requireSub: '/dashboard/settings/subscription-required',

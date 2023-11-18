@@ -13,7 +13,7 @@ export const Login = async ({ email }: EmailFormValues) => {
     const signInResult = await signIn(AuthProviderE.EMAIL, {
       email: email.toLowerCase(),
       redirect: false,
-      callbackUrl: config.redirects.toDashboard
+      callbackUrl: config.redirects.toOnboarding
     });
 
     if (signInResult?.error) {
@@ -30,7 +30,7 @@ export const Login = async ({ email }: EmailFormValues) => {
 export const GoogleLogin = async () => {
   try {
     const signInResult = await signIn(AuthProviderE.GOOGLE, {
-      callbackUrl: config.redirects.toDashboard
+      callbackUrl: config.redirects.toOnboarding
     });
 
     if (signInResult?.error) {
