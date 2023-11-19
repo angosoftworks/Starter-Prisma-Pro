@@ -18,3 +18,20 @@ export const GetUser = async (): Promise<User> => {
     PrismaDBError(err);
   }
 };
+
+export const GetUserByEmail = async ({ email }: { email: string }): Promise<User> => {
+  try {
+    const user = await prisma.user.findUnique({
+      where: {
+        email
+      },
+      select: {
+        name: true,
+        emailVerified: true
+      }
+    });
+    return user;
+  } catch (err) {
+    PrismaDBError(err);
+  }
+};

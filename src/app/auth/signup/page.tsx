@@ -21,7 +21,7 @@ export default function Signup() {
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <AuthForm submit_text="Signup with Email" />
+          <AuthForm submit_text="Signup with Email" auth_flow="signup" />
         </CardContent>
         <CardFooter>
           <div className="flex flex-col">

@@ -8,12 +8,16 @@ import config from '@/lib/config/auth';
 import { AuthProviderE } from '@/lib/types/enums';
 import { EmailFormValues } from '@/lib/types/validations';
 
-export const Login = async ({ email }: EmailFormValues) => {
+interface LoginPropsI extends EmailFormValues {
+  callbackUrl: string;
+}
+
+export const Login = async ({ email, callbackUrl }: LoginPropsI) => {
   try {
     const signInResult = await signIn(AuthProviderE.EMAIL, {
       email: email.toLowerCase(),
       redirect: false,
-      callbackUrl: config.redirects.toOnboarding
+      callbackUrl
     });
 
     if (signInResult?.error) {
@@ -27,10 +31,10 @@ export const Login = async ({ email }: EmailFormValues) => {
   }
 };
 
-export const GoogleLogin = async () => {
+export const GoogleLogin = async ({ callbackUrl }: { callbackUrl: string }) => {
   try {
     const signInResult = await signIn(AuthProviderE.GOOGLE, {
-      callbackUrl: config.redirects.toOnboarding
+      callbackUrl
     });
 
     if (signInResult?.error) {

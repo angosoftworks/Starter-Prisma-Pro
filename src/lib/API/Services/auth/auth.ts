@@ -4,6 +4,7 @@ import { PrismaClient } from '@prisma/client';
 import config from '@/lib/config/auth';
 import Google from 'next-auth/providers/google';
 import EmailProvider from 'next-auth/providers/email';
+import { sendVerificationRequest } from './sendVerificationRequest';
 
 const prisma = new PrismaClient();
 
@@ -25,17 +26,15 @@ export const {
           pass: process.env.EMAIL_SERVER_PASSWORD
         }
       },
-      from: process.env.EMAIL_FROM
-      //sendVerificationRequest({ identifier: email, url, provider: { server, from } }) {
-      //  /* your function */
-      //}
+      from: process.env.EMAIL_FROM,
+      sendVerificationRequest
     })
   ],
   adapter: PrismaAdapter(prisma),
   session: { strategy: 'database' },
   pages: {
     signIn: config.redirects.toLogin,
-    newUser: config.redirects.toOnboarding
+    newUser: config.redirects.toUserDashboard
   },
   callbacks: {
     async session({ session, user }) {

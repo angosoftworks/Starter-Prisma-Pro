@@ -6,7 +6,7 @@ import { useForm } from 'react-hook-form';
 import { Button } from '@/components/ui/Button';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/Form';
 import { Input } from '@/components/ui/Input';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/Card';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/Card';
 import { Icons } from '@/components/Icons';
 import { toast } from 'react-toastify';
 import config from '@/lib/config/api';
@@ -15,7 +15,7 @@ import { CreateOrg } from '@/lib/API/Database/org/mutations';
 import { CreateRole } from '@/lib/API/Database/roles/mutations';
 import configuration from '@/lib/config/auth';
 
-export default function Onboarding() {
+export default function CreateOrgPage() {
   const router = useRouter();
   const form = useForm<OrgFormValues>({
     resolver: zodResolver(OrgFormSchema),
@@ -37,7 +37,7 @@ export default function Onboarding() {
       const org = await CreateOrg(props);
       await CreateRole({ org_id: org?.id, role: 'owner' });
 
-      const redirectPath = `${configuration.redirects.toDashboard}/${org.id}`;
+      const redirectPath = `${configuration.redirects.toUserDashboard}`;
       router.push(redirectPath);
     } catch (err) {
       toast.error(config.errorMessageGeneral);
@@ -50,7 +50,6 @@ export default function Onboarding() {
       <Card className="bg-background-light dark:bg-background-dark">
         <CardHeader className="space-y-1">
           <CardTitle className="text-2xl">Create a Org</CardTitle>
-          <CardDescription>Create a Organization (Team) to continue</CardDescription>
         </CardHeader>
 
         <CardContent>

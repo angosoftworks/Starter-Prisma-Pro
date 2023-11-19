@@ -14,17 +14,22 @@ const config = {
     }
   },
   redirects: {
-    toDashboard: '/dashboard/main',
-    toSubscription: '/dashboard/settings/subscription',
-    toBilling: '/dashboard/settings/billing',
-    toLogin: '/auth/login',
-    requireAuth: '/auth/required',
-    authConfirm: '/auth/confirmed',
-    toOnboarding: '/auth/onboarding',
-    callback: '/api/auth-callback',
+    //dashboard
+    dashboardBase: '/dashboard/',
+    toDashboard: '/main',
+    toSubscription: '/settings/subscription',
+    toBilling: '/settings/billing',
     toProfile: '/dashboard/settings/profile',
     requireSub: '/dashboard/settings/subscription-required',
     toAddSub: '/dashboard/settings/add-subscription',
+    //auth
+    toLogin: '/auth/login',
+    requireAuth: '/auth/required',
+    authConfirm: '/auth/confirmed',
+    callback: '/api/auth-callback',
+    //user
+    toUserDashboard: 'user/orgs',
+    //todos
     toMyTodos: '/dashboard/todos/my-todos'
   }
 };

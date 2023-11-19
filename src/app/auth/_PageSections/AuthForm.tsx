@@ -12,12 +12,18 @@ import { Login, GoogleLogin } from '@/lib/API/Services/auth/login';
 
 import config from '@/lib/config/auth';
 import { useRouter } from 'next/navigation';
+
 interface AuthFormPropsI {
   submit_text: string;
+  auth_flow: string;
 }
 
-export default function AuthForm({ submit_text }: AuthFormPropsI) {
+export default function AuthForm({ submit_text, auth_flow }: AuthFormPropsI) {
   const router = useRouter();
+
+  const onboarding = config.redirects.toUserDashboard;
+  const dashboard = config.redirects.toDashboard;
+  const redirect = auth_flow === 'login' ? dashboard : onboarding;
 
   const form = useForm<EmailFormValues>({
     resolver: zodResolver(EmailFormSchema),
@@ -32,7 +38,7 @@ export default function AuthForm({ submit_text }: AuthFormPropsI) {
   } = form;
 
   const onSubmit = async (values: EmailFormValues) => {
-    const props: EmailFormValues = { email: values.email };
+    const props = { email: values.email, callbackUrl: redirect };
 
     await Login(props);
 
@@ -40,7 +46,8 @@ export default function AuthForm({ submit_text }: AuthFormPropsI) {
   };
 
   const handleGoogleSignIn = async () => {
-    await GoogleLogin();
+    const props = { callbackUrl: redirect };
+    await GoogleLogin(props);
   };
 
   return (
