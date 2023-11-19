@@ -35,7 +35,7 @@ export default function Onboarding() {
 
     try {
       const org = await CreateOrg(props);
-      await CreateRole({ org_id: org?.id });
+      await CreateRole({ org_id: org?.id, role: 'owner' });
 
       const redirectPath = `${configuration.redirects.toDashboard}/${org.id}`;
       router.push(redirectPath);

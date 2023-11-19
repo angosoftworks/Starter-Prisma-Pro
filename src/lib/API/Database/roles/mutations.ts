@@ -6,15 +6,17 @@ import { PrismaDBError } from '@/lib/utils/error';
 
 interface CreateRoleI {
   org_id: string;
+  role: string; // create enum
 }
 
-export const CreateRole = async ({ org_id }: CreateRoleI) => {
+export const CreateRole = async ({ org_id, role }: CreateRoleI) => {
   const user = await GetUser();
   const user_id = user?.id;
 
   const data: Prisma.RoleCreateInput = {
     user: { connect: { id: user_id } },
-    organization: { connect: { id: org_id } }
+    organization: { connect: { id: org_id } },
+    role
   };
 
   try {

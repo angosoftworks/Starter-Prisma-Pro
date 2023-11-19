@@ -21,3 +21,5 @@ export const CreateOrg = async ({ name }: OrgFormValues) => {
     PrismaDBError(err);
   }
 };
+
+export const GetOrgsbyUserId = () => {};
