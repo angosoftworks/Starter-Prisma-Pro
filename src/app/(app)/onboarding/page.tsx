@@ -13,6 +13,7 @@ import config from '@/lib/config/api';
 import { useRouter } from 'next/navigation';
 import { CreateOrg } from '@/lib/API/Database/org/mutations';
 import { CreateRole } from '@/lib/API/Database/roles/mutations';
+import configuration from '@/lib/config/auth';
 
 export default function Onboarding() {
   const router = useRouter();
@@ -24,7 +25,6 @@ export default function Onboarding() {
   });
 
   const {
-    reset,
     register,
     formState: { isSubmitting }
   } = form;
@@ -36,14 +36,13 @@ export default function Onboarding() {
     try {
       const org = await CreateOrg(props);
       await CreateRole({ org_id: org?.id });
+
+      const redirectPath = `${configuration.redirects.toDashboard}/${org.id}`;
+      router.push(redirectPath);
     } catch (err) {
       toast.error(config.errorMessageGeneral);
       throw err;
     }
-
-    reset({ name: '' });
-    toast.success('Todo Submitted');
-    router.refresh();
   };
 
   return (
