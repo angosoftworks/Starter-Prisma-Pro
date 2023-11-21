@@ -1,6 +1,6 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 
 import { Card, CardHeader, CardTitle, CardContent, CardDescription } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
@@ -9,9 +9,11 @@ import { createPortalSession } from '@/lib/API/Services/stripe/session';
 
 const Billing = () => {
   const router = useRouter();
+  const pathname = usePathname();
 
   const handleSubscription = async () => {
-    const res = await createPortalSession();
+    const org_id = pathname.split('/')[2];
+    const res = await createPortalSession({ org_id });
 
     router.push(res.url);
   };

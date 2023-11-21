@@ -1,32 +1,6 @@
-import { Metadata } from 'next';
 import siteConfig from './site';
 
 const config = {
-  routes: [
-    { title: 'Pricing', link: '/pricing' },
-    { title: 'Docs', link: '/docs' },
-    { title: 'Blog', link: '/blog' }
-  ],
-  footer_nav: {
-    about: {
-      title: 'About',
-      routes: [{ title: 'Pricing', link: '/pricing' }]
-    },
-    resources: {
-      title: 'Resources',
-      routes: [
-        { title: 'Blog', link: '/' },
-        { title: 'Docs', link: '/' }
-      ]
-    },
-    legal: {
-      title: 'Legal',
-      routes: [
-        { title: 'Privacy Policy', link: '/' },
-        { title: 'Terms and Conditions', link: '/' }
-      ]
-    }
-  },
   metadate: {
     title: {
       default: siteConfig.name,

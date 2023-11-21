@@ -13,7 +13,7 @@ import config from '@/lib/config/api';
 import { useRouter } from 'next/navigation';
 import { CreateOrg } from '@/lib/API/Database/org/mutations';
 import { CreateRole } from '@/lib/API/Database/roles/mutations';
-import configuration from '@/lib/config/auth';
+import routes from '@/lib/config/routes';
 
 export default function CreateOrgPage() {
   const router = useRouter();
@@ -37,7 +37,7 @@ export default function CreateOrgPage() {
       const org = await CreateOrg(props);
       await CreateRole({ org_id: org?.id, role: 'owner' });
 
-      const redirectPath = `${configuration.redirects.toUserDashboard}`;
+      const redirectPath = routes.redirects.user.toUserDashboard;
       router.push(redirectPath);
     } catch (err) {
       toast.error(config.errorMessageGeneral);

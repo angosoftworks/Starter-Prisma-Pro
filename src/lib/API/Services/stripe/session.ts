@@ -1,25 +1,32 @@
 'use server';
 
 import stripe from '@/lib/API/Services/init/stripe';
-import config from '@/lib/config/auth';
 import { PortalSessionT } from '@/lib/types/stripe';
 import Stripe from 'stripe';
 import { StripeError } from '@/lib/utils/error';
-import { GetUser } from '@/lib/API/Database/user/queries';
+import { GetOrg } from '../../Database/org/queries';
 import configuration from '@/lib/config/site';
+import routes from '@/lib/config/routes';
+import { GetUser } from '../../Database/user/queries';
 interface createCheckoutProps {
   price: string;
+  org_id: string;
 }
 
-export const createCheckoutSession = async ({ price }: createCheckoutProps) => {
-  const { redirects } = config;
-  const { toBilling, toSubscription } = redirects;
+interface createPortalPropsI {
+  org_id: string;
+}
 
+export const createCheckoutSession = async ({ price, org_id }: createCheckoutProps) => {
   const user = await GetUser();
-  const user_id = user.id;
   const customer_email = user.email;
-  const origin = configuration.url;
+  const org = await GetOrg({ id: org_id });
 
+  if (user.id !== org.owner_user_id) {
+    throw 'Unauthorized Operation';
+  }
+
+  const origin = configuration.url;
   let session: Stripe.Checkout.Session;
 
   try {
@@ -31,10 +38,10 @@ export const createCheckoutSession = async ({ price }: createCheckoutProps) => {
         }
       ],
       mode: 'subscription',
-      success_url: `${origin}${toBilling}`,
-      cancel_url: `${origin}${toSubscription}`,
+      success_url: `${origin}${routes.redirects.user.toUserDashboard}`,
+      cancel_url: `${origin}${routes.redirects.user.toUserDashboard}`,
       metadata: {
-        user_id
+        org_id
       },
       customer_email
       //subscription_data: {
@@ -48,17 +55,19 @@ export const createCheckoutSession = async ({ price }: createCheckoutProps) => {
   return session;
 };
 
-export const createPortalSession = async (): Promise<PortalSessionT> => {
+export const createPortalSession = async ({
+  org_id
+}: createPortalPropsI): Promise<PortalSessionT> => {
   let portalSession: PortalSessionT;
 
-  const user = await GetUser();
-  const customer = user?.stripe_customer_id;
+  const org = await GetOrg({ id: org_id });
+  const customer = org?.stripe_customer_id;
   const origin = configuration.url;
 
   try {
     portalSession = await stripe.billingPortal.sessions.create({
       customer,
-      return_url: `${origin}${config.redirects.toSubscription}`
+      return_url: `${origin}${routes.redirects.user.toUserDashboard}`
     });
   } catch (err) {
     StripeError(err);

@@ -1,6 +1,6 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { zodResolver } from '@hookform/resolvers/zod';
 
 import { todoFormSchema, todoFormValues } from '@/lib/types/validations';
@@ -15,7 +15,7 @@ import { UpdateTodo } from '@/lib/API/Database/todos/mutations';
 import { toast } from 'react-toastify';
 import { Todo } from '@prisma/client';
 import config from '@/lib/config/api';
-import configuration from '@/lib/config/auth';
+import routes from '@/lib/config/routes';
 
 interface EditFormProps {
   todo: Todo;
@@ -23,6 +23,7 @@ interface EditFormProps {
 
 export default function TodosEditForm({ todo }: EditFormProps) {
   const router = useRouter();
+  const pathname = usePathname();
   const { title, description, id } = todo;
 
   const form = useForm<todoFormValues>({
@@ -56,7 +57,10 @@ export default function TodosEditForm({ todo }: EditFormProps) {
     reset({ title: '', description: '' });
     toast.success('Todo Updated');
     router.refresh();
-    router.push(configuration.redirects.toMyTodos);
+    const org_id = pathname.split('/')[2];
+    const path = routes.redirects.dashboard.todos.toMyTodos;
+    const basePath = routes.redirects.dashboard.dashboardBase;
+    router.push(`${basePath}${org_id}${path}`);
   };
 
   return (

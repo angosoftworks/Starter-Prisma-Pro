@@ -18,28 +18,24 @@ import { toast } from 'react-toastify';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 
-import {
-  DisplayNameFormValues,
-  DisplayNameFormSchema,
-  EmailFormSchema,
-  EmailFormValues
-} from '@/lib/types/validations';
+import { OrgFormSchema, OrgFormValues } from '@/lib/types/validations';
 
-import { UpdateStripeCustomerEmail } from '@/lib/API/Services/stripe/customer';
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 
-import { UpdateUserName, UpdateUserEmail } from '@/lib/API/Database/user/mutations';
-interface UpdateDisplayNamePropsI {
-  display_name: string;
+import { UpdateUserName } from '@/lib/API/Database/user/mutations';
+import { UpdateOrgName } from '@/lib/API/Database/org/mutations';
+interface UpdateOrgNamePropsI {
+  name: string;
 }
 
-export const UpdateDisplayName = ({ display_name }: UpdateDisplayNamePropsI) => {
+export const UpdateOrgNameForm = ({ name }: UpdateOrgNamePropsI) => {
   const router = useRouter();
+  const pathname = usePathname();
 
-  const form = useForm<DisplayNameFormValues>({
-    resolver: zodResolver(DisplayNameFormSchema),
+  const form = useForm<OrgFormValues>({
+    resolver: zodResolver(OrgFormSchema),
     defaultValues: {
-      display_name
+      name
     }
   });
 
@@ -49,15 +45,16 @@ export const UpdateDisplayName = ({ display_name }: UpdateDisplayNamePropsI) => 
     formState: { isSubmitting }
   } = form;
 
-  const handleSubmit = async (data: DisplayNameFormValues) => {
-    const display_name = data.display_name;
+  const handleSubmit = async (data: OrgFormValues) => {
+    const name = data.name;
+    const org_id = pathname.split('/')[2];
 
-    const props = { display_name };
+    const props = { name, org_id };
 
     try {
-      await UpdateUserName(props);
+      await UpdateOrgName(props);
     } catch (err) {
-      setError('display_name', {
+      setError('name', {
         type: '"root.serverError',
         message: 'Something went wrong'
       });
@@ -74,14 +71,14 @@ export const UpdateDisplayName = ({ display_name }: UpdateDisplayNamePropsI) => 
         <form onSubmit={form.handleSubmit(handleSubmit)}>
           <FormField
             control={form.control}
-            name="display_name"
+            name="name"
             render={({ field }) => (
               <FormItem>
                 <FormMessage className="py-2" />
                 <FormLabel>Display Name</FormLabel>
                 <FormControl>
                   <Input
-                    {...register('display_name')}
+                    {...register('name')}
                     className="bg-background-light dark:bg-background-dark"
                     type="text"
                     {...field}
@@ -94,86 +91,6 @@ export const UpdateDisplayName = ({ display_name }: UpdateDisplayNamePropsI) => 
           <Button disabled={isSubmitting} className="mt-4">
             {isSubmitting && <Icons.Spinner className="mr-2 h-4 w-4 animate-spin" />}
             Update Profile
-          </Button>
-        </form>
-      </Form>
-    </div>
-  );
-};
-
-interface UpdateEmailPropsI {
-  email: string;
-  customer: string;
-}
-
-export const UpdateEmail = ({ email, customer }: UpdateEmailPropsI) => {
-  const router = useRouter();
-
-  const form = useForm<EmailFormValues>({
-    resolver: zodResolver(EmailFormSchema),
-    defaultValues: {
-      email
-    }
-  });
-
-  const {
-    setError,
-    register,
-    formState: { isSubmitting }
-  } = form;
-
-  const handleSubmit = async (data: EmailFormValues) => {
-    const email = data.email;
-    const props = { email };
-
-    try {
-      await UpdateUserEmail(props);
-    } catch (err) {
-      setError('email', {
-        type: '"root.serverError',
-        message: 'Something went wrong'
-      });
-      throw err;
-    }
-
-    try {
-      const props = { customer, email };
-      await UpdateStripeCustomerEmail(props);
-    } catch (e) {
-      toast.error('Stripe Update Failed, please contact support');
-      throw e;
-    }
-
-    router.refresh();
-    toast.success('Update Email Sent, confirm email to complete Update');
-  };
-
-  return (
-    <div className="mt-4 mb-10">
-      <Form {...form}>
-        <form onSubmit={form.handleSubmit(handleSubmit)}>
-          <FormField
-            control={form.control}
-            name="email"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Email</FormLabel>
-                <FormControl>
-                  <Input
-                    {...register('email')}
-                    className="bg-background-light dark:bg-background-dark"
-                    type="text"
-                    {...field}
-                  />
-                </FormControl>
-                <FormDescription>This is the email associated with your account</FormDescription>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <Button disabled={isSubmitting} className="mt-4">
-            {isSubmitting && <Icons.Spinner className="mr-2 h-4 w-4 animate-spin" />}
-            Update Email
           </Button>
         </form>
       </Form>

@@ -1,16 +1,20 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
+import { useRouter, usePathname } from 'next/navigation';
 
 import { Card, CardHeader, CardTitle, CardContent, CardDescription } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
-import config from '@/lib/config/auth';
+import routes from '@/lib/config/routes';
 
 const SubscriptionRequired = () => {
   const router = useRouter();
+  const pathname = usePathname();
 
   const redirectToSubscription = async () => {
-    router.push(config.redirects.toSubscription);
+    const org_id = pathname.split('/')[2];
+    const path = routes.redirects.dashboard.settings.toAddSub;
+    const basePath = routes.redirects.dashboard.dashboardBase;
+    router.push(`${basePath}${org_id}${path}`);
   };
 
   return (

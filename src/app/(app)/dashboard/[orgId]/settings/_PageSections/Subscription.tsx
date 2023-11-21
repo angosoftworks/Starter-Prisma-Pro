@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 
 import {
   Card,
@@ -14,7 +14,7 @@ import {
 import { Button } from '@/components/ui/Button';
 import configuration from '@/lib/config/dashboard';
 import { PlanI } from '@/lib/types/types';
-import config from '@/lib/config/auth';
+import routes from '@/lib/config/routes';
 import { ErrorText } from '@/components/ErrorText';
 import { Subscription } from '@prisma/client';
 
@@ -26,6 +26,7 @@ const SubscriptionExists = ({ subscription }: SubscriptionExistsProps) => {
   const { price_id, period_ends_at, status } = subscription;
 
   const router = useRouter();
+  const pathname = usePathname();
   const { products } = configuration;
   const [errorMessage, setErrorMessage] = useState('');
   const [currentPlan, setPlan] = useState<PlanI>({ name: '' });
@@ -48,7 +49,10 @@ const SubscriptionExists = ({ subscription }: SubscriptionExistsProps) => {
   }, []);
 
   const goToPortal = async () => {
-    router.push(config.redirects.toBilling);
+    const org_id = pathname.split('/')[2];
+    const path = routes.redirects.dashboard.settings.toBilling;
+    const basePath = routes.redirects.dashboard.dashboardBase;
+    router.push(`${basePath}${org_id}${path}`);
   };
 
   return (

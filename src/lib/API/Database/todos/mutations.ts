@@ -13,16 +13,22 @@ interface DeleteTodoPropsI {
   id: number;
 }
 
-export const CreateTodo = async ({ title, description }: todoFormValues) => {
+interface CreateTodoPropsI extends todoFormValues {
+  org_id: string;
+}
+
+export const CreateTodo = async ({ title, description, org_id }: CreateTodoPropsI) => {
   const user = await GetUser();
 
   const user_id = user?.id;
   const author = user?.display_name || '';
+
   const data: Prisma.TodoCreateInput = {
     title,
     description,
     author,
-    user: { connect: { id: user_id } }
+    user: { connect: { id: user_id } },
+    organization: { connect: { id: org_id } }
   };
 
   try {

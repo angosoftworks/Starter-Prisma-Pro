@@ -3,14 +3,25 @@ import { GetUser } from '../user/queries';
 import prisma from '../../Services/init/prisma';
 import { Todo } from '@prisma/client';
 
-export const GetTodosByUserId = async (): Promise<Todo[]> => {
+interface GetOrgTodosI {
+  org_id: string;
+}
+
+export const GetTodosByUserId = async ({ org_id }: GetOrgTodosI): Promise<Todo[]> => {
   const user = await GetUser();
   const user_id = user?.id;
 
   try {
     const todos = await prisma.todo.findMany({
       where: {
-        user_id
+        AND: {
+          user_id: {
+            equals: user_id
+          },
+          org_id: {
+            equals: org_id
+          }
+        }
       }
     });
 
@@ -34,9 +45,10 @@ export const GetTodoById = async (id: number): Promise<Todo> => {
   }
 };
 
-export const GetAllTodos = async (): Promise<Todo[]> => {
+export const GetAllTodos = async ({ org_id }: GetOrgTodosI): Promise<Todo[]> => {
   try {
     const todos = await prisma.todo.findMany({
+      where: { org_id },
       take: 10
     });
 

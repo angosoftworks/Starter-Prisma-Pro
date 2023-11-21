@@ -12,10 +12,12 @@ import { Icons } from '@/components/Icons';
 import { CreateTodo } from '@/lib/API/Database/todos/mutations';
 import { toast } from 'react-toastify';
 import config from '@/lib/config/api';
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 
 export default function TodosCreateForm() {
   const router = useRouter();
+  const pathname = usePathname();
+
   const form = useForm<todoFormValues>({
     resolver: zodResolver(todoFormSchema),
     defaultValues: {
@@ -33,7 +35,9 @@ export default function TodosCreateForm() {
   const onSubmit = async (values: todoFormValues) => {
     const title = values.title;
     const description = values.description;
-    const props = { title, description };
+    const org_id = pathname.split('/')[2];
+
+    const props = { title, description, org_id };
 
     try {
       await CreateTodo(props);

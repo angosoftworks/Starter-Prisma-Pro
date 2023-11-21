@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { UserNav } from './UserNav';
 import TeamSwitcher from './TeamSwitcher';
 import { usePathname } from 'next/navigation';
-import configuration from '@/lib/config/dashboard';
+import routes from '@/lib/config/routes';
 import { MobileNav } from '@/components/MobileNav';
 
 interface HeaderProps {
@@ -16,7 +16,6 @@ interface HeaderProps {
 const Header = ({ display_name, email, avatar_url }: HeaderProps) => {
   const [headerText, setHeaderText] = useState('');
   const pathname = usePathname().split('/');
-  const { routes } = configuration;
 
   useEffect(() => {
     if (pathname.includes('main')) {
@@ -34,7 +33,7 @@ const Header = ({ display_name, email, avatar_url }: HeaderProps) => {
     <div className="border-b">
       <div className="flex h-16 items-center px-4">
         <div className="mr-8">
-          <MobileNav items={routes} />
+          <MobileNav items={routes.routes_dashboard} />
         </div>
         <div className="max-[410px]:hidden">
           <TeamSwitcher />

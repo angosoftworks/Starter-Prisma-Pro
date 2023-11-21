@@ -4,7 +4,7 @@ import { toast } from 'react-toastify';
 
 import { signIn, signOut } from 'next-auth/react';
 import configuration from '@/lib/config/api';
-import config from '@/lib/config/auth';
+import routes from '@/lib/config/routes';
 import { AuthProviderE } from '@/lib/types/enums';
 import { EmailFormValues } from '@/lib/types/validations';
 
@@ -50,7 +50,7 @@ export const GoogleLogin = async ({ callbackUrl }: { callbackUrl: string }) => {
 
 export const Logout = async () => {
   try {
-    await signOut({ callbackUrl: config.redirects.requireAuth });
+    await signOut({ callbackUrl: routes.redirects.auth.requireAuth });
   } catch (err) {
     toast.error(configuration.errorMessageGeneral);
     AuthError(err);

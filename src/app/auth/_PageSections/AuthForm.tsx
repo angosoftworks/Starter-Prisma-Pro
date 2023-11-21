@@ -10,7 +10,7 @@ import { Input } from '@/components/ui/Input';
 import { Icons } from '@/components/Icons';
 import { Login, GoogleLogin } from '@/lib/API/Services/auth/login';
 
-import config from '@/lib/config/auth';
+import routes from '@/lib/config/routes';
 import { useRouter } from 'next/navigation';
 
 interface AuthFormPropsI {
@@ -20,10 +20,6 @@ interface AuthFormPropsI {
 
 export default function AuthForm({ submit_text, auth_flow }: AuthFormPropsI) {
   const router = useRouter();
-
-  const onboarding = config.redirects.toUserDashboard;
-  const dashboard = config.redirects.toDashboard;
-  const redirect = auth_flow === 'login' ? dashboard : onboarding;
 
   const form = useForm<EmailFormValues>({
     resolver: zodResolver(EmailFormSchema),
@@ -38,14 +34,16 @@ export default function AuthForm({ submit_text, auth_flow }: AuthFormPropsI) {
   } = form;
 
   const onSubmit = async (values: EmailFormValues) => {
+    const redirect = routes.redirects.user.toUserDashboard;
     const props = { email: values.email, callbackUrl: redirect };
 
     await Login(props);
 
-    router.push(config.redirects.authConfirm);
+    router.push(routes.redirects.auth.authConfirm);
   };
 
   const handleGoogleSignIn = async () => {
+    const redirect = routes.redirects.user.toUserDashboard;
     const props = { callbackUrl: redirect };
     await GoogleLogin(props);
   };

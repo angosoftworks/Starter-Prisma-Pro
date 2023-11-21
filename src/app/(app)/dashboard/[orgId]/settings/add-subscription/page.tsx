@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import configuration from '@/lib/config/dashboard';
-import { useRouter } from 'next/navigation';
+import { useRouter, usePathname } from 'next/navigation';
 import {
   Card,
   CardHeader,
@@ -94,9 +94,11 @@ const PricingDisplay = () => {
   const premium: ProductI = products[1];
 
   const router = useRouter();
+  const pathname = usePathname();
 
   const handleSubscription = async (price: string) => {
-    const res = await createCheckoutSession({ price });
+    const org_id = pathname.split('/')[2];
+    const res = await createCheckoutSession({ price, org_id });
 
     router.push(res.url);
   };

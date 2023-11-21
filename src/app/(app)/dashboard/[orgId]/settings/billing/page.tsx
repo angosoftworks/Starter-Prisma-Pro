@@ -1,13 +1,16 @@
 import ManageSubscription from '../_PageSections/Billing';
 import { redirect } from 'next/navigation';
-import config from '@/lib/config/auth';
-import { GetUser } from '@/lib/API/Database/user/queries';
+import routes from '@/lib/config/routes';
 
-export default async function Billing() {
-  const user = await GetUser();
-  const subscription = user?.subscription_id;
+import { GetOrg } from '@/lib/API/Database/org/queries';
 
-  if (!subscription) redirect(config.redirects.requireSub);
+export default async function Billing({ params }) {
+  const org = await GetOrg({ id: params.orgId });
+  const subscription = org?.subscription_id;
+
+  const basePath = routes.redirects.dashboard.dashboardBase;
+  const pathLink = routes.redirects.dashboard.settings.requireSub;
+  if (!subscription) redirect(`${basePath}${params.orgId}${pathLink}`);
 
   return (
     <div>

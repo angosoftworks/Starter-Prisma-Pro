@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { MainLogoIcon } from '@/components/MainLogo';
 import { usePathname } from 'next/navigation';
 import { NavItemSidebar } from '@/lib/types/types';
-
+import routes from '@/lib/config/routes';
 interface SideBarNavProps {
   isOpen: boolean;
   routes: NavItemSidebar[];
@@ -17,15 +17,16 @@ interface SidebarNavItemProps {
 
 const SidebarNavItem = ({ item, isOpen }: SidebarNavItemProps) => {
   const pathname = usePathname();
+  const href = `${routes.redirects.dashboard.dashboardBase}${pathname.split('/')[2]}${item.link}`;
 
   return (
     <div className="w-full">
-      <Link key={item.title} href={item.link}>
+      <Link key={item.title} href={href}>
         <span
           className={`flex items-center rounded-md p-4 text-sm space-x-2 font-medium
           ${!isOpen && 'justify-center'}
            ${
-             item.link !== pathname
+             href !== pathname
                ? 'hover:bg-accent hover:text-accent-foreground'
                : 'bg-accent text-accent-foreground'
            }`}

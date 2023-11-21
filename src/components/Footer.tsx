@@ -1,14 +1,14 @@
 'use client';
 
-import config from '@/lib/config/marketing';
+import configuration from '@/lib/config/site';
 import Link from 'next/link';
 import { SocialIcons } from './Icons';
-import configuration from '@/lib/config/site';
+import routes from '@/lib/config/routes';
 import { Input } from './ui/Input';
 import { Button } from './ui/Button';
 
 export default function Footer() {
-  const { footer_nav } = config;
+  const { footer_nav } = routes;
 
   return (
     <footer className="bg-slate-800 mt-8">

@@ -1,7 +1,7 @@
 import NextAuth from 'next-auth';
 import { PrismaAdapter } from '@auth/prisma-adapter';
 import { PrismaClient } from '@prisma/client';
-import config from '@/lib/config/auth';
+import routes from '@/lib/config/routes';
 import Google from 'next-auth/providers/google';
 import EmailProvider from 'next-auth/providers/email';
 import { sendVerificationRequest } from './sendVerificationRequest';
@@ -33,8 +33,8 @@ export const {
   adapter: PrismaAdapter(prisma),
   session: { strategy: 'database' },
   pages: {
-    signIn: config.redirects.toLogin,
-    newUser: config.redirects.toUserDashboard
+    signIn: routes.redirects.auth.toLogin,
+    newUser: routes.redirects.user.toUserDashboard
   },
   callbacks: {
     async session({ session, user }) {

@@ -2,14 +2,14 @@ import SideBar from './_PageSections/SideBar';
 import Header from './_PageSections/Header';
 import { LayoutProps } from '@/lib/types/types';
 import { GetUser } from '@/lib/API/Database/user/queries';
-import config from '@/lib/config/auth';
+import routes from '@/lib/config/routes';
 import { redirect } from 'next/navigation';
 import { GetSession } from '@/lib/API/Services/auth/session';
 import { OrgContextProvider } from '@/lib/utils/OrgContext';
 
 export default async function DashboardLayout({ children }: LayoutProps) {
   const session = await GetSession();
-  if (!session) redirect(config.redirects.requireAuth);
+  if (!session) redirect(routes.redirects.auth.requireAuth);
 
   const user = await GetUser();
   const display_name = user?.display_name;

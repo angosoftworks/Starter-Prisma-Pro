@@ -2,7 +2,7 @@ import 'server-only';
 import Stripe from 'stripe';
 import { RetrieveSubscription } from './customer';
 import { StripeEvent } from '@/lib/types/stripe';
-import { UpdateUserSubscription } from '../../Database/user/mutations';
+import { UpdateOrgSubscription } from '../../Database/org/mutations';
 import { CreateSubscription, UpdateSubscription } from '../../Database/subscription/mutations';
 import { Subscription } from '@prisma/client';
 import { WebhookEventsE } from '@/lib/types/enums';
@@ -42,12 +42,13 @@ export const WebhookEventHandler = async (event: StripeEvent) => {
 
       console.log('Stripe Subscription Created');
 
-      const dataUser = {
+      const dataOrg = {
+        org_id: event.data.object.metadata.org_id,
         stripe_customer_id,
         subscription_id: subscription.id
       };
 
-      await UpdateUserSubscription(dataUser);
+      await UpdateOrgSubscription(dataOrg);
 
       console.log('Stripe Customer Created');
       break;
