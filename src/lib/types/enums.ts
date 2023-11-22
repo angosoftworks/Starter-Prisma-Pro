@@ -12,3 +12,9 @@ export enum WebhookEventsE {
   CheckoutSessionCompleted = 'checkout.session.completed',
   CustomerSubscriptionUpdated = 'customer.subscription.updated'
 }
+
+export enum RolesE {
+  OWNER = 'OWNER',
+  ADMIN = 'ADMIN',
+  MEMBER = 'MEMBER'
+}

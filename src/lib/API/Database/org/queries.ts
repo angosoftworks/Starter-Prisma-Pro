@@ -1,5 +1,4 @@
 import { Organization } from '@prisma/client';
-import { GetSession } from '../../Services/auth/session';
 import prisma from '../../Services/init/prisma';
 import { PrismaDBError } from '@/lib/utils/error';
 

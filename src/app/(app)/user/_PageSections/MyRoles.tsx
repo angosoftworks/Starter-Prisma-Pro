@@ -16,11 +16,11 @@ interface MyRolesProps {
 }
 
 const RoleCard = ({ role }: RoleCardProps) => {
-  const { id, org_name } = role;
+  const { org_id, org_name } = role;
 
   return (
     <div>
-      <Link href={`/dashboard/${id}/main`}>
+      <Link href={`/dashboard/${org_id}/main`}>
         <Card>
           <CardHeader>
             <CardTitle>{org_name}</CardTitle>

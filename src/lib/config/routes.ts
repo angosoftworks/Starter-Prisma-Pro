@@ -4,6 +4,8 @@ const routes = {
   routes_dashboard: [
     { title: 'Overview', link: '/main', icon: Icons.Home },
     { title: 'Todos', link: '/todos/create', icon: Icons.Laptop },
+    { title: 'Invite', link: '/invite', icon: Icons.Settings },
+    { title: 'Admin', link: '/admin', icon: Icons.Settings },
     { title: 'Settings', link: '/settings/profile', icon: Icons.Settings }
   ],
   routes_dashboard_subroutes: {
@@ -37,7 +39,10 @@ const routes = {
       authConfirm: '/auth/confirmed',
       callback: '/api/auth-callback'
     },
-    user: { toUserDashboard: '/user/dashboard' }
+    user: {
+      toUserDashboard: '/user/dashboard',
+      toOrgInvite: '/user/org-invite'
+    }
   },
   routes_marketing: [
     { title: 'Pricing', link: '/pricing' },

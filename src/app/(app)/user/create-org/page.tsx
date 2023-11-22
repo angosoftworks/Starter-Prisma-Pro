@@ -14,6 +14,7 @@ import { useRouter } from 'next/navigation';
 import { CreateOrg } from '@/lib/API/Database/org/mutations';
 import { CreateRole } from '@/lib/API/Database/roles/mutations';
 import routes from '@/lib/config/routes';
+import { RolesE } from '@/lib/types/enums';
 
 export default function CreateOrgPage() {
   const router = useRouter();
@@ -35,7 +36,7 @@ export default function CreateOrgPage() {
 
     try {
       const org = await CreateOrg(props);
-      await CreateRole({ org_id: org?.id, role: 'owner' });
+      await CreateRole({ org_id: org?.id, role: RolesE.OWNER, org_name: org?.name });
 
       const redirectPath = routes.redirects.user.toUserDashboard;
       router.push(redirectPath);

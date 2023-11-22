@@ -10,15 +10,20 @@ import { EmailFormValues } from '@/lib/types/validations';
 
 interface LoginPropsI extends EmailFormValues {
   callbackUrl: string;
+  parameters?: object;
 }
 
-export const Login = async ({ email, callbackUrl }: LoginPropsI) => {
+export const Login = async ({ email, callbackUrl, parameters }: LoginPropsI) => {
   try {
-    const signInResult = await signIn(AuthProviderE.EMAIL, {
-      email: email.toLowerCase(),
-      redirect: false,
-      callbackUrl
-    });
+    const signInResult = await signIn(
+      AuthProviderE.EMAIL,
+      {
+        email: email.toLowerCase(),
+        redirect: false,
+        callbackUrl
+      },
+      parameters
+    );
 
     if (signInResult?.error) {
       toast.error(configuration.errorMessageGeneral);

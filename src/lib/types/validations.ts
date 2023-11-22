@@ -30,15 +30,9 @@ export const EmailFormSchema = z.object({
   email: z.string().email()
 });
 
-export const UpdatePasswordFormSchema = z.object({
-  password: z
-    .string()
-    .min(8, {
-      message: 'Password must be at least 8 characters.'
-    })
-    .max(30, {
-      message: 'Password must not be longer than 30 characters.'
-    })
+export const OrgInviteFormSchema = z.object({
+  email: z.string().email(),
+  role: z.string({ required_error: 'Please Select a Role.' })
 });
 
 export const OrgFormSchema = z.object({
@@ -54,6 +48,6 @@ export const OrgFormSchema = z.object({
 
 export type DisplayNameFormValues = z.infer<typeof DisplayNameFormSchema>;
 export type EmailFormValues = z.infer<typeof EmailFormSchema>;
-export type UpdatePasswordFormValues = z.infer<typeof UpdatePasswordFormSchema>;
+export type OrgInviteFormValues = z.infer<typeof OrgInviteFormSchema>;
 export type todoFormValues = z.infer<typeof todoFormSchema>;
 export type OrgFormValues = z.infer<typeof OrgFormSchema>;

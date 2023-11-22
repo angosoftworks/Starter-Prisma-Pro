@@ -5,7 +5,7 @@ import { GetOrg } from '@/lib/API/Database/org/queries';
 export default async function ProfileForm({ params }) {
   const org = await GetOrg({ id: params.orgId });
 
-  const name = org.name;
+  const name = org?.name;
 
   return (
     <div>
