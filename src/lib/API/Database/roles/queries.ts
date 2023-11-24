@@ -3,7 +3,6 @@ import 'server-only';
 import prisma, { Prisma } from '../../Services/init/prisma';
 import { GetUser } from '@/lib/API/Database/user/queries';
 import { PrismaDBError } from '@/lib/utils/error';
-import { equal } from 'assert';
 import { Role } from '@prisma/client';
 
 export const GetRolesByUserId = async () => {

@@ -13,3 +13,4 @@ const nextConfig = {
 
 //module.exports = withMDX(nextConfig);
 module.exports = withPlugins([withNextra], nextConfig);
+//module.exports = nextConfig;

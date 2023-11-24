@@ -27,7 +27,7 @@ export default async function DashboardLayout({ children, params }: DashLayoutPr
 
   return (
     <main className="grid md:grid-cols-[auto_1fr]">
-      <AbilityProvider role={RolesE[role.role.toUpperCase()]}>
+      <AbilityProvider role={RolesE[role.role.toUpperCase()]} id={user?.id}>
         <SideBar />
         <div>
           <Header

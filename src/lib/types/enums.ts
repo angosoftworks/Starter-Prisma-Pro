@@ -18,3 +18,18 @@ export enum RolesE {
   ADMIN = 'ADMIN',
   MEMBER = 'MEMBER'
 }
+
+export enum Actions {
+  CREATE = 'create',
+  READ = 'read',
+  UPDATE = 'update',
+  DELETE = 'delete',
+  MANAGE = 'manage'
+}
+
+export enum Subjects {
+  SUBSCRIPTION = 'Subscription',
+  TODO = 'Todo',
+  USER = 'User',
+  ALL = 'all'
+}

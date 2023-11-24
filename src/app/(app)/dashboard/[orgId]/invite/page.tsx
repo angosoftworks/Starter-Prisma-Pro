@@ -17,23 +17,15 @@ import {
 
 import { RolesE } from '@/lib/types/enums';
 
-import Link from 'next/link';
-
 import { Icons } from '@/components/Icons';
 import { Login } from '@/lib/API/Services/auth/login';
 
 import routes from '@/lib/config/routes';
-import { usePathname, useRouter } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 import { CreateInvite } from '@/lib/API/Database/invite/mutations';
 import { toast } from 'react-toastify';
 
-interface AuthFormPropsI {
-  submit_text: string;
-  auth_flow: string;
-}
-
 export default function AuthForm() {
-  const router = useRouter();
   const pathname = usePathname();
   const roles = [RolesE.ADMIN, RolesE.MEMBER];
 
