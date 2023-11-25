@@ -1,7 +1,8 @@
 'use client';
 
 import { defineAbilityFor } from '@/lib/utils/caslAbility';
-import { AbilityContext } from '@/lib/utils/caslCan';
+import { AbilityContext } from '@/lib/utils/caslContext';
+import { RoleContext } from '@/lib/utils/roleContext';
 import { LayoutProps } from '@/lib/types/types';
 import { RolesE } from '@/lib/types/enums';
 
@@ -12,6 +13,8 @@ interface AbilityProviderPropsI extends LayoutProps {
 
 export function AbilityProvider({ children, role, id }: AbilityProviderPropsI) {
   return (
-    <AbilityContext.Provider value={defineAbilityFor(role, id)}>{children}</AbilityContext.Provider>
+    <AbilityContext.Provider value={defineAbilityFor(role, id)}>
+      <RoleContext.Provider value={role}>{children}</RoleContext.Provider>
+    </AbilityContext.Provider>
   );
 }

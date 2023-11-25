@@ -7,7 +7,7 @@ import { PrismaDBError } from '@/lib/utils/error';
 
 interface CreateRoleI {
   org_id: string;
-  role: RolesE.MEMBER | RolesE.ADMIN | RolesE.OWNER;
+  role: RolesE;
   org_name: string;
 }
 

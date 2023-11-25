@@ -1,7 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 
 export async function middleware(request: NextRequest) {
-  console.log(request.bodyUsed, 'ddd');
   const res = NextResponse.next();
   return res;
 }
