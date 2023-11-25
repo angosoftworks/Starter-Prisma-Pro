@@ -3,9 +3,10 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/Card';
 import { useAbility } from '@casl/react';
 import { AbilityContext } from '@/lib/utils/caslCan';
-import { Actions, Subjects } from '@/lib/types/enums';
+import { Actions, RolesE, Subjects } from '@/lib/types/enums';
 import { TestRole } from '@/lib/API/Database/roles/helpers';
 import { Button } from '@/components/ui/Button';
+import { CheckPermission } from '@/lib/API/Database/roles/helpers';
 
 interface AdminCardPropsI {
   id: string;
@@ -14,8 +15,14 @@ interface AdminCardPropsI {
 export default function AdminCard({ id }: AdminCardPropsI) {
   const ability = useAbility(AbilityContext);
 
-  const Handlesubmit = async () => {
-    const res = await TestRole();
+  const Handlesubmit = async ({ action, subject }) => {
+    const permissions = {
+      role: RolesE.MEMBER,
+      action,
+      subject: Subjects.SUBSCRIPTION
+    };
+
+    const res = await TestRole({ test: 'test', permissions });
     console.log(res);
   };
 
@@ -36,7 +43,9 @@ export default function AdminCard({ id }: AdminCardPropsI) {
             <div>Admin and Owner Roles can See This</div>
           )}
           {ability.can(Actions.DELETE, Subjects.SUBSCRIPTION) && <div>Only Owner can See This</div>}
-          <Button onClick={Handlesubmit}>FFFFFF</Button>
+          <Button onClick={() => Handlesubmit({ action: Actions.READ, subject: Subjects.TODO })}>
+            FFFFFF
+          </Button>
         </CardContent>
       </Card>
     </div>
