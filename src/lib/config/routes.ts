@@ -26,7 +26,6 @@ const routes = {
     { title: 'Blog', link: '/blog' }
   ],
   routes_user: [
-    { title: 'Home', link: '/user/dashboard' },
     { title: 'Create Org', link: '/user/create-org' },
     { title: 'Settings', link: '/user/settings' }
   ],
