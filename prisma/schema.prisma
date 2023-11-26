@@ -54,6 +54,7 @@ model User {
   Role         Role[]
   Organization Organization[]
 
+  @@unique([id, email])
   @@map(name: "users")
 }
 
@@ -111,11 +112,11 @@ model Role {
   org_id   String
   org_name String
   user_id  String
-
+  email    String
   role String @db.VarChar
 
   organization Organization? @relation(fields: [org_id, org_name], references: [id, name], onUpdate: NoAction)
-  user         User?         @relation(fields: [user_id], references: [id], onUpdate: NoAction)
+  user         User?         @relation(fields: [user_id, email], references: [id, email], onUpdate: NoAction)
 
   @@map(name: "roles")
 }

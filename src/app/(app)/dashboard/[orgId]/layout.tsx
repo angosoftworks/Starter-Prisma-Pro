@@ -8,11 +8,8 @@ import { GetSession } from '@/lib/API/Services/auth/session';
 import { GetRoleByUserIdAndOrgId } from '@/lib/API/Database/roles/queries';
 import { AbilityProvider } from './_PageSections/AbilityProvider';
 import { RolesE } from '@/lib/types/enums';
-interface DashLayoutPropsI extends LayoutProps {
-  params: { orgId: string };
-}
 
-export default async function DashboardLayout({ children, params }: DashLayoutPropsI) {
+export default async function DashboardLayout({ children, params }: LayoutProps) {
   const session = await GetSession();
   if (!session) redirect(routes.redirects.auth.requireAuth);
 

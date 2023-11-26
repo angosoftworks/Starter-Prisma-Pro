@@ -4,7 +4,9 @@ import prisma, { Prisma } from '../../Services/init/prisma';
 import { GetUser } from '@/lib/API/Database/user/queries';
 import { RolesE } from '@/lib/types/enums';
 import { PrismaDBError } from '@/lib/utils/error';
-
+import { GetRoleByUserIdAndOrgId } from './queries';
+import { CheckPermission } from './helpers';
+import { PermissionsI } from './helpers';
 interface CreateRoleI {
   org_id: string;
   role: RolesE;
@@ -15,6 +17,9 @@ export const CreateRole = async ({ org_id, role, org_name }: CreateRoleI) => {
   const user = await GetUser();
   const user_id = user?.id;
 
+  const isRoleExists = await GetRoleByUserIdAndOrgId({ org_id, user_id });
+  if (isRoleExists) throw 'Role Already Exists';
+
   const data: Prisma.RoleCreateInput = {
     user: { connect: { id: user_id } },
     organization: { connect: { id: org_id, name: org_name } },
@@ -23,6 +28,33 @@ export const CreateRole = async ({ org_id, role, org_name }: CreateRoleI) => {
 
   try {
     await prisma.role.create({ data });
+  } catch (err) {
+    PrismaDBError(err);
+  }
+};
+
+export interface DeleteRoleI extends PermissionsI {
+  id: string;
+}
+
+export const DeleteRoleByUserIdAndOrgId = async ({ id, permissions }: DeleteRoleI) => {
+  const { role, action, subject } = permissions;
+  await CheckPermission({ role, action, subject });
+
+  try {
+    const role = await prisma.role.findFirst({
+      where: {
+        id
+      }
+    });
+
+    if (role?.role === RolesE.OWNER) throw 'Can not Remove Owner';
+
+    await prisma.role.delete({
+      where: {
+        id
+      }
+    });
   } catch (err) {
     PrismaDBError(err);
   }

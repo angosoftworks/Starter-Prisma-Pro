@@ -15,14 +15,14 @@ export default async function UserDashboard({ params }) {
 
   const org = await GetOrg({ id: org_id });
 
-  //client side, set loading spinner on load
   await CreateRole({
     org_id,
     role: RolesE[role.toUpperCase()],
-    org_name: org.name
+    org_name: org?.name,
+    email: user?.email
   });
 
   await DeleteInvite({ invite_id: id });
 
-  return <div>{/*<MyRoles roles={roles} />*/}</div>;
+  return <div>Setting Up Organization Finished</div>;
 }

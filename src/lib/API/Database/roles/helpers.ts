@@ -8,8 +8,11 @@ import { ForbiddenError } from '@casl/ability';
 import { defineAbilityFor } from '@/lib/utils/caslAbility';
 import { Actions, RolesE, Subjects } from '@/lib/types/enums';
 
-interface TestRolePropsI {
+interface TestRolePropsI extends PermissionsI {
   test: string;
+}
+
+export interface PermissionsI {
   permissions: {
     role: RolesE;
     action: Actions;

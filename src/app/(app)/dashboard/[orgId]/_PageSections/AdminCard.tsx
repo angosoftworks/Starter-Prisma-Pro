@@ -36,7 +36,7 @@ export default function AdminCard({ id }: AdminCardPropsI) {
           <CardDescription>Examples of RBAC</CardDescription>
         </CardHeader>
 
-        <CardContent>
+        <CardContent className="space-y-4">
           {ability.can(Actions.READ, Subjects.TODO) && <div>All Roles can See This</div>}
           {ability.can(Actions.UPDATE, { type: Subjects.TODO, id }) && (
             <div>Member Role Can see This if User Id matches, Owner and Admin can See</div>
@@ -45,6 +45,7 @@ export default function AdminCard({ id }: AdminCardPropsI) {
             <div>Admin and Owner Roles can See This</div>
           )}
           {ability.can(Actions.DELETE, Subjects.SUBSCRIPTION) && <div>Only Owner can See This</div>}
+          <div>Gaurd API routes with Casl</div>
           <Button onClick={() => handleSubmit({ action: Actions.READ, subject: Subjects.TODO })}>
             Submit
           </Button>

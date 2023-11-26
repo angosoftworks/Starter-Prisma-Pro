@@ -3,8 +3,6 @@ import { Separator } from '@/components/ui/Separator';
 import { LayoutProps } from '@/lib/types/types';
 
 export default async function UserLayout({ children }: LayoutProps) {
-  //if logged in and not onboarding redirect
-
   return (
     <div>
       <header className="p-6 mb-4">

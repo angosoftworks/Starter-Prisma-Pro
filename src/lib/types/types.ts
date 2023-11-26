@@ -16,6 +16,7 @@ export type NavItemSidebar = {
 
 export interface LayoutProps {
   children: React.ReactNode;
+  params?: { orgId: string };
 }
 
 export interface PlanI {
