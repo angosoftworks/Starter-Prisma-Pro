@@ -55,6 +55,7 @@ const CreateRoleCard = () => {
 const MyRoles = ({ roles }: MyRolesProps) => {
   return (
     <div>
+      <h1 className="text-xl font-bold pb-6">My Organizations:</h1>
       {roles?.length !== 0 ? (
         roles?.map((role) => <RoleCard key={role.id} role={role} />)
       ) : (

@@ -1,7 +1,7 @@
 import { buttonVariants } from '@/components/ui/Button';
 import Link from 'next/link';
 import { cn } from '@/lib/utils/helpers';
-import { Nav } from './NavBar';
+import { Nav } from '../../../components/NavBar';
 import routes from '@/lib/config/routes';
 import { MainLogoText } from '@/components/MainLogo';
 import { ThemeDropDownMenu } from '../../../components/ThemeDropdown';

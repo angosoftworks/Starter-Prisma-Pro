@@ -4,8 +4,8 @@ const routes = {
   routes_dashboard: [
     { title: 'Overview', link: '/main', icon: Icons.Home },
     { title: 'Todos', link: '/todos/create', icon: Icons.Laptop },
-    { title: 'Invite', link: '/invite', icon: Icons.Settings },
-    { title: 'Admin', link: '/admin', icon: Icons.Settings },
+    { title: 'Invite', link: '/invite', icon: Icons.Users },
+    { title: 'Admin', link: '/admin', icon: Icons.Lock },
     { title: 'Settings', link: '/settings/profile', icon: Icons.Settings }
   ],
   routes_dashboard_subroutes: {
@@ -20,6 +20,16 @@ const routes = {
       { title: 'Subscription', link: '/settings/subscription' }
     ]
   },
+  routes_marketing: [
+    { title: 'Pricing', link: '/pricing' },
+    { title: 'Docs', link: '/docs' },
+    { title: 'Blog', link: '/blog' }
+  ],
+  routes_user: [
+    { title: 'Home', link: '/user/dashboard' },
+    { title: 'Create Org', link: '/user/create-org' },
+    { title: 'Settings', link: '/user/settings' }
+  ],
   redirects: {
     dashboard: {
       dashboardBase: '/dashboard/',
@@ -44,11 +54,6 @@ const routes = {
       toOrgInvite: '/user/org-invite'
     }
   },
-  routes_marketing: [
-    { title: 'Pricing', link: '/pricing' },
-    { title: 'Docs', link: '/docs' },
-    { title: 'Blog', link: '/blog' }
-  ],
   footer_nav: {
     about: {
       title: 'About',

@@ -63,15 +63,12 @@ export function UserNav({ email, display_name, avatar_url }) {
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
           <DropdownMenuItem>
-            <Link href="/dashboard/todos/my-todos"> Todos </Link>
+            <Link href="/user/dashboard">Dashboard</Link>
             <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
           </DropdownMenuItem>
+
           <DropdownMenuItem>
-            <Link href="/dashboard/settings/billing"> Billing </Link>
-            <DropdownMenuShortcut>⌘B</DropdownMenuShortcut>
-          </DropdownMenuItem>
-          <DropdownMenuItem>
-            <Link href="/dashboard/settings/profile">Settings</Link>
+            <Link href="/user/settings">Settings</Link>
             <DropdownMenuShortcut>⌘S</DropdownMenuShortcut>
           </DropdownMenuItem>
         </DropdownMenuGroup>

@@ -71,8 +71,8 @@ export default function InviteUsers() {
     <div className="md:w-96">
       <Card className="bg-background-light dark:bg-background-dark">
         <CardHeader className="space-y-1">
-          <CardTitle className="text-2xl">Login to your Account</CardTitle>
-          <CardDescription>Enter your email and password below to login</CardDescription>
+          <CardTitle className="text-2xl">Invite Org User</CardTitle>
+          <CardDescription>Enter an email below to add user to organization</CardDescription>
         </CardHeader>
         <CardContent>
           <Form {...form}>
