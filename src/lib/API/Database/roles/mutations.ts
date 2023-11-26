@@ -16,12 +16,13 @@ interface CreateRoleI {
 export const CreateRole = async ({ org_id, role, org_name }: CreateRoleI) => {
   const user = await GetUser();
   const user_id = user?.id;
+  const email = user?.email;
 
   const isRoleExists = await GetRoleByUserIdAndOrgId({ org_id, user_id });
   if (isRoleExists) throw 'Role Already Exists';
 
   const data: Prisma.RoleCreateInput = {
-    user: { connect: { id: user_id } },
+    user: { connect: { id: user_id, email } },
     organization: { connect: { id: org_id, name: org_name } },
     role
   };

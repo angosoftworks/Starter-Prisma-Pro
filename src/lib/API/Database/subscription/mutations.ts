@@ -12,14 +12,12 @@ export const CreateSubscription = async ({
   period_ends_at
 }: Subscription) => {
   const user = await GetUser();
-  const user_id = user?.id;
 
   const data: Prisma.SubscriptionCreateInput = {
     id,
     price_id,
     status,
-    period_ends_at,
-    user: { connect: { id: user_id } }
+    period_ends_at
   };
 
   try {

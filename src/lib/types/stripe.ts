@@ -39,7 +39,7 @@ export type StripeEvent = {
     object: {
       id: string;
       metadata: {
-        user_id: string;
+        org_id: string;
       };
       subscription: string;
       status: string;

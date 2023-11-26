@@ -12,14 +12,12 @@ export default async function UserDashboard({ params }) {
   if (!invite || !isMatchEmail) throw 'Unauthorized Access';
 
   const { role, org_id, id } = invite;
-
   const org = await GetOrg({ id: org_id });
 
   await CreateRole({
     org_id,
     role: RolesE[role.toUpperCase()],
-    org_name: org?.name,
-    email: user?.email
+    org_name: org?.name
   });
 
   await DeleteInvite({ invite_id: id });
