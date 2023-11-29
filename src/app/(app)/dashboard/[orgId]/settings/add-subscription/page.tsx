@@ -14,9 +14,9 @@ import {
 import { Button } from '@/components/ui/Button';
 import { Icons } from '@/components/Icons';
 import { Switch } from '@/components/ui/Switch';
-import { createCheckoutSession } from '@/lib/API/Services/stripe/session';
 import { ProductI } from '@/lib/types/types';
 import { IntervalE } from '@/lib/types/enums';
+import { createCheckoutSession } from '@/lib/API/Services/lemon/session';
 
 interface PriceCardProps {
   product: ProductI;
@@ -96,11 +96,15 @@ const PricingDisplay = () => {
   const router = useRouter();
   const pathname = usePathname();
 
-  const handleSubscription = async (price: string) => {
+  const handleSubscription = async (price_id: string) => {
     const org_id = pathname.split('/')[2];
-    const res = await createCheckoutSession({ price, org_id });
+    const price = Number(price_id);
 
-    router.push(res.url);
+    console.log(price_id);
+
+    const res = await createCheckoutSession({ price_id: price, org_id });
+
+    router.push(res.data.attributes.url);
   };
 
   const changeTimeInterval = () => {

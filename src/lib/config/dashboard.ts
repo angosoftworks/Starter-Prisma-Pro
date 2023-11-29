@@ -2,6 +2,7 @@ import { Icons } from '@/components/Icons';
 import { IntervalE } from '../types/enums';
 
 const configuration = {
+  storeId: Number(process.env.LEMON_STORE_ID),
   products: [
     {
       name: 'Basic',
@@ -12,14 +13,14 @@ const configuration = {
           name: 'Basic Monthly',
           interval: IntervalE.MONTHLY,
           price: '10',
-          price_id: process.env.NEXT_PUBLIC_STRIPE_PRICE_ID_BASIC_MONTHLY,
+          price_id: process.env.NEXT_PUBLIC_LEMON_PRICE_ID_BASIC_MONTHLY,
           isPopular: true
         },
         {
           name: 'Basic Annual',
           interval: IntervalE.YEARLY,
           price: '100',
-          price_id: process.env.NEXT_PUBLIC_STRIPE_PRICE_ID_BASIC_YEARLY,
+          price_id: process.env.NEXT_PUBLIC_LEMON_PRICE_ID_BASIC_YEARLY,
           isPopular: false
         }
       ]
@@ -38,14 +39,14 @@ const configuration = {
           name: 'Pro Monthly',
           interval: IntervalE.MONTHLY,
           price: '20',
-          price_id: process.env.NEXT_PUBLIC_STRIPE_PRICE_ID_PREMIUM_MONTHLY,
+          price_id: process.env.NEXT_PUBLIC_LEMON_PRICE_ID_PREMIUM_MONTHLY,
           isPopular: false
         },
         {
           name: 'Pro Annual',
           interval: IntervalE.YEARLY,
           price: '200',
-          price_id: process.env.NEXT_PUBLIC_STRIPE_PRICE_ID_PREMIUM_YEARLY,
+          price_id: process.env.NEXT_PUBLIC_LEMON_PRICE_ID_PREMIUM_YEARLY,
           isPopular: false
         }
       ]

@@ -7,7 +7,7 @@ import { OrgFormSchema, OrgFormValues } from '@/lib/types/validations';
 
 interface UpdateOrgSubPropsT {
   org_id: string;
-  stripe_customer_id: string;
+  customer_id: number;
   subscription_id: string;
 }
 
@@ -30,11 +30,11 @@ export const CreateOrg = async ({ name }: OrgFormValues) => {
 
 export const UpdateOrgSubscription = async ({
   org_id,
-  stripe_customer_id,
+  customer_id,
   subscription_id
 }: UpdateOrgSubPropsT) => {
   const data: Prisma.OrganizationUpdateInput = {
-    stripe_customer_id,
+    customer_id,
     subscription: { connect: { id: subscription_id } }
   };
 

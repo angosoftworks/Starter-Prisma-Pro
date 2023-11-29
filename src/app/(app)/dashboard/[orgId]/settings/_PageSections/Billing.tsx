@@ -4,18 +4,17 @@ import { usePathname, useRouter } from 'next/navigation';
 
 import { Card, CardHeader, CardTitle, CardContent, CardDescription } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
+import { GetCustomer } from '@/lib/API/Services/lemon/customer';
 
-import { createPortalSession } from '@/lib/API/Services/stripe/session';
-
-const Billing = () => {
+const Billing = ({ customer_id }) => {
   const router = useRouter();
   const pathname = usePathname();
 
   const handleSubscription = async () => {
-    const org_id = pathname.split('/')[2];
-    const res = await createPortalSession({ org_id });
+    const res = await GetCustomer({ customer_id });
+    console.log(res);
 
-    router.push(res.url);
+    //router.push(res.url);
   };
 
   return (
@@ -24,7 +23,7 @@ const Billing = () => {
         <CardHeader>
           <CardTitle>Manage Subscription & Billing</CardTitle>
           <CardDescription>
-            Click below to Manage Subscription and Billing, You will be redirected to the Stripe
+            Click below to Manage Subscription and Billing, You will be redirected to the Lemon
             Customer Portal, where you will be able to update or cancel subsciptions, update payment
             methods and view past invoices.
           </CardDescription>
