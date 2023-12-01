@@ -4,17 +4,17 @@ import { usePathname, useRouter } from 'next/navigation';
 
 import { Card, CardHeader, CardTitle, CardContent, CardDescription } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
-import { GetCustomer } from '@/lib/API/Services/lemon/customer';
+import { GetSubscription } from '@/lib/API/Services/lemon/subscription';
 
-const Billing = ({ customer_id }) => {
+const Billing = ({ subscription_id }) => {
   const router = useRouter();
   const pathname = usePathname();
 
   const handleSubscription = async () => {
-    const res = await GetCustomer({ customer_id });
+    const res = await GetSubscription({ subscription_id });
     console.log(res);
-
-    //router.push(res.url);
+    //@ts-ignore, wrong types on lemon.js
+    router.push(res.data.attributes.urls.customer_portal);
   };
 
   return (

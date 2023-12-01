@@ -14,7 +14,7 @@ export default async function Billing({ params }) {
 
   return (
     <div>
-      <ManageSubscription customer_id={org?.customer_id} />
+      <ManageSubscription subscription_id={org?.subscription_id} />
     </div>
   );
 }

@@ -4,7 +4,7 @@ import { UpdateOrgSubscription } from '../../Database/org/mutations';
 import { CreateSubscription, UpdateSubscription } from '../../Database/subscription/mutations';
 import { Subscription } from '@prisma/client';
 
-import { WebhookPayload, WebhookEventsE, SubscriptionStatus } from '@/lib/types/lemon';
+import { WebhookPayload, WebhookEventsE } from '@/lib/types/lemon';
 
 export const WebhookEventHandler = async (event: WebhookPayload) => {
   // Handle the event
