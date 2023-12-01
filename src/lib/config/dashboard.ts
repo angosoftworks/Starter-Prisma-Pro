@@ -2,7 +2,7 @@ import { Icons } from '@/components/Icons';
 import { IntervalE } from '../types/enums';
 
 const configuration = {
-  storeId: Number(process.env.LEMON_STORE_ID),
+  storeId: Number(process.env.NEXT_PUBLIC_LEMON_STORE_ID),
   products: [
     {
       name: 'Basic',
