@@ -3,10 +3,17 @@ import path from 'path';
 import matter from 'gray-matter';
 import { mdxComponents } from '../_PageSections/MdxComponents';
 import { MDXRemote } from 'next-mdx-remote/rsc';
+import { notFound } from 'next/navigation';
 
 import remarkGfm from 'remark-gfm';
 import rehypeSlug from 'rehype-slug';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
+import { Icons } from '@/components/Icons';
+import Link from 'next/link';
+import { cn } from '@/lib/utils/helpers';
+import { buttonVariants } from '@/components/ui/Button';
+import Image from 'next/image';
+
 interface UrlParamsI {
   params: { slug: string };
 }
@@ -49,9 +56,39 @@ function getPost({ slug }: GetPostI) {
 export default function Post({ params }: UrlParamsI) {
   const post = getPost(params);
 
+  if (!post) {
+    notFound();
+  }
+
   return (
-    <article>
-      <h1>{post.frontMatter.title}</h1>
+    <article className="container relative max-w-3xl py-6 lg:py-10">
+      <Link
+        href="/blog"
+        className={cn(
+          buttonVariants({ variant: 'ghost' }),
+          'absolute left-[-200px] top-14 hidden xl:inline-flex'
+        )}
+      >
+        <Icons.ChevronLeft className="mr-2 h-4 w-4" />
+        See all posts
+      </Link>
+      <div>
+        <time dateTime={post.frontMatter.date} className="block text-sm text-muted-foreground">
+          Published on {post.frontMatter.date}
+        </time>
+
+        <h1 className="mt-2 inline-block font-heading text-4xl leading-tight lg:text-5xl">
+          {post.frontMatter.title}
+        </h1>
+      </div>
+      <Image
+        src={post.frontMatter.image}
+        alt={post.frontMatter.title}
+        width={720}
+        height={405}
+        className="my-8 rounded-md border bg-muted transition-colors"
+        priority
+      />
       <MDXRemote
         options={{
           mdxOptions: {
@@ -62,6 +99,13 @@ export default function Post({ params }: UrlParamsI) {
         components={mdxComponents}
         source={post.content}
       />
+      <hr className="mt-12" />
+      <div className="flex justify-center py-6 lg:py-10">
+        <Link href="/blog" className={cn(buttonVariants({ variant: 'ghost' }))}>
+          <Icons.ChevronLeft className="mr-2 h-4 w-4" />
+          See all posts
+        </Link>
+      </div>
     </article>
   );
 }

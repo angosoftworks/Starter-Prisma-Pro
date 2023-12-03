@@ -1,5 +1,6 @@
 import { Lock, CloudIcon } from 'lucide-react';
 import Image from 'next/image';
+import DashPic from '../../../../public/static/images/marketing/dash.png';
 
 const features = [
   {
@@ -49,7 +50,7 @@ const FeatureText = ({ isFlipped }: FeaturePropsI) => {
 const FeatureImage = () => {
   return (
     <div className="hidden lg:block self-center">
-      <Image src="" alt="Product screenshot" width={3840} height={75} />
+      <Image src={DashPic} alt="Product screenshot" width={3840} height={75} />
     </div>
   );
 };
