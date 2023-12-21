@@ -4,6 +4,10 @@ import { GetUserByEmail } from '../../Database/user/queries';
 import config from '@/lib/config/marketing';
 import MagicLinkEmail from '../../../../../emails/MagicLink';
 import { renderAsync } from '@react-email/render';
+import { redirect } from 'next/navigation';
+import { cookies } from 'next/headers';
+
+import transporter from '@/lib/utils/emailTestUtils';
 
 export const sendVerificationRequest = async ({
   url,
@@ -26,17 +30,26 @@ export const sendVerificationRequest = async ({
   );
 
   try {
-    await resend.emails.send({
-      from: 'My SaaS <onboarding@resend.dev>',
-      to: process.env.NODE_ENV === 'development' ? 'delivered@resend.dev' : identifier,
-      subject: authSubject,
-      html,
-      // Set this to prevent Gmail from threading emails.
-      // More info: https://resend.com/changelog/custom-email-headers
-      headers: {
-        'X-Entity-Ref-ID': new Date().getTime() + ''
-      }
-    });
+    if (process.env.NODE_ENV === 'production') {
+      await resend.emails.send({
+        from: 'My SaaS <onboarding@resend.dev>',
+        to: identifier,
+        subject: authSubject,
+        html,
+        // Set this to prevent Gmail from threading emails.
+        // More info: https://resend.com/changelog/custom-email-headers
+        headers: {
+          'X-Entity-Ref-ID': new Date().getTime() + ''
+        }
+      });
+    } else {
+      await transporter.sendMail({
+        to: identifier,
+        subject: authSubject,
+        text: url
+        //html
+      });
+    }
   } catch (error) {
     throw new Error('Failed to send verification email.');
   }

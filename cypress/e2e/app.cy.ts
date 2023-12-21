@@ -1,24 +1,32 @@
-/* eslint-disable */
-// Disable ESLint to prevent failing linting inside the Next.js repo.
-// If you're using ESLint on your project, we recommend installing the ESLint Cypress plugin instead:
-// https://github.com/cypress-io/eslint-plugin-cypress
+describe('home page tests', () => {
+  before(() => {
+    cy.fixture('users').then((data) => {
+      this.data = data;
+    });
+  });
 
-// Cypress E2E Test
-describe('Navigation', () => {
-  it('should navigate to the about page', () => {
-    // Start from the index page
-    cy.visit('http://localhost:3000/');
+  beforeEach(() => {
+    cy.Login(this.data.PRIMARY_USER.email);
+    cy.visit('http://localhost:3000/user/dashboard');
+  });
 
-    // Find a link with an href attribute containing "about" and click it
-    cy.get('a[href*="about"]').click();
+  it('should test something on the /home page', () => {
+    cy.url().should('contain', '/user/dashboard');
+    console.log(this.data);
+  });
 
-    // The new url should include "/about"
-    cy.url().should('include', '/about');
-
-    // The new page should contain an h1 with "About page"
-    cy.get('h1').contains('About Page');
+  it('should test something else on the /home page', () => {
+    // assertions
   });
 });
 
-// Prevent TypeScript from reading file as legacy script
-export {};
+//describe('other page tests', () => {
+//  beforeEach(() => {
+//    cy.Login('testuser234@yahoo.com');
+//    cy.visit('/other');
+//  });
+
+//  it('should test something on the /other page', () => {
+//    // assertions
+//  });
+//});
