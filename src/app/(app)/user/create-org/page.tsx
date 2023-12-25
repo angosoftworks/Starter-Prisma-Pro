@@ -39,6 +39,7 @@ export default function CreateOrgPage() {
       await CreateRole({ org_id: org?.id, role: RolesE.OWNER, org_name: org?.name });
 
       const redirectPath = routes.redirects.user.toUserDashboard;
+      router.refresh();
       router.push(redirectPath);
     } catch (err) {
       toast.error(config.errorMessageGeneral);

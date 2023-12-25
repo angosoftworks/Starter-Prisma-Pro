@@ -135,7 +135,7 @@ export const UpdateEmail = ({ email }: UpdateEmailPropsI) => {
     }
 
     router.refresh();
-    toast.success('Update Email Sent, confirm email to complete Update');
+    toast.success('Email Updated');
   };
 
   return (

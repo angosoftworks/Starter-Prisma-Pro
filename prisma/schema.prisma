@@ -24,7 +24,7 @@ model Account {
   id_token          String? @db.Text
   session_state     String?
 
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user User @relation(fields: [userId], references: [id])
 
   @@unique([provider, providerAccountId])
   @@map(name: "accounts")
@@ -35,7 +35,7 @@ model Session {
   sessionToken String   @unique
   userId       String
   expires      DateTime
-  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user         User     @relation(fields: [userId], references: [id])
 
   @@map(name: "sessions")
 }
@@ -81,11 +81,11 @@ model Todo {
   id           String        @id @default(cuid())
   title        String        @db.VarChar
   description  String        @db.VarChar
-  user_id      String
+  user_id      String?
   org_id       String
   author       String?       @db.VarChar
-  user         User?         @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
-  organization Organization? @relation(fields: [org_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  user         User?         @relation(fields: [user_id], references: [id], onDelete: SetNull, onUpdate: Cascade)
+  organization Organization? @relation(fields: [org_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
 
   @@map(name: "todos")
 }
@@ -93,12 +93,12 @@ model Todo {
 model Organization {
   id                 String  @id @default(cuid())
   name               String  @db.VarChar
-  owner_user_id      String
-  customer_id         Int? @unique 
+  owner_user_id      String?
+  customer_id        Int? @unique 
   subscription_id    String?
 
-  user         User?         @relation(fields: [owner_user_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
-  subscription Subscription? @relation(fields: [subscription_id], references: [id], onUpdate: NoAction)
+  user         User?         @relation(fields: [owner_user_id], references: [id], onDelete: SetNull, onUpdate: Cascade)
+  subscription Subscription? @relation(fields: [subscription_id], references: [id], onDelete: SetNull, onUpdate: Cascade)
   Role         Role[]
   Todo         Todo[]
   Invite       Invite[]
@@ -113,10 +113,10 @@ model Role {
   org_name String
   user_id  String
   email    String
-  role String @db.VarChar
+  role     String @db.VarChar
 
-  organization Organization? @relation(fields: [org_id, org_name], references: [id, name], onUpdate: NoAction)
-  user         User?         @relation(fields: [user_id, email], references: [id, email], onUpdate: NoAction)
+  organization Organization @relation(fields: [org_id, org_name], references: [id, name], onDelete: Cascade, onUpdate: Cascade)
+  user         User         @relation(fields: [user_id, email], references: [id, email], onDelete: Cascade, onUpdate: Cascade)
 
   @@map(name: "roles")
 }
@@ -124,9 +124,9 @@ model Role {
 model Invite {
   id       String @id @default(cuid())
   org_id   String
-  email String
-  role String @db.VarChar
+  email    String
+  role     String @db.VarChar
 
-  organization Organization? @relation(fields: [org_id], references: [id], onUpdate: NoAction)
+  organization Organization? @relation(fields: [org_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
   @@map(name: "invites")
 }
