@@ -27,6 +27,7 @@ export default function CreateOrgPage() {
 
   const {
     register,
+    reset,
     formState: { isSubmitting }
   } = form;
 
@@ -38,9 +39,9 @@ export default function CreateOrgPage() {
       const org = await CreateOrg(props);
       await CreateRole({ org_id: org?.id, role: RolesE.OWNER, org_name: org?.name });
 
-      const redirectPath = routes.redirects.user.toUserDashboard;
+      reset({ name: '' });
+      toast.success('Org Created');
       router.refresh();
-      router.push(redirectPath);
     } catch (err) {
       toast.error(config.errorMessageGeneral);
       throw err;
