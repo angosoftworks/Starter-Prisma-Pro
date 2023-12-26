@@ -1,4 +1,4 @@
-import { UpdateOrgSubscription } from '../../Database/org/mutations';
+import { UpdateOrgSubscription } from '../../Database/subscription/mutations';
 import { CreateSubscription, UpdateSubscription } from '../../Database/subscription/mutations';
 import { Subscription } from '@prisma/client';
 
@@ -12,7 +12,7 @@ export const WebhookEventHandler = async (event: WebhookPayload) => {
         id: event.data.id,
         price_id: event.data.attributes.variant_id.toString(),
         status: event.data.attributes.status,
-        period_ends_at: new Date(event.data.attributes.billing_anchor)
+        period_ends_at: new Date(event.data.attributes.billing_anchor * 1000)
       };
 
       await CreateSubscription(dataSub);

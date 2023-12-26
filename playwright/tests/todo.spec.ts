@@ -12,7 +12,7 @@ test.describe('Todo Tests', () => {
     await page.getByLabel('Title').click();
     await page.getByLabel('Title').fill(org.orgTodo);
     await page.getByRole('button', { name: 'Submit' }).click();
-    await page.getByRole('button', { name: 'Submit' }).isEnabled();
+    await expect(page.getByLabel('Title')).toBeEmpty();
     await page.getByRole('link', { name: 'My SAAS' }).click();
 
     //go to dashboard
@@ -59,11 +59,13 @@ test.describe('Todo Tests', () => {
     await page.getByLabel('Description').click();
     await page.getByLabel('Description').fill('todo description 1 EDIT');
     await page.getByRole('button', { name: 'Submit' }).click();
+    await expect(page.getByLabel('Title')).toBeEmpty();
+    await expect(page.getByLabel('Description')).toBeEmpty();
     await expect(page.locator('h3')).toContainText('todo1 EDIT');
     await expect(page.getByRole('main')).toContainText('todo description 1 EDIT');
   });
 
-  test.only('Delete Todo', async ({ page }) => {
+  test('Delete Todo', async ({ page }) => {
     await page.getByRole('link', { name: 'My Todos' }).click();
     await page.getByRole('link', { name: 'My Todos' }).click();
     await page.getByRole('button', { name: 'Delete' }).click();

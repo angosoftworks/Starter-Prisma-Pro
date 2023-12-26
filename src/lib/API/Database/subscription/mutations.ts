@@ -1,9 +1,36 @@
-//'use server';
+'use server';
 
 import prisma, { Prisma } from '../../Services/init/prisma';
-import { GetUser } from '@/lib/API/Database/user/queries';
 import { PrismaDBError } from '@/lib/utils/error';
 import { Subscription } from '@prisma/client';
+
+interface UpdateOrgSubPropsT {
+  org_id: string;
+  customer_id: number;
+  subscription_id: string;
+}
+
+export const UpdateOrgSubscription = async ({
+  org_id,
+  customer_id,
+  subscription_id
+}: UpdateOrgSubPropsT) => {
+  const data: Prisma.OrganizationUpdateInput = {
+    customer_id,
+    subscription: { connect: { id: subscription_id } }
+  };
+
+  try {
+    await prisma.organization.update({
+      where: {
+        id: org_id
+      },
+      data
+    });
+  } catch (err) {
+    PrismaDBError(err);
+  }
+};
 
 export const CreateSubscription = async ({
   id,

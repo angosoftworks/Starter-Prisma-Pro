@@ -70,7 +70,7 @@ test.describe('Todo Tests', () => {
     await expect(page.getByRole('main')).toContainText('todo description 1 EDIT');
   });
 
-  test.only('Delete Todo', async ({ page }) => {
+  test('Delete Todo', async ({ page }) => {
     await page.getByRole('link', { name: 'My Todos' }).click();
     await page.getByRole('link', { name: 'My Todos' }).click();
     await page.getByRole('button', { name: 'Delete' }).click();

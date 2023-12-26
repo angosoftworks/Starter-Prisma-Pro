@@ -4,7 +4,7 @@ import { clearDB } from '../prisma';
 
 test.use({ storageState: 'playwright/.auth/admin.json' });
 
-test.skip('User Dashboard Tests', () => {
+test.describe('User Dashboard Tests', () => {
   test.beforeEach(async ({ page }) => {
     await page.goto(routes.urls.UserDashboard);
   });
