@@ -5,12 +5,6 @@
 // admin tests, ability to delete from user lists, assert on admin card
 // member tests, cant delete from user lists, assert on admin card
 
-// subscription
-// add subscription, test redirect to stripe, no subscription user and org.
-// test redirect to customer portal, assert redirect to stripe. existing subscription
-// user and org, hard code and manual create subscription from lemon squeezy.
-// display subscription can be component tested.
-
 import { test, expect } from '@playwright/test';
 import { routes, org, todo } from '../config';
 import { clearDB } from '../prisma';

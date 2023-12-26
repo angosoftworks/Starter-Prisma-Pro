@@ -1,5 +1,3 @@
-import 'server-only';
-
 import { UpdateOrgSubscription } from '../../Database/org/mutations';
 import { CreateSubscription, UpdateSubscription } from '../../Database/subscription/mutations';
 import { Subscription } from '@prisma/client';

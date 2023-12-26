@@ -1,6 +1,4 @@
 import { PrismaClient } from '@prisma/client';
-import { CreateSubscription } from '@/lib/API/Database/subscription/mutations';
-import { CreateOrg, UpdateOrgSubscription } from '@/lib/API/Database/org/mutations';
 
 const prisma = new PrismaClient();
 
@@ -11,6 +9,11 @@ export const clearDB = async () => {
   await prisma.verificationToken.deleteMany({});
 };
 
-export const MockSubscription = async () => {
-  await CreateOrg;
+export const MockOrg = async () => {
+  const user = await prisma.user.create({ data: { email: 'test223@yahoo.com' } });
+  const org = await prisma.organization.create({
+    data: { name: 'org1', user: { connect: { id: user.id } } }
+  });
+
+  return org.id;
 };

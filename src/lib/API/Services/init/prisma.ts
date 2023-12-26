@@ -1,7 +1,5 @@
-import 'server-only';
+//import 'server-only'; // comment out when running e2e tests
 import { Prisma } from '@prisma/client';
-//import { PrismaClient } from '@prisma/client/edge';
-//import { withAccelerate } from '@prisma/extension-accelerate';
 
 import { PrismaClient } from '@prisma/client';
 
@@ -14,11 +12,9 @@ import { PrismaClient } from '@prisma/client';
 let prisma;
 
 if (process.env.NODE_ENV === 'production') {
-  //prisma = new PrismaClient().$extends(withAccelerate());
   prisma = new PrismaClient();
 } else {
   if (!global.prisma) {
-    //global.prisma = new PrismaClient().$extends(withAccelerate());
     global.prisma = new PrismaClient();
   }
   prisma = global.prisma;

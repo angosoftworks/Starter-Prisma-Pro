@@ -1,4 +1,4 @@
-'use server';
+//'use server';
 
 import prisma, { Prisma } from '../../Services/init/prisma';
 import { GetUser } from '@/lib/API/Database/user/queries';
