@@ -6,7 +6,7 @@ import type { NextRequest } from 'next/server';
 import crypto from 'crypto';
 
 export async function POST(req: NextRequest) {
-  console.log('Starting');
+  console.log('Starting...');
 
   const webhookSecret = process.env.LEMON_WEBHOOK_SECRET;
   const body = await req.text();

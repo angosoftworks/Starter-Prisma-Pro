@@ -11,8 +11,6 @@ export const CreateSubscription = async ({
   status,
   period_ends_at
 }: Subscription) => {
-  const user = await GetUser();
-
   const data: Prisma.SubscriptionCreateInput = {
     id,
     price_id,

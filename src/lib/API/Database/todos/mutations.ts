@@ -6,11 +6,11 @@ import { PrismaDBError } from '@/lib/utils/error';
 import { todoFormValues } from '@/lib/types/validations';
 
 interface UpdateTodoPropsI extends todoFormValues {
-  id: number;
+  id: string;
 }
 
 interface DeleteTodoPropsI {
-  id: number;
+  id: string;
 }
 
 interface CreateTodoPropsI extends todoFormValues {

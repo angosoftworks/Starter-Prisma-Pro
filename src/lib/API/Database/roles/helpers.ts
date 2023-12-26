@@ -23,8 +23,6 @@ export interface PermissionsI {
 export const TestRole = async ({ test, permissions }: TestRolePropsI) => {
   const { role, action, subject } = permissions;
   await CheckPermission({ role, action, subject });
-
-  console.log(test);
 };
 
 export const CheckPermission = async ({ role, action, subject }) => {

@@ -100,8 +100,6 @@ const PricingDisplay = () => {
     const org_id = pathname.split('/')[2];
     const price = Number(price_id);
 
-    console.log(price_id);
-
     const res = await createCheckoutSession({ price_id: price, org_id });
 
     router.push(res.data.attributes.url);

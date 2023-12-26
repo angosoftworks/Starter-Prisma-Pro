@@ -31,7 +31,7 @@ export const GetTodosByUserId = async ({ org_id }: GetOrgTodosI): Promise<Todo[]
   }
 };
 
-export const GetTodoById = async (id: number): Promise<Todo> => {
+export const GetTodoById = async (id: string): Promise<Todo> => {
   try {
     const todo = await prisma.todo.findFirst({
       where: {

@@ -25,7 +25,6 @@ export default function AdminCard({ id }: AdminCardPropsI) {
     };
 
     const res = await TestRole({ test: 'test', permissions });
-    console.log(res);
   };
 
   return (

@@ -1,11 +1,12 @@
 export const routes = {
   urls: {
     base: 'http://localhost:3000/',
-    UserDashboard: 'http://localhost:3000/user/dashboard'
+    UserDashboard: 'http://localhost:3000/user/dashboard',
+    lemonUrl: 'https://saasstarterkit.lemonsqueezy.com/**'
   },
   segments: {
     authConfirm: '**/auth/confirmed',
-    userDash: '**/user/dashboard',
+    userDash: '**/user/**',
     login: '**/auth/login'
   },
   api: {
@@ -19,4 +20,14 @@ export const routes = {
 
 export const user = {
   admin: { email: 'test4@yahoo.com' }
+};
+
+export const org = {
+  org1: 'org1',
+  orgTodo: 'orgTodo'
+};
+
+export const todo = {
+  todoTitle: 'todo1',
+  todoDescription: 'todo description 1'
 };

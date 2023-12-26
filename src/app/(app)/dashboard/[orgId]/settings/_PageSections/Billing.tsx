@@ -8,11 +8,9 @@ import { GetSubscription } from '@/lib/API/Services/lemon/subscription';
 
 const Billing = ({ subscription_id }) => {
   const router = useRouter();
-  const pathname = usePathname();
 
   const handleSubscription = async () => {
     const res = await GetSubscription({ subscription_id });
-    console.log(res);
     //@ts-ignore, wrong types on lemon.js
     router.push(res.data.attributes.urls.customer_portal);
   };

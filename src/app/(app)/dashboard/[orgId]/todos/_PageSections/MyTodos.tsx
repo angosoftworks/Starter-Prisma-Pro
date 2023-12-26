@@ -6,10 +6,10 @@ import { Button, buttonVariants } from '@/components/ui/Button';
 import Link from 'next/link';
 import { cn } from '@/lib/utils/helpers';
 import { toast } from 'react-toastify';
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import config from '@/lib/config/api';
 import { Todo } from '@prisma/client';
-
+import routes from '@/lib/config/routes';
 interface TodoCardProps {
   todo: Todo;
 }
@@ -20,11 +20,16 @@ interface MyTodosProps {
 
 const TodoCard = ({ todo }: TodoCardProps) => {
   const router = useRouter();
+  const pathname = usePathname();
 
   const { id, title, description } = todo;
+  const org_id = pathname.split('/')[2];
+  const todosEditPath = '/todos/edit/';
+
+  const href = `${routes.redirects.dashboard.dashboardBase}${org_id}${todosEditPath}${id}`;
 
   const Delete = async () => {
-    const todo_id = Number(id);
+    const todo_id = id;
     try {
       await DeleteTodo({ id: todo_id });
     } catch (err) {
@@ -44,7 +49,7 @@ const TodoCard = ({ todo }: TodoCardProps) => {
       </CardHeader>
       <CardContent>
         <Link
-          href={`/dashboard/todos/edit/${id}`}
+          href={href}
           className={cn(buttonVariants({ variant: 'secondary', size: 'lg' }), 'mr-6')}
         >
           Edit
@@ -60,9 +65,8 @@ const TodoCard = ({ todo }: TodoCardProps) => {
 const MyTodos = ({ todos }: MyTodosProps) => {
   return (
     <div>
-      {todos.map((todo) => (
-        <TodoCard key={todo.id} todo={todo} />
-      ))}
+      {todos?.map((todo) => <TodoCard key={todo.id} todo={todo} />)}
+      {todos.length === 0 && <div>No Todos Found</div>}
     </div>
   );
 };

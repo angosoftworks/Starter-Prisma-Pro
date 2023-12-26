@@ -13,7 +13,6 @@ export const GetUser = async (): Promise<User> => {
         id
       }
     });
-    console.log(id);
     return user;
   } catch (err) {
     PrismaDBError(err);

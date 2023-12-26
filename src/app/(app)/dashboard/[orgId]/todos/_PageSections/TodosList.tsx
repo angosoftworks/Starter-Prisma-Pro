@@ -30,6 +30,7 @@ const TodosList = ({ todos }: MyTodosProps) => {
       {todos.map((todo) => (
         <TodoCard key={todo.id} todo={todo} />
       ))}
+      {todos.length === 0 && <div>No Todos Found</div>}
     </div>
   );
 };

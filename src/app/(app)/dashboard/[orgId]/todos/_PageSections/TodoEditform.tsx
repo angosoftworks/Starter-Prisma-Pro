@@ -43,7 +43,7 @@ export default function TodosEditForm({ todo }: EditFormProps) {
   const onSubmit = async (values: todoFormValues) => {
     const title = values.title;
     const description = values.description;
-    const todo_id = Number(id);
+    const todo_id = id;
 
     const props = { id: todo_id, title, description };
 
