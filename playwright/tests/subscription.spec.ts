@@ -49,11 +49,6 @@ test.describe('Subscription Tests', () => {
 
   test('Update Subscription Webhook Flow', async () => {
     const subscription_id = MockWebhookPayload.data.id;
-    const status = MockWebhookPayload.data.attributes.status;
-    const price_id = MockWebhookPayload.data.attributes.variant_id.toString();
-    const period_ends_at = new Date(MockWebhookPayload.data.attributes.billing_anchor);
-
-    await CreateSubscriptionMock({ id: subscription_id, status, price_id, period_ends_at });
 
     MockWebhookPayload.meta.event_name = 'subscription_updated';
 

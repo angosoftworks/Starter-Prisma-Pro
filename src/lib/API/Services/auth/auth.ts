@@ -33,8 +33,7 @@ export const {
   adapter: PrismaAdapter(prisma),
   session: { strategy: 'database' },
   pages: {
-    signIn: routes.redirects.auth.toLogin,
-    newUser: routes.redirects.user.toUserDashboard
+    signIn: routes.redirects.auth.toLogin
   },
   callbacks: {
     async session({ session, user }) {

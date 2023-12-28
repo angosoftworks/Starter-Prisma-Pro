@@ -1,11 +1,15 @@
 import { test, expect } from '@playwright/test';
-import { routes, org, todo } from '../config';
+import { routes, org, todo, user } from '../config';
 import { clearDB } from '../prisma';
 
 test.use({ storageState: 'playwright/.auth/admin.json' });
 
 test.describe('Todo Tests', () => {
-  test.beforeAll(async ({ page }) => {
+  test.afterAll(async ({ page }) => {
+    await clearDB();
+  });
+
+  test.beforeAll(async ({ page, request }) => {
     //create org
     await page.goto(routes.urls.UserDashboard);
     await page.getByRole('link', { name: 'Create Org' }).click();
@@ -35,10 +39,6 @@ test.describe('Todo Tests', () => {
     await page.getByRole('link', { name: 'Todos' }).click();
   });
 
-  test.afterAll(async ({ page }) => {
-    await clearDB();
-  });
-
   test('My Todos', async ({ page }) => {
     await page.getByRole('link', { name: 'My Todos' }).click();
     await expect(page.locator('h3')).toContainText('todo1');
@@ -59,8 +59,9 @@ test.describe('Todo Tests', () => {
     await page.getByLabel('Description').click();
     await page.getByLabel('Description').fill('todo description 1 EDIT');
     await page.getByRole('button', { name: 'Submit' }).click();
-    await expect(page.getByLabel('Title')).toBeEmpty();
-    await expect(page.getByLabel('Description')).toBeEmpty();
+    await expect(page.locator('h3')).toContainText('New Todo');
+    await page.getByRole('link', { name: 'My Todos' }).click();
+    await page.reload();
     await expect(page.locator('h3')).toContainText('todo1 EDIT');
     await expect(page.getByRole('main')).toContainText('todo description 1 EDIT');
   });

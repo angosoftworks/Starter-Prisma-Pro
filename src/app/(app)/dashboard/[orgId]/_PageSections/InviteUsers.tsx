@@ -49,6 +49,7 @@ export default function InviteUsers() {
 
   const {
     register,
+    reset,
     formState: { isSubmitting }
   } = form;
 
@@ -64,6 +65,7 @@ export default function InviteUsers() {
     const propsLogin = { email, callbackUrl };
     await Login(propsLogin);
 
+    reset({ email: '' });
     toast.success('Invite Sent!');
   };
 

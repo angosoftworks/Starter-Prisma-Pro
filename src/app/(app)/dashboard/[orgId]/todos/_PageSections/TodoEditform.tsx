@@ -16,6 +16,7 @@ import { toast } from 'react-toastify';
 import { Todo } from '@prisma/client';
 import config from '@/lib/config/api';
 import routes from '@/lib/config/routes';
+import { redirect } from 'next/navigation';
 
 interface EditFormProps {
   todo: Todo;
@@ -54,11 +55,10 @@ export default function TodosEditForm({ todo }: EditFormProps) {
       throw err;
     }
 
-    reset({ title: '', description: '' });
     toast.success('Todo Updated');
     router.refresh();
     const org_id = pathname.split('/')[2];
-    const path = routes.redirects.dashboard.todos.toMyTodos;
+    const path = routes.redirects.dashboard.todos.createTodos;
     const basePath = routes.redirects.dashboard.dashboardBase;
     router.push(`${basePath}${org_id}${path}`);
   };

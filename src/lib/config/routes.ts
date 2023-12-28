@@ -40,7 +40,7 @@ const routes = {
         requireSub: '/settings/subscription-required',
         toAddSub: '/settings/add-subscription'
       },
-      todos: { toMyTodos: '/todos/my-todos' }
+      todos: { toMyTodos: '/todos/my-todos', createTodos: '/todos/create' }
     },
     auth: {
       toLogin: '/auth/login',

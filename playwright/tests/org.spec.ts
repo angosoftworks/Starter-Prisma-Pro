@@ -1,16 +1,20 @@
 import { test, expect } from '@playwright/test';
-import { routes, org, todo } from '../config';
+import { routes, org, todo, user } from '../config';
 import { clearDB } from '../prisma';
 
 test.use({ storageState: 'playwright/.auth/admin.json' });
 
 test.describe('Org Tests', () => {
+  test.afterAll(async () => {
+    await clearDB();
+  });
+
   test.beforeAll(async ({ page }) => {
     //create org
     await page.goto(routes.urls.UserDashboard);
     await page.getByRole('link', { name: 'Create Org' }).click();
     await page.getByLabel('Title').click();
-    await page.getByLabel('Title').fill(org.orgTodo);
+    await page.getByLabel('Title').fill('orgTest334');
     await page.getByRole('button', { name: 'Submit' }).click();
     await expect(page.getByLabel('Title')).toBeEmpty();
     await page.getByRole('link', { name: 'My SAAS' }).click();
@@ -18,13 +22,9 @@ test.describe('Org Tests', () => {
 
   test.beforeEach(async ({ page }) => {
     await page.goto(routes.urls.UserDashboard);
-    await page.getByRole('link', { name: 'orgTodo Role: OWNER Click Go' }).click();
+    await page.getByRole('link', { name: 'orgTest334 Role: OWNER Click Go' }).click();
     await expect(page.getByRole('navigation')).toContainText('Overview');
     await page.getByRole('link', { name: 'Settings' }).click();
-  });
-
-  test.afterAll(async () => {
-    await clearDB();
   });
 
   test('Add Subscription', async ({ page }) => {
@@ -35,8 +35,8 @@ test.describe('Org Tests', () => {
 
   test('Update Org Name', async ({ page }) => {
     await page.getByLabel('Display Name').click();
-    await page.getByLabel('Display Name').fill('orgTodo-edit');
+    await page.getByLabel('Display Name').fill('orgTest334-edit');
     await page.getByRole('button', { name: 'Update Profile' }).click();
-    await expect(page.getByLabel('Display Name')).toHaveValue('orgTodo-edit');
+    await expect(page.getByLabel('Display Name')).toHaveValue('orgTest334-edit');
   });
 });
