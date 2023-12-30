@@ -1,6 +1,6 @@
 import { SendVerificationRequestParams } from 'next-auth/providers';
 import { resend } from '../init/resend';
-import { GetUserByEmail } from '../../Database/user/queries';
+//import { GetUserByEmail } from '../../Database/user/queries';
 import config from '@/lib/config/marketing';
 import MagicLinkEmail from '../../../../../emails/MagicLink';
 import { renderAsync } from '@react-email/render';

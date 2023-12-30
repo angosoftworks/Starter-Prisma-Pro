@@ -1,6 +1,6 @@
 import { neonConfig, Pool, PoolConfig } from '@neondatabase/serverless';
 import { PrismaNeon } from '@prisma/adapter-neon';
-import { PrismaClient } from '@prisma/client';
+import { PrismaClient, Prisma } from '@prisma/client';
 import ws from 'ws';
 
 declare global {
@@ -23,5 +23,7 @@ const prisma = global.prisma || new PrismaClient({ adapter });
 
 // cache on global for HOT RELOAD in dev
 if (process.env.NODE_ENV === 'development') global.prisma = prisma;
+
+export { Prisma };
 
 export default prisma;

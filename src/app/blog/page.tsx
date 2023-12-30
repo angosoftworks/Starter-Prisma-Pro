@@ -30,7 +30,7 @@ export default function Blog() {
           <h2 className="text-center md:text-left mb-4 font-heading text-3xl">Featured Posts</h2>
           <div className="grid gap-6 justify-center md:grid-cols-2 lg:grid-cols-3">
             {posts.map((post) => (
-              <div>
+              <div key={post.meta.title}>
                 {post.meta.featured && (
                   <article key={post.meta.id} className="group relative flex flex-col space-y-2">
                     <Image

@@ -94,5 +94,8 @@
     "prettier": "^3.0.3",
     "prettier-plugin-tailwindcss": "^0.5.4",
     "prisma": "^5.7.1"
+  },
+  "optionalDependencies": {
+    "bufferutil": "^4.0.8"
   }
 }
