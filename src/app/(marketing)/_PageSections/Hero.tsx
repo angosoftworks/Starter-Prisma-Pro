@@ -24,7 +24,7 @@ export default async function Hero() {
     try {
       const user = await prisma.user.findUnique({
         where: {
-          email: ''
+          email: 'test1@yahoo.com'
         }
       });
       return user;

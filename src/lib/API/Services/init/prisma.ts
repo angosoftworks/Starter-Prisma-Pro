@@ -3,26 +3,41 @@ import { PrismaNeon } from '@prisma/adapter-neon';
 import { PrismaClient, Prisma } from '@prisma/client';
 import ws from 'ws';
 
+//www.prisma.io/docs/orm/more/help-and-troubleshooting/help-articles/nextjs-prisma-client-dev-practices
 declare global {
   var prisma: PrismaClient | undefined;
 }
 
-// setup
-neonConfig.webSocketConstructor = ws;
-const isTest = process.env.NODE_ENV === 'test';
-const DB_URL_TEST = process.env.DATABASE_URL_TEST;
-const DB_URL = process.env.DATABASE_URL;
-const connectionString = isTest ? DB_URL_TEST : DB_URL;
-const poolConfig: PoolConfig = { connectionString: DB_URL };
+let prisma: PrismaClient;
 
-// instantiate
-const pool = new Pool(poolConfig);
-const adapter = new PrismaNeon(pool);
+if (process.env.NODE_ENV === 'development') {
+  prisma = new PrismaClient();
+  global.prisma = prisma;
+}
 
-const prisma = global.prisma || new PrismaClient({ adapter });
+if (process.env.NODE_ENV === 'production') {
+  // setup
+  neonConfig.webSocketConstructor = ws;
+  const connectionString = process.env.DATABASE_URL;
+  const poolConfig: PoolConfig = { connectionString };
 
-// cache on global for HOT RELOAD in dev
-if (process.env.NODE_ENV === 'development') global.prisma = prisma;
+  // instantiate
+  const pool = new Pool(poolConfig);
+  const adapter = new PrismaNeon(pool);
+  prisma = new PrismaClient({ adapter });
+}
+
+if (process.env.NODE_ENV === 'test') {
+  const url = process.env.DATABASE_URL_TEST;
+
+  prisma = new PrismaClient({
+    datasources: {
+      db: {
+        url
+      }
+    }
+  });
+}
 
 export { Prisma };
 

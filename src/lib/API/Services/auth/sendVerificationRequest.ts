@@ -1,11 +1,9 @@
 import { SendVerificationRequestParams } from 'next-auth/providers';
 import { resend } from '../init/resend';
-//import { GetUserByEmail } from '../../Database/user/queries';
+import { GetUserByEmail } from '../../Database/user/queries';
 import config from '@/lib/config/marketing';
 import MagicLinkEmail from '../../../../../emails/MagicLink';
 import { renderAsync } from '@react-email/render';
-import { redirect } from 'next/navigation';
-import { cookies } from 'next/headers';
 
 import transporter from '@/lib/utils/emailTestUtils';
 
@@ -13,11 +11,10 @@ export const sendVerificationRequest = async ({
   url,
   identifier
 }: SendVerificationRequestParams) => {
-  //const user = await GetUserByEmail({ email: identifier });
+  const user = await GetUserByEmail({ email: identifier });
   const site = config.metadate.title.default;
 
-  //const userVerified = user?.emailVerified ? true : false;
-  const userVerified = true;
+  const userVerified = user?.emailVerified ? true : false;
   const authSubject = userVerified ? `Sign-in link for ${site}` : 'Activate your account';
 
   //https://github.com/resendlabs/resend-node/issues/256
@@ -34,7 +31,7 @@ export const sendVerificationRequest = async ({
     if (process.env.NODE_ENV === 'production') {
       await resend.emails.send({
         from: 'My SaaS <onboarding@resend.dev>',
-        to: identifier, //'delivered@resend.dev'
+        to: identifier, //'delivered@resend.dev' for testing
         subject: authSubject,
         html,
         // Set this to prevent Gmail from threading emails.
