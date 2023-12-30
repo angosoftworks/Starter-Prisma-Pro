@@ -34,6 +34,7 @@ export default defineConfig({
     timeout: 30 * 1000
   },
   timeout: 50 * 1000,
+  globalTeardown: require.resolve('./playwright/globalTeardown'),
   /* Configure projects for major browsers */
   projects: [
     { name: 'setup', testMatch: /.*\.setup\.ts/ },
