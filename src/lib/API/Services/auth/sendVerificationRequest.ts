@@ -13,16 +13,17 @@ export const sendVerificationRequest = async ({
   url,
   identifier
 }: SendVerificationRequestParams) => {
-  const user = await GetUserByEmail({ email: identifier });
+  //const user = await GetUserByEmail({ email: identifier });
   const site = config.metadate.title.default;
 
-  const userVerified = user?.emailVerified ? true : false;
+  //const userVerified = user?.emailVerified ? true : false;
+  const userVerified = true;
   const authSubject = userVerified ? `Sign-in link for ${site}` : 'Activate your account';
 
   //https://github.com/resendlabs/resend-node/issues/256
   const html = await renderAsync(
     MagicLinkEmail({
-      firstName: user?.name as string,
+      firstName: 'ddd',
       actionUrl: url,
       mailType: userVerified ? 'login' : 'register',
       siteName: site

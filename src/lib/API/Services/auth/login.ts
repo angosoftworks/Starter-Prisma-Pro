@@ -31,8 +31,10 @@ export const Login = async ({ email, callbackUrl, parameters }: LoginPropsI) => 
       AuthError(error);
     }
   } catch (err) {
-    toast.error(configuration.errorMessageGeneral);
-    AuthError(err);
+    //toast.error(configuration.errorMessageGeneral);
+    console.log(err.ErrorEvent.errors);
+    throw 'error';
+    //AuthError(err);
   }
 };
 

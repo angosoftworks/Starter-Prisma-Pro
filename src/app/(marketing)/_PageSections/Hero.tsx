@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { buttonVariants } from '@/components/ui/Button';
 import Image from 'next/image';
 import DashPic from '../../../../public/static/images/marketing/dash.png';
+import prisma from '@/lib/API/Services/init/prisma';
 
 const HeroScreenshot = () => {
   return (
@@ -18,10 +19,26 @@ const HeroScreenshot = () => {
   );
 };
 
-export default function Hero() {
+export default async function Hero() {
+  const GetUser = async () => {
+    try {
+      const user = await prisma.user.findUnique({
+        where: {
+          email: ''
+        }
+      });
+      return user;
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  console.log(await GetUser());
+
   return (
     <div>
       <section className="py-8 px-4">
+        {/*<button onClick={GetUser}>DDDDDDDDDDDDDDDD</button>*/}
         <div className="flex flex-col items-center gap-4 text-center">
           <h1 className=" text-3xl md:text-7xl md:max-w-[54rem] ">
             An example app built using Next.js 13 server components.

@@ -1,25 +1,27 @@
-//import 'server-only'; // comment out when running e2e tests
-import { Prisma } from '@prisma/client';
-
+import { neonConfig, Pool, PoolConfig } from '@neondatabase/serverless';
+import { PrismaNeon } from '@prisma/adapter-neon';
 import { PrismaClient } from '@prisma/client';
+import ws from 'ws';
 
-// PrismaClient is attached to the `global` object in development to prevent
-// exhausting your database connection limit.
-//
-// Learn more:
-// https://pris.ly/d/help/next-js-best-practices
-
-let prisma;
-
-if (process.env.NODE_ENV === 'production') {
-  prisma = new PrismaClient();
-} else {
-  if (!global.prisma) {
-    global.prisma = new PrismaClient();
-  }
-  prisma = global.prisma;
+declare global {
+  var prisma: PrismaClient | undefined;
 }
 
-export { Prisma };
+// setup
+neonConfig.webSocketConstructor = ws;
+const isTest = process.env.NODE_ENV === 'test';
+const DB_URL_TEST = process.env.DATABASE_URL_TEST;
+const DB_URL = process.env.DATABASE_URL;
+const connectionString = isTest ? DB_URL_TEST : DB_URL;
+const poolConfig: PoolConfig = { connectionString: DB_URL };
+
+// instantiate
+const pool = new Pool(poolConfig);
+const adapter = new PrismaNeon(pool);
+
+const prisma = global.prisma || new PrismaClient({ adapter });
+
+// cache on global for HOT RELOAD in dev
+if (process.env.NODE_ENV === 'development') global.prisma = prisma;
 
 export default prisma;
