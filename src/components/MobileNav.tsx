@@ -3,6 +3,8 @@ import Link from 'next/link';
 import { NavItem } from '@/lib/types/types';
 
 import { Icons } from '@/components/Icons';
+import routes from '@/lib/config/routes';
+import { usePathname } from 'next/navigation';
 
 import {
   DropdownMenu,
@@ -15,13 +17,18 @@ export interface NavProps {
   items?: NavItem[];
 }
 
-const MobileNavItem = ({ title, link }: NavItem) => (
-  <DropdownMenuItem className="flex justify-center">
-    <Link className="p-4 text-xl font-semi-bold text-center" href={link}>
-      {title}
-    </Link>
-  </DropdownMenuItem>
-);
+const MobileNavItem = ({ title, link }: NavItem) => {
+  const pathname = usePathname();
+  const href = `${routes.redirects.dashboard.dashboardBase}${pathname.split('/')[2]}${link}`;
+
+  return (
+    <DropdownMenuItem className="flex justify-center">
+      <Link className="p-4 text-xl font-semi-bold text-center" href={href}>
+        {title}
+      </Link>
+    </DropdownMenuItem>
+  );
+};
 
 export const MobileNav = ({ items }: NavProps) => {
   return (
