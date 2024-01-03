@@ -1,9 +1,6 @@
 'use server';
 
-import prisma, { Prisma } from '../../Services/init/prisma';
 import { GetUser } from '@/lib/API/Database/user/queries';
-import { PrismaDBError } from '@/lib/utils/error';
-import { Role } from '@prisma/client';
 import { ForbiddenError } from '@casl/ability';
 import { defineAbilityFor } from '@/lib/utils/caslAbility';
 import { Actions, RolesE, Subjects } from '@/lib/types/enums';
@@ -13,16 +10,12 @@ interface TestRolePropsI extends PermissionsI {
 }
 
 export interface PermissionsI {
-  permissions: {
-    role: RolesE;
-    action: Actions;
-    subject: Subjects;
-  };
+  role: RolesE;
 }
 
-export const TestRole = async ({ test, permissions }: TestRolePropsI) => {
-  const { role, action, subject } = permissions;
-  await CheckPermission({ role, action, subject });
+export const TestRole = async ({ test, role }: TestRolePropsI) => {
+  await CheckPermission({ role, action: Actions.READ, subject: Subjects.TODO });
+  return `${test} successful`;
 };
 
 export const CheckPermission = async ({ role, action, subject }) => {

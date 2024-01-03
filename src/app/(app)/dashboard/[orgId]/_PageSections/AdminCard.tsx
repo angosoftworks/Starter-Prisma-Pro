@@ -4,7 +4,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { useAbility } from '@casl/react';
 import { AbilityContext } from '@/lib/utils/caslContext';
 import { RoleContext } from '@/lib/utils/roleContext';
-import { Actions, RolesE, Subjects } from '@/lib/types/enums';
+import { Actions, Subjects } from '@/lib/types/enums';
 import { TestRole } from '@/lib/API/Database/roles/helpers';
 import { Button } from '@/components/ui/Button';
 import { useContext } from 'react';
@@ -17,14 +17,8 @@ export default function AdminCard({ id }: AdminCardPropsI) {
   const ability = useAbility(AbilityContext);
   const role = useContext(RoleContext);
 
-  const handleSubmit = async ({ action, subject }) => {
-    const permissions = {
-      role,
-      action,
-      subject
-    };
-
-    const res = await TestRole({ test: 'test', permissions });
+  const handleSubmit = async () => {
+    await TestRole({ test: 'test', role });
   };
 
   return (
@@ -44,10 +38,8 @@ export default function AdminCard({ id }: AdminCardPropsI) {
             <div>Admin and Owner Roles can See This</div>
           )}
           {ability.can(Actions.DELETE, Subjects.SUBSCRIPTION) && <div>Only Owner can See This</div>}
-          <div>Gaurd API routes with Casl</div>
-          <Button onClick={() => handleSubmit({ action: Actions.READ, subject: Subjects.TODO })}>
-            Submit
-          </Button>
+          <div>Guard API routes with Casl</div>
+          <Button onClick={() => handleSubmit()}>Submit</Button>
         </CardContent>
       </Card>
     </div>
