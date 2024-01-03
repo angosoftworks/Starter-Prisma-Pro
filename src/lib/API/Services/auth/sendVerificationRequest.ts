@@ -4,8 +4,7 @@ import { GetUserByEmail } from '../../Database/user/queries';
 import config from '@/lib/config/marketing';
 import MagicLinkEmail from '../../../../../emails/MagicLink';
 import { renderAsync } from '@react-email/render';
-
-import transporter from '@/lib/utils/emailTestUtils';
+import transporter from '@/lib/API/Services/auth/transporter';
 
 export const sendVerificationRequest = async ({
   url,
@@ -20,7 +19,7 @@ export const sendVerificationRequest = async ({
   //https://github.com/resendlabs/resend-node/issues/256
   const html = await renderAsync(
     MagicLinkEmail({
-      firstName: 'ddd',
+      firstName: user?.display_name,
       actionUrl: url,
       mailType: userVerified ? 'login' : 'register',
       siteName: site
