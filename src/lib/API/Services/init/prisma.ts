@@ -15,18 +15,6 @@ if (process.env.NODE_ENV === 'development') {
   global.prisma = prisma;
 }
 
-if (process.env.NODE_ENV === 'production') {
-  // setup
-  neonConfig.webSocketConstructor = ws;
-  const connectionString = process.env.DATABASE_URL;
-  const poolConfig: PoolConfig = { connectionString };
-
-  // instantiate
-  const pool = new Pool(poolConfig);
-  const adapter = new PrismaNeon(pool);
-  prisma = new PrismaClient({ adapter });
-}
-
 if (process.env.NODE_ENV === 'test') {
   const url = process.env.DATABASE_URL_TEST;
 
@@ -37,6 +25,20 @@ if (process.env.NODE_ENV === 'test') {
       }
     }
   });
+}
+
+// modify this config based on production database setup.
+// default to work with Neon Database
+if (process.env.NODE_ENV === 'production') {
+  // setup
+  neonConfig.webSocketConstructor = ws;
+  const connectionString = process.env.DATABASE_URL;
+  const poolConfig: PoolConfig = { connectionString };
+
+  // instantiate
+  const pool = new Pool(poolConfig);
+  const adapter = new PrismaNeon(pool);
+  prisma = new PrismaClient({ adapter });
 }
 
 export { Prisma };
