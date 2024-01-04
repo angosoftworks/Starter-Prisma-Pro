@@ -5,6 +5,8 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.min.css';
 import NextTopLoader from 'nextjs-toploader';
 import config from '@/lib/config/site';
+import { SpeedInsights } from '@vercel/speed-insights/next';
+import { Analytics } from '@vercel/analytics/react';
 
 const RootLayout = ({ children }) => {
   return (
@@ -19,6 +21,8 @@ const RootLayout = ({ children }) => {
           <NextTopLoader color={config.loading_bar_color} />
           {children}
         </ThemeProvider>
+        <SpeedInsights />
+        <Analytics />
         <ToastContainer position="bottom-right" />
       </body>
     </html>
