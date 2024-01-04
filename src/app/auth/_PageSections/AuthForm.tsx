@@ -12,6 +12,7 @@ import { Login, GoogleLogin } from '@/lib/API/Services/auth/login';
 
 import routes from '@/lib/config/routes';
 import { useRouter } from 'next/navigation';
+import { trackEvent } from '@/lib/utils/analytics';
 
 interface AuthFormPropsI {
   submit_text: string;
@@ -34,6 +35,7 @@ export default function AuthForm({ submit_text, auth_flow }: AuthFormPropsI) {
   } = form;
 
   const onSubmit = async (values: EmailFormValues) => {
+    trackEvent({ eventName: auth_flow });
     const redirect = routes.redirects.user.toUserDashboard;
     const props = { email: values.email, callbackUrl: redirect };
 
