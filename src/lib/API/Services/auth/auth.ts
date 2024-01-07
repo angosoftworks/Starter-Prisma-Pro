@@ -26,7 +26,6 @@ export const {
   pages: {
     signIn: routes.redirects.auth.toLogin
   },
-  debug: true,
   callbacks: {
     async session({ session, user }) {
       if (user || session) {
