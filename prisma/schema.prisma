@@ -92,7 +92,7 @@ model Organization {
   id                 String  @id @default(cuid())
   name               String  @db.VarChar
   owner_user_id      String?
-  customer_id        Int? @unique 
+  customer_id        String? @unique 
   subscription_id    String?
 
   user         User?         @relation(fields: [owner_user_id], references: [id], onDelete: SetNull, onUpdate: Cascade)

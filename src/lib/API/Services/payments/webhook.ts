@@ -21,7 +21,7 @@ export const WebhookEventHandler = async (event: WebhookPayload) => {
 
       const dataOrg = {
         org_id: event.meta.custom_data.org_id,
-        customer_id: event.data.attributes.customer_id,
+        customer_id: String(event.data.attributes.customer_id),
         subscription_id: event.data.id
       };
 

@@ -31,13 +31,7 @@ export default function UsersList({ roles }: InviteUsersI) {
 
   const handleDelete = async ({ id }: { id: string }) => {
     try {
-      const permissions = {
-        role,
-        action: Actions.DELETE,
-        subject: Subjects.USER
-      };
-
-      await DeleteRoleByUserIdAndOrgId({ id, permissions });
+      await DeleteRoleByUserIdAndOrgId({ id, role });
       router.refresh();
     } catch (e) {
       toast.error('Remove User Role Failed');

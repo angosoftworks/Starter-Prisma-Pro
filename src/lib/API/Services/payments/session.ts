@@ -1,18 +1,22 @@
 'use server';
-import clientLemon from '../init/lemonsqueezy';
+import clientLemon from '../init/payments';
 
 import { GetUser } from '../../Database/user/queries';
 import { GetOrg } from '../../Database/org/queries';
 import configuration from '@/lib/config/site';
 import routes from '@/lib/config/routes';
-import config from '@/lib/config/dashboard';
 
 interface createCheckoutProps {
   price_id: number;
   org_id: string;
 }
 
-export const createCheckoutSession = async ({ price_id, org_id }: createCheckoutProps) => {
+export const createCheckoutSession = async ({
+  price_id,
+  org_id
+}: createCheckoutProps): Promise<string> => {
+  const storeId = Number(process.env.NEXT_PUBLIC_LEMON_STORE_ID);
+  const variantId = price_id;
   const user = await GetUser();
   const email = user.email;
   const org = await GetOrg({ id: org_id });
@@ -36,9 +40,10 @@ export const createCheckoutSession = async ({ price_id, org_id }: createCheckout
   };
 
   const res = await clientLemon.createCheckout({
-    storeId: config.storeId,
-    variantId: price_id,
+    storeId,
+    variantId,
     attributes
   });
-  return res;
+
+  return res.data.attributes.url;
 };

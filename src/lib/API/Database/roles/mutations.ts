@@ -7,6 +7,7 @@ import { PrismaDBError } from '@/lib/utils/error';
 import { GetRoleByUserIdAndOrgId } from './queries';
 import { CheckPermission } from './helpers';
 import { PermissionsI } from './helpers';
+import { Actions, Subjects } from '@/lib/types/enums';
 interface CreateRoleI {
   org_id: string;
   role: RolesE;
@@ -38,9 +39,8 @@ export interface DeleteRoleI extends PermissionsI {
   id: string;
 }
 
-export const DeleteRoleByUserIdAndOrgId = async ({ id, permissions }: DeleteRoleI) => {
-  const { role, action, subject } = permissions;
-  await CheckPermission({ role, action, subject });
+export const DeleteRoleByUserIdAndOrgId = async ({ id, role }: DeleteRoleI) => {
+  await CheckPermission({ role, action: Actions.DELETE, subject: Subjects.USER });
 
   try {
     const role = await prisma.role.findFirst({

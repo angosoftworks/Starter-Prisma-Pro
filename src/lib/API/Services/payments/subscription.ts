@@ -1,13 +1,15 @@
 'use server';
 
-import clientLemon from '../init/lemonsqueezy';
+import clientLemon from '../init/payments';
 
 interface SubscriptionPropsI {
-  subscription_id: number;
+  customer_id: string;
 }
 
-export const GetSubscription = async ({ subscription_id }: SubscriptionPropsI) => {
-  const res = await clientLemon.getSubscription({ id: subscription_id });
+export const GetBillingUrl = async ({ customer_id }: SubscriptionPropsI): Promise<string> => {
+  const id = Number(customer_id);
+  const res = await clientLemon.getCustomer({ id });
 
-  return res;
+  //@ts-ignore, wrong types on lemon.js
+  return res.data.attributes.urls.customer_portal;
 };

@@ -6,7 +6,7 @@ import { Subscription } from '@prisma/client';
 
 interface UpdateOrgSubPropsT {
   org_id: string;
-  customer_id: number;
+  customer_id: string;
   subscription_id: string;
 }
 
