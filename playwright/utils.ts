@@ -1,4 +1,4 @@
-import { WebhookPayload, Subscription } from '@/lib/API/Services/lemon/lemonTypes';
+import { WebhookPayload, Subscription } from '@/lib/API/Services/payments/lemonTypes';
 
 const mockSubscription: Subscription = {
   type: 'subscriptions',

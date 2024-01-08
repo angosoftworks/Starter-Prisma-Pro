@@ -16,7 +16,7 @@ import { Icons } from '@/components/Icons';
 import { Switch } from '@/components/ui/Switch';
 import { ProductI } from '@/lib/types/types';
 import { IntervalE } from '@/lib/types/enums';
-import { createCheckoutSession } from '@/lib/API/Services/lemon/session';
+import { createCheckoutSession } from '@/lib/API/Services/payments/session';
 
 interface PriceCardProps {
   product: ProductI;

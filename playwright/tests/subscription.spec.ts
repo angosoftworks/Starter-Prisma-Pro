@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test';
 
 import { GetOrgMock, GetSubscriptionMock, MockOrg, clearDB } from '../prisma';
 
-import { WebhookEventHandler } from '@/lib/API/Services/lemon/webhook';
+import { WebhookEventHandler } from '@/lib/API/Services/payments/webhook';
 import { MockWebhookPayload } from '../utils';
 
 test.describe('Subscription Tests', () => {

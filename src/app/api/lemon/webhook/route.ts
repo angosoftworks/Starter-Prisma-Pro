@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import { headers } from 'next/headers';
-import { WebhookEventHandler } from '@/lib/API/Services/lemon/webhook';
+import { WebhookEventHandler } from '@/lib/API/Services/payments/webhook';
 import type { NextRequest } from 'next/server';
 
 import crypto from 'crypto';

@@ -4,7 +4,7 @@ import { usePathname, useRouter } from 'next/navigation';
 
 import { Card, CardHeader, CardTitle, CardContent, CardDescription } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
-import { GetSubscription } from '@/lib/API/Services/lemon/subscription';
+import { GetSubscription } from '@/lib/API/Services/payments/subscription';
 
 const Billing = ({ subscription_id }) => {
   const router = useRouter();
