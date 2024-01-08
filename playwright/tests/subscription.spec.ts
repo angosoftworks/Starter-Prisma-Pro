@@ -1,12 +1,6 @@
 import { test, expect } from '@playwright/test';
 
-import {
-  CreateSubscriptionMock,
-  GetOrgMock,
-  GetSubscriptionMock,
-  MockOrg,
-  clearDB
-} from '../prisma';
+import { GetOrgMock, GetSubscriptionMock, MockOrg, clearDB } from '../prisma';
 
 import { WebhookEventHandler } from '@/lib/API/Services/lemon/webhook';
 import { MockWebhookPayload } from '../utils';

@@ -1,11 +1,9 @@
 'use server';
 
 import prisma, { Prisma } from '../../Services/init/prisma';
-import { GetUser } from '@/lib/API/Database/user/queries';
 import { PrismaDBError } from '@/lib/utils/error';
 import { OrgInviteFormValues } from '@/lib/types/validations';
-import { Login } from '../../Services/auth/login';
-import routes from '@/lib/config/routes';
+
 import { Invite } from '@prisma/client';
 
 interface CreateInvitePropsI extends OrgInviteFormValues {
@@ -35,7 +33,7 @@ interface InvitePropsI {
   invite_id: string;
 }
 
-// The query does not need to be cached so can be defined here for simplicity
+// The query does not need to be cached, so can be defined here as a server action for simplicity
 export const GetInviteId = async ({ invite_id }: InvitePropsI): Promise<Invite> => {
   try {
     const invite = await prisma.invite.findFirst({

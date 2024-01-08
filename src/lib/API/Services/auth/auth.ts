@@ -4,7 +4,7 @@ import { PrismaClient } from '@prisma/client';
 import routes from '@/lib/config/routes';
 import Google from 'next-auth/providers/google';
 import EmailProvider from 'next-auth/providers/email';
-import { sendVerificationRequest } from './sendVerificationRequest';
+import { sendVerificationRequest } from './sendEmail';
 
 import prisma from '../init/prisma';
 

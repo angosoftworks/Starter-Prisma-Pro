@@ -42,14 +42,3 @@ export const GetOrgMock = async (id: string) => {
   });
   return organization;
 };
-
-export const CreateSubscriptionMock = async ({ id, price_id, status, period_ends_at }) => {
-  const data = {
-    id,
-    price_id,
-    status,
-    period_ends_at
-  };
-
-  await prisma.subscription.create({ data });
-};
