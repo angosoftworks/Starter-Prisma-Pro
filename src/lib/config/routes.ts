@@ -22,7 +22,6 @@ const routes = {
   },
   routes_marketing: [
     { title: 'Pricing', link: '/pricing' },
-    { title: 'Docs', link: '/docs' },
     { title: 'Blog', link: '/blog' }
   ],
   routes_user: [
