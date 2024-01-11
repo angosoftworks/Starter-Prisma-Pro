@@ -8,7 +8,7 @@ import crypto from 'crypto';
 export async function POST(req: NextRequest) {
   console.log('Starting...');
 
-  const webhookSecret = process.env.LEMON_WEBHOOK_SECRET;
+  const webhookSecret = process.env.WEBHOOK_SECRET;
   const body = await req.text();
   const hmac = crypto.createHmac('sha256', webhookSecret);
   const digest = Buffer.from(hmac.update(body).digest('hex'), 'utf8');
@@ -38,7 +38,7 @@ export async function POST(req: NextRequest) {
 //export async function POST(req: NextRequest) {
 //  const body = await req.text();
 //  const sig = headers().get('Stripe-Signature');
-//  const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET;
+//  const webhookSecret = process.env.WEBHOOK_SECRET;
 
 //  if (!sig || !webhookSecret) return;
 //  const event = stripe.webhooks.constructEvent(body, sig, webhookSecret);
