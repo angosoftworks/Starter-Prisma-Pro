@@ -14,7 +14,6 @@ import Link from 'next/link';
 import { cn } from '@/lib/utils/helpers';
 import { buttonVariants } from '@/components/ui/Button';
 import Image from 'next/image';
-import '@code-hike/mdx/dist/index.css';
 
 interface UrlParamsI {
   params: { slug: string };
