@@ -2,13 +2,15 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { cn } from '@/lib/utils/helpers';
 import { Code } from 'bright';
+import InlineCode from './InlineCode';
+import Callout from './Callout';
 
 Code.lineNumbers = true;
 
 export const mdxComponents = {
   a: ({ children, ...props }) => {
     return (
-      <Link {...props} href={props.href || ''}>
+      <Link className="text-blue-400 underline" {...props} href={props.href || ''}>
         {children}
       </Link>
     );
@@ -100,5 +102,7 @@ export const mdxComponents = {
       {...props}
     />
   ),
-  pre: Code
+  pre: Code,
+  IC: InlineCode,
+  Callout
 };

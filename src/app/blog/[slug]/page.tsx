@@ -8,11 +8,13 @@ import { notFound } from 'next/navigation';
 import remarkGfm from 'remark-gfm';
 import rehypeSlug from 'rehype-slug';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
+
 import { Icons } from '@/components/Icons';
 import Link from 'next/link';
 import { cn } from '@/lib/utils/helpers';
 import { buttonVariants } from '@/components/ui/Button';
 import Image from 'next/image';
+import '@code-hike/mdx/dist/index.css';
 
 interface UrlParamsI {
   params: { slug: string };
@@ -61,7 +63,7 @@ export default function Post({ params }: UrlParamsI) {
   }
 
   return (
-    <article className="container relative max-w-3xl py-6 lg:py-10">
+    <article className="container justify-self-center relative max-w-3xl py-6 lg:py-10">
       <Link
         href="/blog"
         className={cn(
@@ -73,9 +75,12 @@ export default function Post({ params }: UrlParamsI) {
         See all posts
       </Link>
       <div>
-        <time dateTime={post.frontMatter.date} className="block text-sm text-muted-foreground">
-          Published on {post.frontMatter.date}
-        </time>
+        <div className="flex justify-between">
+          <time dateTime={post.frontMatter.date} className="block text-sm text-muted-foreground">
+            Published on {post.frontMatter.date}
+          </time>
+          <div>{post.frontMatter.read_time}</div>
+        </div>
 
         <h1 className="mt-2 inline-block font-heading text-4xl leading-tight lg:text-5xl">
           {post.frontMatter.title}
@@ -86,9 +91,10 @@ export default function Post({ params }: UrlParamsI) {
         alt={post.frontMatter.title}
         width={720}
         height={405}
-        className="my-8 rounded-md border bg-muted transition-colors"
+        className="my-8 rounded-md border bg-muted transition-colors w-full"
         priority
       />
+
       <MDXRemote
         options={{
           mdxOptions: {
@@ -99,6 +105,7 @@ export default function Post({ params }: UrlParamsI) {
         components={mdxComponents}
         source={post.content}
       />
+
       <hr className="mt-12" />
       <div className="flex justify-center py-6 lg:py-10">
         <Link href="/blog" className={cn(buttonVariants({ variant: 'ghost' }))}>
