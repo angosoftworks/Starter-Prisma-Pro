@@ -1,17 +1,41 @@
-'use server';
+//import stripe from '@/lib/API/Services/init/payments';
+//import routes from '@/lib/config/routes';
+//import Stripe from 'stripe';
 
-import clientLemon from '../init/payments';
+//import configuration from '@/lib/config/site';
 
-interface SubscriptionPropsI {
-  payments_id: string;
-}
+//interface createProtalProps {
+//  customer_id: string;
+//}
 
-export const GetBillingUrl = async ({ payments_id }: SubscriptionPropsI): Promise<string> => {
-  const id = Number(payments_id);
-  const res = await clientLemon.getSubscription({ id });
+//export const GetBillingUrl = async ({ customer_id }: createProtalProps): Promise<string> => {
+//  let portalSession: Stripe.BillingPortal.Session;
+//  const customer = customer_id;
 
-  // @ts-expect-error, wrong types on lemon.js
-  const resUrl = res.data.attributes.urls.customer_portal;
+//  const origin = configuration.url;
 
-  return resUrl;
-};
+//  try {
+//    portalSession = await stripe.billingPortal.sessions.create({
+//      customer,
+//      return_url: `${origin}${routes.redirects.user.toUserDashboard}`
+//    });
+//  } catch (err) {
+//    throw err;
+//  }
+
+//  return portalSession.url;
+//};
+
+//export const RetrieveSubscription = async (
+//  subscription_id: string
+//): Promise<Stripe.Subscription> => {
+//  let subscription: Stripe.Subscription;
+
+//  try {
+//    subscription = await stripe.subscriptions.retrieve(subscription_id as string);
+//  } catch (err) {
+//    throw err;
+//  }
+
+//  return subscription;
+//};

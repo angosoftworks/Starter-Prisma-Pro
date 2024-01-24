@@ -1,56 +1,70 @@
-import { UpdateOrgSubscription } from '../../Database/subscription/mutations';
-import { CreateSubscription, UpdateSubscription } from '../../Database/subscription/mutations';
-import { Subscription } from '@prisma/client';
+//'use server';
 
-import { WebhookPayload, WebhookEventsE } from '@/lib/API/Services/payments/lemonTypes';
+//import Stripe from 'stripe';
+//import { UpdateOrgSubscription } from '@/lib/API/Database/subscription/mutations';
+//import { CreateSubscription, UpdateSubscription } from '@/lib/API/Database/subscription/mutations';
+//import { Subscription } from '@prisma/client';
+//import { WebhookEventsE } from './stripeTypes';
+//import { RetrieveSubscription } from './subscription';
 
-import ls from '../init/payments';
+//const WebhookEvents = {
+//  customer_subscription_updated: WebhookEventsE.CustomerSubscriptionUpdated,
+//  checkout_session_completed: WebhookEventsE.CheckoutSessionCompleted
+//};
 
-export const WebhookEventHandler = async (event: WebhookPayload) => {
-  // Handle the event
-  switch (event.meta.event_name) {
-    case WebhookEventsE.SUBSCRIPTION_CREATED: {
-      const dataSub: Subscription = {
-        id: event.data.id.toString(),
-        price_id: event.data.attributes.variant_id.toString(),
-        status: event.data.attributes.status,
-        period_ends_at: new Date(event.data.attributes.billing_anchor * 1000)
-      };
+//export const WebhookEventHandler = async (event: Stripe.Event) => {
+//  // Handle the event
+//  switch (event.type) {
+//    case WebhookEvents.checkout_session_completed: {
+//      //@ts-expect-error, update function props to string for customer_id
+//      const subscriptionId = event.data.object.subscription;
 
-      await CreateSubscription(dataSub);
+//      const subscription: Stripe.Subscription = await RetrieveSubscription(subscriptionId);
+//      const org_id = event.data.object.metadata.org_id;
 
-      console.log('Subscription Created');
+//      const customer_id = subscription.customer as string;
+//      const statusSub = subscription.status as string;
 
-      const dataOrg = {
-        org_id: event.meta.custom_data.org_id,
-        customer_id: String(event.data.attributes.customer_id),
-        subscription_id: String(event.data.id)
-      };
+//      const dataSub: Subscription = {
+//        id: subscription.id,
+//        price_id: subscription.items.data[0].price.id,
+//        status: statusSub,
+//        period_ends_at: new Date(subscription.current_period_end * 1000)
+//      };
 
-      await UpdateOrgSubscription(dataOrg);
+//      await CreateSubscription(dataSub);
 
-      console.log('Customer Created');
-      break;
-    }
-    case WebhookEventsE.SUBSCRIPTION_UPDATED: {
-      const isSubscriptionExists = await ls.getSubscription({ id: Number(event.data.id) });
-      if (!isSubscriptionExists) {
-        throw 'Subscription Not Found';
-      }
+//      console.log('Stripe Subscription Created');
 
-      const dataSub: Subscription = {
-        id: event.data.id.toString(),
-        price_id: event.data.attributes.variant_id.toString(),
-        status: event.data.attributes.status,
-        period_ends_at: new Date(event.data.attributes.billing_anchor * 1000)
-      };
+//      const dataOrg = {
+//        org_id,
+//        customer_id,
+//        subscription_id: subscription.id
+//      };
 
-      await UpdateSubscription(dataSub);
-      console.log('Subscription Updated');
-      break;
-    }
-    default:
-      // Unexpected event type
-      console.log(`Unhandled event type ${event.meta.event_name}.`);
-  }
-};
+//      await UpdateOrgSubscription(dataOrg);
+
+//      console.log('Stripe Customer Created');
+//      break;
+//    }
+//    case WebhookEvents.customer_subscription_updated: {
+//      // Incorrect infered type, need to override.
+//      const subscriptionUpdate = event.data.object as unknown as Stripe.Subscription;
+
+//      const dataSub: Subscription = {
+//        id: subscriptionUpdate.id,
+//        price_id: subscriptionUpdate.items.data[0].price.id,
+//        status: subscriptionUpdate.status,
+//        period_ends_at: new Date(subscriptionUpdate.current_period_end * 1000)
+//      };
+
+//      await UpdateSubscription(dataSub);
+//      console.log('Stripe Subscription Updated');
+//      break;
+//    }
+//    default:
+//      // Unexpected event type
+//      console.log(`Unhandled event type ${event.type}.`);
+//      throw `Unhandled Event Type ${event.type}`;
+//  }
+//};

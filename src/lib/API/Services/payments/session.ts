@@ -1,49 +1,60 @@
-'use server';
-import clientLemon from '../init/payments';
+//import stripe from '@/lib/API/Services/init/payments';
 
-import { GetUser } from '../../Database/user/queries';
-import { GetOrg } from '../../Database/org/queries';
-import configuration from '@/lib/config/site';
-import routes from '@/lib/config/routes';
+//import Stripe from 'stripe';
+//import { GetUser } from '@/lib/API/Database/user/queries';
+//import configuration from '@/lib/config/site';
+//import routes from '@/lib/config/routes';
+//import { GetOrg } from '@/lib/API/Database/org/queries';
 
-interface createCheckoutProps {
-  price_id: number;
-  org_id: string;
-}
+//interface createCheckoutProps {
+//  price_id: string;
+//  org_id: string;
+//}
 
-export const createCheckoutSession = async ({
-  price_id,
-  org_id
-}: createCheckoutProps): Promise<string> => {
-  const storeId = Number(process.env.NEXT_PUBLIC_LEMON_STORE_ID);
-  const variantId = price_id;
-  const user = await GetUser();
-  const email = user.email;
-  const org = await GetOrg({ id: org_id });
+//export const createCheckoutSession = async ({ price_id, org_id }: createCheckoutProps) => {
+//  const {
+//    redirects: {
+//      dashboard: { settings }
+//    }
+//  } = routes;
 
-  if (user.id !== org.owner_user_id) {
-    throw 'Unauthorized Operation';
-  }
+//  const { toBilling, toSubscription } = settings;
 
-  const origin = configuration.url;
+//  const price = price_id;
+//  const user = await GetUser();
+//  const org = await GetOrg({ id: org_id });
 
-  const attributes = {
-    checkout_data: {
-      email,
-      custom: {
-        org_id
-      }
-    },
-    product_options: {
-      redirect_url: `${origin}/${routes.redirects.user.toUserDashboard}`
-    }
-  };
+//  if (user.id !== org.owner_user_id) {
+//    throw 'Unauthorized Operation';
+//  }
 
-  const res = await clientLemon.createCheckout({
-    storeId,
-    variantId,
-    attributes
-  });
+//  const customer_email = user.email;
+//  const origin = configuration.url;
 
-  return res.data.attributes.url;
-};
+//  let session: Stripe.Checkout.Session;
+
+//  try {
+//    session = await stripe.checkout.sessions.create({
+//      line_items: [
+//        {
+//          price,
+//          quantity: 1
+//        }
+//      ],
+//      mode: 'subscription',
+//      success_url: `${origin}${toBilling}`,
+//      cancel_url: `${origin}${toSubscription}`,
+//      metadata: {
+//        org_id
+//      },
+//      customer_email
+//      //subscription_data: {
+//      //  trial_period_days: 14
+//      //}
+//    });
+//  } catch (err) {
+//    throw err;
+//  }
+
+//  return session.url;
+//};
