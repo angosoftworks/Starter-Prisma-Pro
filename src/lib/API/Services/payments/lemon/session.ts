@@ -1,49 +1,49 @@
-'use server';
-import clientLemon from '../init/payments';
+//'use server';
+//import clientLemon from '../init/payments';
 
-import { GetUser } from '../../Database/user/queries';
-import { GetOrg } from '../../Database/org/queries';
-import configuration from '@/lib/config/site';
-import routes from '@/lib/config/routes';
+//import { GetUser } from '../../Database/user/queries';
+//import { GetOrg } from '../../Database/org/queries';
+//import configuration from '@/lib/config/site';
+//import routes from '@/lib/config/routes';
 
-interface createCheckoutProps {
-  price_id: number;
-  org_id: string;
-}
+//interface createCheckoutProps {
+//  price_id: number;
+//  org_id: string;
+//}
 
-export const createCheckoutSession = async ({
-  price_id,
-  org_id
-}: createCheckoutProps): Promise<string> => {
-  const storeId = Number(process.env.NEXT_PUBLIC_LEMON_STORE_ID);
-  const variantId = price_id;
-  const user = await GetUser();
-  const email = user.email;
-  const org = await GetOrg({ id: org_id });
+//export const createCheckoutSession = async ({
+//  price_id,
+//  org_id
+//}: createCheckoutProps): Promise<string> => {
+//  const storeId = Number(process.env.NEXT_PUBLIC_LEMON_STORE_ID);
+//  const variantId = price_id;
+//  const user = await GetUser();
+//  const email = user.email;
+//  const org = await GetOrg({ id: org_id });
 
-  if (user.id !== org.owner_user_id) {
-    throw 'Unauthorized Operation';
-  }
+//  if (user.id !== org.owner_user_id) {
+//    throw 'Unauthorized Operation';
+//  }
 
-  const origin = configuration.url;
+//  const origin = configuration.url;
 
-  const attributes = {
-    checkout_data: {
-      email,
-      custom: {
-        org_id
-      }
-    },
-    product_options: {
-      redirect_url: `${origin}/${routes.redirects.user.toUserDashboard}`
-    }
-  };
+//  const attributes = {
+//    checkout_data: {
+//      email,
+//      custom: {
+//        org_id
+//      }
+//    },
+//    product_options: {
+//      redirect_url: `${origin}/${routes.redirects.user.toUserDashboard}`
+//    }
+//  };
 
-  const res = await clientLemon.createCheckout({
-    storeId,
-    variantId,
-    attributes
-  });
+//  const res = await clientLemon.createCheckout({
+//    storeId,
+//    variantId,
+//    attributes
+//  });
 
-  return res.data.attributes.url;
-};
+//  return res.data.attributes.url;
+//};

@@ -1,13 +1,12 @@
-import 'server-only';
-import LemonSqueezy from '@lemonsqueezy/lemonsqueezy.js';
+import Stripe from 'stripe';
 
-const ls = new LemonSqueezy(process.env.PAYMENT_SECRET_KEY);
+const stripe = new Stripe(process.env.PAYMENT_SECRET_KEY);
 
-export default ls;
+export default stripe;
 
-// uncommment if using stripe, remove otherwise
-//import Stripe from 'stripe';
+// uncommment if using lemon, remove otherwise
+//import LemonSqueezy from '@lemonsqueezy/lemonsqueezy.js';
 
-//const stripe = new Stripe(process.env.PAYMENT_SECRET_KEY);
+//const ls = new LemonSqueezy(process.env.PAYMENT_SECRET_KEY);
 
-//export default stripe;
+//export default ls;

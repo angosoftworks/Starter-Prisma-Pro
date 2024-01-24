@@ -45,6 +45,7 @@ export const CreateSubscription = async ({
     period_ends_at
   };
 
+  console.log(prisma, data);
   try {
     await prisma.subscription.create({ data });
   } catch (err) {

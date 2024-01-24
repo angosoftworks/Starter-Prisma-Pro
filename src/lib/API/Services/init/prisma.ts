@@ -25,6 +25,7 @@ if (process.env.NODE_ENV === 'test') {
       }
     }
   });
+  global.prisma = prisma;
 }
 
 // modify this config based on production database setup.

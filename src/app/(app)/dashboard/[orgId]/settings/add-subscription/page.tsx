@@ -23,7 +23,7 @@ const AddSubscription = () => {
 
   const handleSubscription = async (price_id: string) => {
     const org_id = pathname.split('/')[2];
-    const price = Number(price_id);
+    const price = price_id;
 
     const redirectUrl = await createCheckoutSession({ price_id: price, org_id });
 

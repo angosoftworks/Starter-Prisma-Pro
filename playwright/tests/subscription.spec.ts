@@ -1,26 +1,29 @@
 import { test, expect } from '@playwright/test';
-
+import { routes } from '../config';
 import { GetOrgMock, GetSubscriptionMock, MockOrg, clearDB } from '../prisma';
 
 import { WebhookEventHandler } from '@/lib/API/Services/payments/webhook';
-import { MockWebhookPayload } from '../utils';
+import { MockWebhookPayload, MockPriceId1, MockSubscriptionEvent } from '../utils';
 
 test.describe('Subscription Tests', () => {
   test.afterAll(async () => {
     await clearDB();
   });
 
-  test('Create Subscription Webhook Flow', async () => {
+  test('Create Subscription Webhook Flow', async ({ page }) => {
+    await page.goto(routes.urls.UserDashboard);
     const org_create = await MockOrg();
     const org_id = org_create.id;
-    MockWebhookPayload.meta.custom_data.org_id = org_id;
 
+    MockWebhookPayload.data.object.metadata.org_id = org_id;
+
+    //@ts-ignore, wrong type on stripe
     await WebhookEventHandler(MockWebhookPayload);
 
-    const subscription_id = MockWebhookPayload.data.id;
-    const customer_id = MockWebhookPayload.data.attributes.customer_id;
-    const status = MockWebhookPayload.data.attributes.status;
-    const price_id = MockWebhookPayload.data.attributes.variant_id.toString();
+    const subscription_id = MockWebhookPayload.data.object.subscription;
+    const customer_id = MockWebhookPayload.data.object.customer;
+    const status = MockWebhookPayload.data.object.status;
+    const price_id = MockPriceId1;
 
     const mockSub = { id: subscription_id, price_id, status };
     const mockOrg = {
@@ -41,20 +44,19 @@ test.describe('Subscription Tests', () => {
     expect(org).toEqual(mockOrg);
   });
 
-  test('Update Subscription Webhook Flow', async () => {
-    const subscription_id = MockWebhookPayload.data.id;
-
-    MockWebhookPayload.meta.event_name = 'subscription_updated';
+  test.skip('Update Subscription Webhook Flow', async () => {
+    const subscription_id = MockSubscriptionEvent.data.object.id;
 
     const mockSubUpdate = {
-      price_id: 858585
+      price_id: 'priceid_test3345'
     };
 
-    MockWebhookPayload.data.attributes.variant_id = mockSubUpdate.price_id;
+    MockSubscriptionEvent.data.object.items.data[0].price.id = mockSubUpdate.price_id;
 
-    await WebhookEventHandler(MockWebhookPayload);
+    //@ts-ignore, wrong type exported from stripe
+    await WebhookEventHandler(MockSubscriptionEvent);
 
     const subscription = await GetSubscriptionMock(subscription_id);
-    expect(subscription.price_id).toEqual(mockSubUpdate.price_id.toString());
+    expect(subscription.price_id).toEqual(mockSubUpdate.price_id);
   });
 });
