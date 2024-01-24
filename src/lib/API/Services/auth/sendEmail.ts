@@ -30,7 +30,7 @@ export const sendVerificationRequest = async ({
     if (process.env.NODE_ENV === 'production') {
       await resend.emails.send({
         from: 'My SaaS <onboarding@resend.dev>',
-        to: identifier, //'delivered@resend.dev' for testing
+        to: 'delivered@resend.dev', // for testing resend, use identifier when going live.
         subject: authSubject,
         html,
         // Set this to prevent Gmail from threading emails.
