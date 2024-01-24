@@ -15,14 +15,10 @@ export const GetBillingUrl = async ({ payments_id }: createProtalProps): Promise
 
   const origin = configuration.url;
 
-  try {
-    portalSession = await stripe.billingPortal.sessions.create({
-      customer,
-      return_url: `${origin}${routes.redirects.user.toUserDashboard}`
-    });
-  } catch (err) {
-    throw err;
-  }
+  portalSession = await stripe.billingPortal.sessions.create({
+    customer,
+    return_url: `${origin}${routes.redirects.user.toUserDashboard}`
+  });
 
   return portalSession.url;
 };
@@ -32,11 +28,7 @@ export const RetrieveSubscription = async (
 ): Promise<Stripe.Subscription> => {
   let subscription: Stripe.Subscription;
 
-  try {
-    subscription = await stripe.subscriptions.retrieve(subscription_id as string);
-  } catch (err) {
-    throw err;
-  }
+  subscription = await stripe.subscriptions.retrieve(subscription_id as string);
 
   return subscription;
 };
