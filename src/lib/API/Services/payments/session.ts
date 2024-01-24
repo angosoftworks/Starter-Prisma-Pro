@@ -26,9 +26,7 @@ export const createCheckoutSession = async ({ price_id, org_id }: createCheckout
   const customer_email = user.email;
   const origin = configuration.url;
 
-  let session: Stripe.Checkout.Session;
-
-  session = await stripe.checkout.sessions.create({
+  const session: Stripe.Checkout.Session = await stripe.checkout.sessions.create({
     line_items: [
       {
         price,

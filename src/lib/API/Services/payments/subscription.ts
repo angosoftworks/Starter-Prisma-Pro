@@ -10,12 +10,11 @@ interface createProtalProps {
 }
 
 export const GetBillingUrl = async ({ payments_id }: createProtalProps): Promise<string> => {
-  let portalSession: Stripe.BillingPortal.Session;
   const customer = payments_id;
 
   const origin = configuration.url;
 
-  portalSession = await stripe.billingPortal.sessions.create({
+  const portalSession: Stripe.BillingPortal.Session = await stripe.billingPortal.sessions.create({
     customer,
     return_url: `${origin}${routes.redirects.user.toUserDashboard}`
   });
@@ -26,9 +25,9 @@ export const GetBillingUrl = async ({ payments_id }: createProtalProps): Promise
 export const RetrieveSubscription = async (
   subscription_id: string
 ): Promise<Stripe.Subscription> => {
-  let subscription: Stripe.Subscription;
-
-  subscription = await stripe.subscriptions.retrieve(subscription_id as string);
+  const subscription: Stripe.Subscription = await stripe.subscriptions.retrieve(
+    subscription_id as string
+  );
 
   return subscription;
 };
