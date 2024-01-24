@@ -28,28 +28,24 @@ export const createCheckoutSession = async ({ price_id, org_id }: createCheckout
 
   let session: Stripe.Checkout.Session;
 
-  try {
-    session = await stripe.checkout.sessions.create({
-      line_items: [
-        {
-          price,
-          quantity: 1
-        }
-      ],
-      mode: 'subscription',
-      success_url: `${origin}${redirects.user.toUserDashboard}`,
-      cancel_url: `${origin}${redirects.user.toUserDashboard}`,
-      metadata: {
-        org_id
-      },
-      customer_email
-      //subscription_data: {
-      //  trial_period_days: 14
-      //}
-    });
-  } catch (err) {
-    throw err;
-  }
+  session = await stripe.checkout.sessions.create({
+    line_items: [
+      {
+        price,
+        quantity: 1
+      }
+    ],
+    mode: 'subscription',
+    success_url: `${origin}${redirects.user.toUserDashboard}`,
+    cancel_url: `${origin}${redirects.user.toUserDashboard}`,
+    metadata: {
+      org_id
+    },
+    customer_email
+    //subscription_data: {
+    //  trial_period_days: 14
+    //}
+  });
 
   return session.url;
 };
