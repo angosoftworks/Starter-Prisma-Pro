@@ -36,7 +36,7 @@ export type Subscription = {
     user_email: string;
     status: SubscriptionStatus;
     status_formatted: string;
-    pause: any | null;
+    pause: boolean | null;
     cancelled: boolean;
     trial_ends_at: string | null;
     billing_anchor: number;

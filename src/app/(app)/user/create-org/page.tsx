@@ -13,7 +13,6 @@ import config from '@/lib/config/api';
 import { useRouter } from 'next/navigation';
 import { CreateOrg } from '@/lib/API/Database/org/mutations';
 import { CreateRole } from '@/lib/API/Database/roles/mutations';
-import routes from '@/lib/config/routes';
 import { RolesE } from '@/lib/types/enums';
 
 export default function CreateOrgPage() {

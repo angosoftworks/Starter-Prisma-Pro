@@ -16,7 +16,6 @@ import { toast } from 'react-toastify';
 import { Todo } from '@prisma/client';
 import config from '@/lib/config/api';
 import routes from '@/lib/config/routes';
-import { redirect } from 'next/navigation';
 
 interface EditFormProps {
   todo: Todo;
@@ -37,7 +36,6 @@ export default function TodosEditForm({ todo }: EditFormProps) {
 
   const {
     register,
-    reset,
     formState: { isSubmitting, isSubmitted }
   } = form;
 

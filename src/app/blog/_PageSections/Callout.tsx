@@ -1,13 +1,11 @@
 import { cn } from '@/lib/utils/helpers';
-import { Info } from 'lucide-react';
 
 interface CalloutProps {
-  icon?: string;
   children?: React.ReactNode;
   type?: 'default' | 'warning' | 'danger';
 }
 
-export default function Callout({ children, icon, type = 'default', ...props }: CalloutProps) {
+export default function Callout({ children, type = 'default', ...props }: CalloutProps) {
   return (
     <div
       className={cn('my-6 flex items-start rounded-md border border-l-4 p-4 bg-gray-100', {
@@ -17,7 +15,6 @@ export default function Callout({ children, icon, type = 'default', ...props }: 
       })}
       {...props}
     >
-      {/*{type === 'default' && <Info className="hidden md:block h-6 w-6 mr-4 mt-2" />}*/}
       <div>{children}</div>
     </div>
   );

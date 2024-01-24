@@ -1,6 +1,6 @@
 import 'server-only';
 
-import prisma, { Prisma } from '../../Services/init/prisma';
+import prisma from '../../Services/init/prisma';
 import { GetUser } from '@/lib/API/Database/user/queries';
 import { PrismaDBError } from '@/lib/utils/error';
 import { Role } from '@prisma/client';

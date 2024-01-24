@@ -27,7 +27,7 @@ export const createCheckoutSession = async ({
 
   const origin = configuration.url;
 
-  let attributes = {
+  const attributes = {
     checkout_data: {
       email,
       custom: {

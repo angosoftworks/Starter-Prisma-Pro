@@ -46,7 +46,7 @@ const SubscriptionExists = ({ subscription }: SubscriptionExistsProps) => {
 
   useEffect(() => {
     matchSubscription();
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const goToPortal = async () => {
     const org_id = pathname.split('/')[2];

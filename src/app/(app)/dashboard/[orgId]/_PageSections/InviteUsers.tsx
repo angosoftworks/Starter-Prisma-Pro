@@ -15,18 +15,7 @@ import {
   SelectValue
 } from '@/components/ui/Select';
 
-import {
-  Table,
-  TableBody,
-  TableCaption,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow
-} from '@/components/ui/Table';
-
 import { RolesE } from '@/lib/types/enums';
-import UserList from './UserList';
 import { Icons } from '@/components/Icons';
 import { Login } from '@/lib/API/Services/auth/login';
 

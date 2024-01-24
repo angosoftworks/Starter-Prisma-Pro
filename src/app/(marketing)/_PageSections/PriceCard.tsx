@@ -10,32 +10,32 @@ import {
   CardFooter,
   CardDescription
 } from '@/components/ui/Card';
-import { Button } from '@/components/ui/Button';
 import { Icons } from '@/components/Icons';
+
 import { ProductI } from '@/lib/types/types';
 import { IntervalE } from '@/lib/types/enums';
+import { cn } from '@/lib/utils/helpers';
+import { buttonVariants } from '@/components/ui/Button';
+import Link from 'next/link';
 
 interface PriceCardProps {
   product: ProductI;
-  handleSubscription: (price: string) => Promise<void>; // eslint-disable-line
   timeInterval: IntervalE;
 }
 
-const PriceCard = ({ product, handleSubscription, timeInterval }: PriceCardProps) => {
-  const [plan, setPlan] = useState({ price: '', price_id: '', isPopular: false });
+const PriceCard = ({ product, timeInterval }: PriceCardProps) => {
+  const [plan, setPlan] = useState({ price: '', isPopular: false });
   const { name, description, features, plans } = product;
 
   const setProductPlan = () => {
     if (timeInterval === IntervalE.MONTHLY) {
       setPlan({
         price: plans[0].price,
-        price_id: plans[0].price_id,
         isPopular: plans[0].isPopular
       });
     } else {
       setPlan({
         price: plans[1].price,
-        price_id: plans[1].price_id,
         isPopular: plans[1].isPopular
       });
     }
@@ -47,7 +47,7 @@ const PriceCard = ({ product, handleSubscription, timeInterval }: PriceCardProps
 
   return (
     <Card
-      className={`flex flex-col items-center justify-center border mt-4 bg-background-light dark:bg-background-dark ${
+      className={`flex flex-col items-center justify-center w-72 border bg-background-light dark:bg-background-dark ${
         plan.isPopular && 'border-blue-500 relative'
       }`}
     >
@@ -74,9 +74,9 @@ const PriceCard = ({ product, handleSubscription, timeInterval }: PriceCardProps
         </ul>
       </CardContent>
       <CardFooter>
-        <Button size="lg" className="w-full" onClick={() => handleSubscription(plan?.price_id)}>
+        <Link href="/auth/signup" className={cn(buttonVariants({ size: 'lg' }))}>
           Get Started
-        </Button>
+        </Link>
       </CardFooter>
     </Card>
   );

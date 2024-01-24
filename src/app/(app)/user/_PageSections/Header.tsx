@@ -1,13 +1,13 @@
 'use client';
 
-import { MainLogoText, MainLogoIcon } from '@/components/MainLogo';
+import { MainLogoText } from '@/components/MainLogo';
 import { Separator } from '@/components/ui/Separator';
 import { Nav } from '@/components/NavBar';
 import routes from '@/lib/config/routes';
 import { Button } from '@/components/ui/Button';
 import { Logout } from '@/lib/API/Services/auth/login';
 
-export default async function HeaderUser() {
+export default function HeaderUser() {
   const signOut = async () => {
     await Logout();
   };

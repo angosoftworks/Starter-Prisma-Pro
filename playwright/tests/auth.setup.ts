@@ -1,7 +1,6 @@
 import { test as setup, expect } from '@playwright/test';
 
 import { routes, user } from '../config';
-import { clearDB } from '../prisma';
 
 const adminFile = routes.filePath.adminFile;
 

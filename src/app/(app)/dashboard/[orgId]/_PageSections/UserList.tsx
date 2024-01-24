@@ -13,7 +13,7 @@ import {
 } from '@/components/ui/Table';
 import { Role } from '@prisma/client';
 import { useRouter } from 'next/navigation';
-import { DeleteRoleByUserIdAndOrgId, DeleteRoleI } from '@/lib/API/Database/roles/mutations';
+import { DeleteRoleByUserIdAndOrgId } from '@/lib/API/Database/roles/mutations';
 import { toast } from 'react-toastify';
 import { useAbility } from '@casl/react';
 import { AbilityContext } from '@/lib/utils/caslContext';

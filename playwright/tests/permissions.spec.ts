@@ -1,10 +1,9 @@
 import { test, expect } from '@playwright/test';
-import { routes, org, todo } from '../config';
+import { routes } from '../config';
 import { clearDB } from '../prisma';
-import { user } from '../config';
 
 test.describe('Owner Tests', () => {
-  test.afterAll(async ({ page }) => {
+  test.afterAll(async () => {
     await clearDB();
   });
 
@@ -47,7 +46,7 @@ test.describe('Owner Tests', () => {
 });
 
 test.describe('Admin Tests', () => {
-  test.afterAll(async ({ page }) => {
+  test.afterAll(async () => {
     await clearDB();
   });
 

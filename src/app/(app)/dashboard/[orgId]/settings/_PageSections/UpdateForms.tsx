@@ -22,7 +22,6 @@ import { OrgFormSchema, OrgFormValues } from '@/lib/types/validations';
 
 import { usePathname, useRouter } from 'next/navigation';
 
-import { UpdateUserName } from '@/lib/API/Database/user/mutations';
 import { UpdateOrgName } from '@/lib/API/Database/org/mutations';
 interface UpdateOrgNamePropsI {
   name: string;

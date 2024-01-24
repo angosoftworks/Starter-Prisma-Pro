@@ -1,6 +1,5 @@
 import NextAuth from 'next-auth';
 import { PrismaAdapter } from '@auth/prisma-adapter';
-import { PrismaClient } from '@prisma/client';
 import routes from '@/lib/config/routes';
 import Google from 'next-auth/providers/google';
 import EmailProvider from 'next-auth/providers/email';

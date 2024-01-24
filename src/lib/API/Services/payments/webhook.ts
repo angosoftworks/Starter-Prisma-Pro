@@ -7,8 +7,8 @@ import { WebhookPayload, WebhookEventsE } from '@/lib/API/Services/payments/lemo
 export const WebhookEventHandler = async (event: WebhookPayload) => {
   // Handle the event
   switch (event.meta.event_name) {
-    case WebhookEventsE.SUBSCRIPTION_CREATED:
-      let dataSub: Subscription = {
+    case WebhookEventsE.SUBSCRIPTION_CREATED: {
+      const dataSub: Subscription = {
         id: event.data.id,
         price_id: event.data.attributes.variant_id.toString(),
         status: event.data.attributes.status,
@@ -29,17 +29,19 @@ export const WebhookEventHandler = async (event: WebhookPayload) => {
 
       console.log('Customer Created');
       break;
-    case WebhookEventsE.SUBSCRIPTION_UPDATED:
-      let dataSubUpdate: Subscription = {
+    }
+    case WebhookEventsE.SUBSCRIPTION_UPDATED: {
+      const dataSub: Subscription = {
         id: event.data.id,
         price_id: event.data.attributes.variant_id.toString(),
         status: event.data.attributes.status,
         period_ends_at: new Date(event.data.attributes.billing_anchor * 1000)
       };
 
-      await UpdateSubscription(dataSubUpdate);
+      await UpdateSubscription(dataSub);
       console.log('Subscription Updated');
       break;
+    }
     default:
       // Unexpected event type
       console.log(`Unhandled event type ${event.meta.event_name}.`);

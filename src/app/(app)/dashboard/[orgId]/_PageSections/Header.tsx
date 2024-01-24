@@ -1,9 +1,7 @@
 'use client';
 
-import { useEffect, useState } from 'react';
 import { UserNav } from './UserNav';
 import TeamSwitcher from './TeamSwitcher';
-import { usePathname } from 'next/navigation';
 import routes from '@/lib/config/routes';
 import { MobileNav } from '@/components/MobileNav';
 

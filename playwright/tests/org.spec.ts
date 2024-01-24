@@ -1,5 +1,5 @@
 import { test, expect } from '@playwright/test';
-import { routes, org, todo, user } from '../config';
+import { routes } from '../config';
 import { clearDB } from '../prisma';
 
 test.use({ storageState: 'playwright/.auth/admin.json' });

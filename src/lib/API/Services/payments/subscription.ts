@@ -10,6 +10,6 @@ export const GetBillingUrl = async ({ customer_id }: SubscriptionPropsI): Promis
   const id = Number(customer_id);
   const res = await clientLemon.getCustomer({ id });
 
-  //@ts-ignore, wrong types on lemon.js
+  // @ts-expect-error, wrong types on lemon.js
   return res.data.attributes.urls.customer_portal;
 };

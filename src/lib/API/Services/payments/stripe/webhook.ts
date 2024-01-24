@@ -15,8 +15,8 @@
 //export const WebhookEventHandler = async (event: Stripe.Event) => {
 //  // Handle the event
 //  switch (event.type) {
-//    case WebhookEvents.checkout_session_completed:
-//      //@ts-ignore, update function props to string for customer_id
+//    case WebhookEvents.checkout_session_completed: {
+//      //@ts-expect-error, update function props to string for customer_id
 //      const subscriptionId = event.data.object.subscription;
 
 //      const subscription: Stripe.Subscription = await RetrieveSubscription(subscriptionId);
@@ -25,7 +25,7 @@
 //      const customer_id = subscription.customer as string;
 //      const statusSub = subscription.status as string;
 
-//      let dataSub: Subscription = {
+//      const dataSub: Subscription = {
 //        id: subscription.id,
 //        price_id: subscription.items.data[0].price.id,
 //        status: statusSub,
@@ -46,20 +46,22 @@
 
 //      console.log('Stripe Customer Created');
 //      break;
-//    case WebhookEvents.customer_subscription_updated:
+//    }
+//    case WebhookEvents.customer_subscription_updated: {
 //      // Incorrect infered type, need to override.
 //      const subscriptionUpdate = event.data.object as unknown as Stripe.Subscription;
 
-//      let dataSubUpdate: Subscription = {
+//      const dataSub: Subscription = {
 //        id: subscriptionUpdate.id,
 //        price_id: subscriptionUpdate.items.data[0].price.id,
 //        status: subscriptionUpdate.status,
 //        period_ends_at: new Date(subscriptionUpdate.current_period_end * 1000)
 //      };
 
-//      await UpdateSubscription(dataSubUpdate);
+//      await UpdateSubscription(dataSub);
 //      console.log('Stripe Subscription Updated');
 //      break;
+//    }
 //    default:
 //      // Unexpected event type
 //      console.log(`Unhandled event type ${event.type}.`);
