@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "postinstall": "prisma migrate",
+    "postinstall": "prisma migrate dev",
     "ngrok": "ngrok http 3000",
     "email": "email dev --dir emails --port 3333",
     "maildev": "docker run -p 1080:1080 -p 1025:1025 maildev/maildev",
