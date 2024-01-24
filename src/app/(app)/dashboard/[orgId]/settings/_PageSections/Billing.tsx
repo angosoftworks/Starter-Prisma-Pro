@@ -6,11 +6,15 @@ import { Card, CardHeader, CardTitle, CardContent, CardDescription } from '@/com
 import { Button } from '@/components/ui/Button';
 import { GetBillingUrl } from '@/lib/API/Services/payments/subscription';
 
-const Billing = ({ customer_id }) => {
+interface BillingProps {
+  payments_id: string;
+}
+
+const Billing = ({ payments_id }: BillingProps) => {
   const router = useRouter();
 
   const handleSubscription = async () => {
-    const redirectUrl = await GetBillingUrl({ customer_id });
+    const redirectUrl = await GetBillingUrl({ payments_id });
     router.push(redirectUrl);
   };
 

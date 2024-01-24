@@ -66,7 +66,7 @@ model VerificationToken {
 }
 
 model Subscription {
-  id             String         @id @unique
+  id             String         @id
   price_id       String
   status         String
   period_ends_at DateTime       @db.Timestamp(6)
@@ -92,7 +92,7 @@ model Organization {
   id                 String  @id @default(cuid())
   name               String  @db.VarChar
   owner_user_id      String?
-  customer_id        String? @unique 
+  customer_id        String? 
   subscription_id    String?
 
   user         User?         @relation(fields: [owner_user_id], references: [id], onDelete: SetNull, onUpdate: Cascade)

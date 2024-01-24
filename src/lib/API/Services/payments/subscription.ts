@@ -3,13 +3,15 @@
 import clientLemon from '../init/payments';
 
 interface SubscriptionPropsI {
-  customer_id: string;
+  payments_id: string;
 }
 
-export const GetBillingUrl = async ({ customer_id }: SubscriptionPropsI): Promise<string> => {
-  const id = Number(customer_id);
-  const res = await clientLemon.getCustomer({ id });
+export const GetBillingUrl = async ({ payments_id }: SubscriptionPropsI): Promise<string> => {
+  const id = Number(payments_id);
+  const res = await clientLemon.getSubscription({ id });
 
   // @ts-expect-error, wrong types on lemon.js
-  return res.data.attributes.urls.customer_portal;
+  const resUrl = res.data.attributes.urls.customer_portal;
+
+  return resUrl;
 };

@@ -19,7 +19,7 @@ const RoleCard = ({ role }: RoleCardProps) => {
   const { org_id, org_name } = role;
 
   return (
-    <div>
+    <div className="my-6">
       <Link href={`/dashboard/${org_id}/main`}>
         <Card>
           <CardHeader>
