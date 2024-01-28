@@ -1,5 +1,5 @@
-this directory contains various configuration files, including the main configuration object for the app.
+this directory contains various configuration files.
 
-Initialize third party libraries and set configuration info here
+constant values can be defined here.
 
 This readme file can be safely removed.

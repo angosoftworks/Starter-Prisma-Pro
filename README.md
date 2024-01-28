@@ -1,34 +1,51 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+<h1 align="center">Welcome to SAAS Starter Kit Pro!
+</h1>
+<p align="center">
+  <img height="auto" width="400px" src="https://user-images.githubusercontent.com/24860061/113771653-839ae180-96d8-11eb-9df5-49a856019be4.png" />
+<p align="center">
+<br />
+<br />
+ 
+> Saas Starter Kit Pro is a modern SAAS boilerplate. Save weeks of development time having standard SAAS features implemented for you, and start building your core app right away.
 
-## Getting Started
+## 🎛 Tech Stack
 
-First, run the development server:
+Reactjs, Nextjs, Typescript, Tailwind, Shadcn, Stripe, Nextauth, Prisma, Postgres, Playwright.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+## ✨ Features
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- ✅ Admin Dashboard
+- ✅ Full Authentication, with Google Social Login
+- ✅ User Profile Management with Email and Username change
+- ✅ User Dashboard
+- ✅ Checkout Pages
+- ✅ Landing and Pricing Page template
+- ✅ Testing Setup with Playwright
+- ✅ CRUD operations
+- ✅ Stripe subscription payments
+- ✅ Lemon Squeezy MoR
+- ✅ Roles and permissions
+- ✅ Team Invites
+- ✅ Multi user apps and multi tenancy
+- ✅ Fully Featured Blog
+- ✅ Event Based Analytics
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 📜 Docs
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+The Documentation is available here:
+<br />
+https://www.saasstarterkit.com/docs
 
-## Learn More
+If there are any questions or something is not covered in the docs, feel free to open a github issue on this repo.
 
-To learn more about Next.js, take a look at the following resources:
+## 💻 Demo
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+The Demo can be found here:
+<br />
+https://www.saasstarterkit.com/dashboard/test243/main
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+Certain Features have to be disabled or cant be included in the demo.
 
-## Deploy on Vercel
+## 🤝 Contributing
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Pull requests are welcome.
