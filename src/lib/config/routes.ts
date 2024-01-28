@@ -22,6 +22,7 @@ const routes = {
   },
   routes_marketing: [
     { title: 'Pricing', link: '/pricing' },
+    { title: 'FAQ', link: '/faq' },
     { title: 'Blog', link: '/blog' }
   ],
   routes_user: [
@@ -55,7 +56,10 @@ const routes = {
   footer_nav: {
     about: {
       title: 'About',
-      routes: [{ title: 'Pricing', link: '/pricing' }]
+      routes: [
+        { title: 'Pricing', link: '/pricing' },
+        { title: 'FAQ', link: '/faq' }
+      ]
     },
     resources: {
       title: 'Resources',
