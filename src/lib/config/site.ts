@@ -9,7 +9,9 @@ const siteConfig = {
     twitter: 'https://twitter.com',
     github: 'https://github.com',
     linkedin: 'https://linkedin.com'
-  }
+  },
+  seo_title: '',
+  seo_description: ''
 };
 
 export default siteConfig;

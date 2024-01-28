@@ -2,7 +2,7 @@ import FAQ from '../_PageSections/FAQ';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'FAQ'
+  title: 'FAQ Page'
 };
 
 const FAQPage = () => {

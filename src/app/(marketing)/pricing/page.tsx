@@ -13,6 +13,12 @@ import Link from 'next/link';
 import { Separator } from '@/components/ui/Separator';
 import PriceCard from '../_PageSections/PriceCard';
 
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Pricing Page'
+};
+
 const MainCard = () => {
   const { products } = configuration;
   const product: ProductI = products[0];
