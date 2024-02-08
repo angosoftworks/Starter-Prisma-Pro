@@ -5,6 +5,7 @@ const routes = {
     { title: 'Overview', link: '/main', icon: Icons.Home },
     { title: 'Todos', link: '/todos/create', icon: Icons.Laptop },
     { title: 'Invite', link: '/invite', icon: Icons.Users },
+    { title: 'AI', link: '/ai', icon: Icons.Bot },
     { title: 'Admin', link: '/admin', icon: Icons.Lock },
     { title: 'Settings', link: '/settings/profile', icon: Icons.Settings }
   ],
