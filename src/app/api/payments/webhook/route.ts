@@ -5,6 +5,12 @@ import type { NextRequest } from 'next/server';
 
 import stripe from '@/lib/API/Services/init/payments';
 
+export const config = {
+  api: {
+    bodyParser: false
+  }
+};
+
 export async function POST(req: NextRequest) {
   const body = await req.text();
   const sig = headers().get('Stripe-Signature');
