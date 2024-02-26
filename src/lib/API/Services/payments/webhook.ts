@@ -2,8 +2,12 @@ import Stripe from 'stripe';
 import { UpdateOrgSubscription } from '@/lib/API/Database/subscription/mutations';
 import { CreateSubscription, UpdateSubscription } from '@/lib/API/Database/subscription/mutations';
 import { Subscription } from '@prisma/client';
-import { WebhookEventsE } from './stripeTypes';
 import { RetrieveSubscription } from './subscription';
+
+enum WebhookEventsE {
+  CheckoutSessionCompleted = 'checkout.session.completed',
+  CustomerSubscriptionUpdated = 'customer.subscription.updated'
+}
 
 const WebhookEvents = {
   customer_subscription_updated: WebhookEventsE.CustomerSubscriptionUpdated,
