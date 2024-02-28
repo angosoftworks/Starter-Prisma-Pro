@@ -1,4 +1,4 @@
-//'use server';
+'use server';
 import stripe from '@/lib/API/Services/init/payments';
 import routes from '@/lib/config/routes';
 import Stripe from 'stripe';
