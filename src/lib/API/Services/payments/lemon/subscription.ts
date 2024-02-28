@@ -1,17 +1,18 @@
 //'use server';
 
-//import clientLemon from '../init/payments';
+//import { getCustomer } from '@lemonsqueezy/lemonsqueezy.js';
+//import '@/lib/API/Services/init/payments';
 
 //interface SubscriptionPropsI {
 //  payments_id: string;
 //}
 
 //export const GetBillingUrl = async ({ payments_id }: SubscriptionPropsI): Promise<string> => {
-//  const id = Number(payments_id);
-//  const res = await clientLemon.getSubscription({ id });
+//  const id = payments_id;
+//  const { error, data } = await getCustomer(id);
+//  if (error) throw error;
 
-//  // @ts-expect-error, wrong types on lemon.js
-//  const resUrl = res.data.attributes.urls.customer_portal;
+//  const resUrl = data.data.attributes.urls.customer_portal;
 
 //  return resUrl;
 //};

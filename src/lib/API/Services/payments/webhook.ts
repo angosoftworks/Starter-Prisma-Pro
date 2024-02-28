@@ -31,7 +31,6 @@ export const WebhookEventHandler = async (event: Stripe.Event) => {
         status: statusSub,
         period_ends_at: new Date(subscription.current_period_end * 1000)
       };
-      console.log(dataSub);
 
       try {
         const sub = await prisma.subscription.create({ data: dataSub });

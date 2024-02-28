@@ -1,13 +1,16 @@
 //'use server';
-//import clientLemon from '../init/payments';
+
+//import { type NewCheckout, createCheckout } from '@lemonsqueezy/lemonsqueezy.js';
 
 //import { GetUser } from '../../Database/user/queries';
 //import { GetOrg } from '../../Database/org/queries';
 //import configuration from '@/lib/config/site';
 //import routes from '@/lib/config/routes';
 
+//import '@/lib/API/Services/init/payments';
+
 //interface createCheckoutProps {
-//  price_id: number;
+//  price_id: string;
 //  org_id: string;
 //}
 
@@ -15,8 +18,9 @@
 //  price_id,
 //  org_id
 //}: createCheckoutProps): Promise<string> => {
-//  const storeId = Number(process.env.NEXT_PUBLIC_LEMON_STORE_ID);
+//  const storeId = process.env.NEXT_PUBLIC_LEMON_STORE_ID;
 //  const variantId = price_id;
+
 //  const user = await GetUser();
 //  const email = user.email;
 //  const org = await GetOrg({ id: org_id });
@@ -27,23 +31,20 @@
 
 //  const origin = configuration.url;
 
-//  const attributes = {
-//    checkout_data: {
+//  const attributes: NewCheckout = {
+//    checkoutData: {
 //      email,
 //      custom: {
 //        org_id
 //      }
 //    },
-//    product_options: {
-//      redirect_url: `${origin}/${routes.redirects.user.toUserDashboard}`
+//    productOptions: {
+//      redirectUrl: `${origin}/${routes.redirects.user.toUserDashboard}`
 //    }
 //  };
 
-//  const res = await clientLemon.createCheckout({
-//    storeId,
-//    variantId,
-//    attributes
-//  });
+//  const { error, data } = await createCheckout(storeId, variantId, attributes);
+//  if (error) throw error;
 
-//  return res.data.attributes.url;
+//  return data.data.attributes.url;
 //};
