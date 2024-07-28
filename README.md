@@ -44,7 +44,7 @@ The Demo can be found here:
 <br />
 https://www.saasstarterkit.com/dashboard/test243/main
 
-Certain Features have to be disabled or cant be included in the demo.
+Certain Features have to be disabled or cant be included in the demo
 
 ## 🤝 Contributing
 

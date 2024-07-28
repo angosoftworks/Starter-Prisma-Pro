@@ -9,7 +9,9 @@ import prisma from '../init/prisma';
 
 export const {
   handlers: { GET, POST },
-  auth
+  auth,
+  signIn,
+  signOut
 } = NextAuth({
   providers: [
     Google({
