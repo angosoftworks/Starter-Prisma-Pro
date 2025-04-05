@@ -128,3 +128,11 @@ model Invite {
   organization Organization? @relation(fields: [org_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
   @@map(name: "invites")
 }
+
+model Blueprint {
+  id        String   @id @default(cuid())
+  userId    String
+  name      String
+  dsl       String   // Le contenu brut du blueprint
+  createdAt DateTime @default(now())
+}
