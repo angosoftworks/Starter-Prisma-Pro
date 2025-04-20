@@ -16,12 +16,6 @@ export default function Landing() {
   return (
     <div>
       <Hero />
-      <LogoCloud />
-      <FeatureList />
-      <Feature />
-      <Feature isFlipped={true} />
-      <Feature />
-      <CTA />
     </div>
   );
 }

@@ -7,6 +7,9 @@ import { sendVerificationRequest } from './sendEmail';
 
 import prisma from '../init/prisma';
 
+console.log('GOOGLE_CLIENT_ID:', process.env.GOOGLE_CLIENT_ID);
+console.log('GOOGLE_CLIENT_SECRET:', process.env.GOOGLE_CLIENT_SECRET);
+
 export const {
   handlers: { GET, POST },
   auth,
@@ -15,10 +18,19 @@ export const {
 } = NextAuth({
   providers: [
     Google({
-      clientId: process.env.GOOGLE_CLIENT_ID,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET
+      clientId: process.env.GOOGLE_CLIENT_ID ?? '',
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET ?? '',
     }),
     EmailProvider({
+      server: {
+        host: 'localhost',
+        port: 1025,
+        auth: {
+          user: '',
+          pass: ''
+        }
+      },
+      from: 'no-reply@localhost',
       sendVerificationRequest
     })
   ],
@@ -29,12 +41,10 @@ export const {
   },
   callbacks: {
     async session({ session, user }) {
-      if (user || session) {
+      if (session?.user && user?.id) {
         session.user.id = user.id;
-        return session;
       }
-
-      throw 'User Not Found';
+      return session;
     }
   }
 });

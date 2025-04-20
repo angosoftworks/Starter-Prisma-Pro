@@ -1,7 +1,7 @@
 const siteConfig = {
-  name: 'Saas Starter Kit',
-  alt_name: 'My SAAS',
-  description: 'An open source Saas boilerplate with Nextjs and Prisma.',
+  name: 'Just AAA Dev',
+  alt_name: 'Just AAA Dev',
+  description: 'Assistant IA pour Blueprints Unreal.',
   url: process.env.NEXT_PUBLIC_DOMAIN,
   ogImage: '',
   loading_bar_color: '#ADD8E6',

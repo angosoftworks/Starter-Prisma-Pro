@@ -37,15 +37,15 @@ const CreateRoleCard = () => {
   return (
     <Card className="bg-background-light dark:bg-background-dark">
       <CardHeader>
-        <CardTitle>No Organizations and Roles Found</CardTitle>
-        <CardDescription>Click below to create an Organization to get Started</CardDescription>
+        <CardTitle>Aucun projet détecté</CardTitle>
+        <CardDescription>Clique ici pour créer un projet et propulser ton jeu vidéo aux standards AAA.</CardDescription>
       </CardHeader>
       <CardContent>
         <Link
           href={`/user/create-org`}
           className={cn(buttonVariants({ variant: 'secondary', size: 'lg' }), 'mr-6')}
         >
-          Get Started
+          C'est parti ! 🚀
         </Link>
       </CardContent>
     </Card>
@@ -55,7 +55,7 @@ const CreateRoleCard = () => {
 const MyRoles = ({ roles }: MyRolesProps) => {
   return (
     <div>
-      <h1 className="text-xl font-bold mb-6">My Organizations:</h1>
+      <h1 className="text-xl font-bold mb-6">Mes projets :</h1>
       {roles?.length !== 0 ? (
         roles?.map((role) => <RoleCard key={role.id} role={role} />)
       ) : (

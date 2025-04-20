@@ -51,7 +51,7 @@ export default function CreateOrgPage() {
     <div>
       <Card className="bg-background-light dark:bg-background-dark">
         <CardHeader className="space-y-1">
-          <CardTitle className="text-2xl">Create a Org</CardTitle>
+          <CardTitle className="text-2xl">Créer un projet</CardTitle>
         </CardHeader>
 
         <CardContent>
@@ -62,7 +62,7 @@ export default function CreateOrgPage() {
                 name="name"
                 render={({ field }) => (
                   <FormItem>
-                    <FormMessage /> <FormLabel>Title</FormLabel>
+                    <FormMessage /> <FormLabel>Titre</FormLabel>
                     <FormControl>
                       <Input
                         {...register('name')}
@@ -75,7 +75,7 @@ export default function CreateOrgPage() {
                 )}
               />
               <Button disabled={isSubmitting} className="w-full">
-                {isSubmitting && <Icons.Spinner className="mr-2 h-4 w-4 animate-spin" />}Submit
+                {isSubmitting && <Icons.Spinner className="mr-2 h-4 w-4 animate-spin" />}Soumettre
               </Button>
             </form>
           </Form>
