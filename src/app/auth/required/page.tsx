@@ -10,12 +10,12 @@ const AuthRequired = () => {
   return (
     <Card className="bg-background-light dark:bg-background-dark">
       <CardHeader>
-        <CardTitle>Authentication Required </CardTitle>
-        <CardDescription>Please Sign in to view this page.</CardDescription>
+        <CardTitle>Connexion requise </CardTitle>
+        <CardDescription>Connectez-vous pour voir cette page.</CardDescription>
       </CardHeader>
       <CardContent>
         <Button variant="ghost" onClick={() => router.push('/auth/login')}>
-          Click Here to sign in
+          Cliquez-ici pour vous connecter
         </Button>
       </CardContent>
     </Card>

@@ -1,80 +1,42 @@
-'use client';
+"use client";
+import { useState } from "react";
 
-import { Button } from '@/components/ui/Button';
+export default function AskGPTPage() {
+  const [question, setQuestion] = useState("");
+  const [response, setResponse] = useState("");
 
-import { Separator } from '@radix-ui/react-dropdown-menu';
-import { Textarea } from '@/components/ui/Textarea';
-
-import { MaxLengthSelector } from './_PageSections/MaxlengthSelector';
-import { ModelSelector } from './_PageSections/ModelSelector';
-
-import { TemperatureSelector } from './_PageSections/TemperatureSelector';
-import { TopPSelector } from './_PageSections/TopPSelector';
-import { models, types } from './data/models';
-
-import { Message, useChat } from 'ai/react';
-
-export default function PlaygroundPage() {
-  const { messages, input, handleInputChange, handleSubmit, stop, setMessages } = useChat();
-
-  const emptyMessage: Message[] = [
-    {
-      id: 'empty34d345',
-      createdAt: new Date('2024-02-08T00:57:54.306Z'),
-      content: '',
-      role: 'system'
-    }
-  ];
-
-  const getCurrentRole = (role: string) => {
-    if (role === 'system') return;
-    return messages.length > 1 && role.toUpperCase();
+  const ask = async () => {
+    const res = await fetch("/api/ask-gpt", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ question, userId: "demo-user" }),
+    });
+    const data = await res.json();
+    setResponse(data.reply);
   };
 
   return (
-    <div className="mb-24">
-      <h2 className="text-2xl mb-4 font-bold">Playground</h2>
-      <Separator />
-      <div className="grid grid-cols-1 gap-6 xl:grid-cols-4">
-        <div>
-          <h1 className="text-xl font-bold tracking-tight mb-2">Input:</h1>
-          <form onSubmit={handleSubmit} className="h-full">
-            <Textarea
-              placeholder="Submit some text to generate an AI reponse"
-              className="min-h-[18rem]"
-              value={input}
-              onChange={handleInputChange}
-            />
-            <div className="grid grid-cols-3 gap-4 items-center mt-4 min-h-[5rem]">
-              <Button type="submit">Submit</Button>
-              <Button onClick={() => setMessages(emptyMessage)} variant="secondary">
-                Reset
-              </Button>
+    <div className="max-w-xl mx-auto mt-10">
+      <h1 className="text-2xl font-bold mb-4">Poser une question à GPT</h1>
+      <textarea
+        value={question}
+        onChange={(e) => setQuestion(e.target.value)}
+        rows={4}
+        className="w-full p-2 border rounded mb-2"
+        placeholder="Ex : Comment le PlayerController interagit avec le GameMode ?"
+      />
+      <button
+        onClick={ask}
+        className="px-4 py-2 bg-purple-600 text-white rounded"
+      >
+        Envoyer
+      </button>
 
-              <Button onClick={() => stop()} variant="destructive">
-                Stop
-              </Button>
-            </div>
-          </form>
+      {response && (
+        <div className="mt-6 p-4 bg-gray-100 rounded whitespace-pre-wrap font-mono">
+          {response}
         </div>
-        <div className="col-span-2">
-          <h1 className="text-xl font-bold tracking-tight mb-2">Output:</h1>
-          <div className="rounded-md border bg-muted overflow-y-scroll p-4 h-[24rem]">
-            {messages.map((m) => (
-              <div key={m.id} className="mt-2 whitespace-pre-wrap">
-                <div className="font-bold">{getCurrentRole(m.role)}</div>
-                {m.content}
-              </div>
-            ))}
-          </div>
-        </div>
-        <div className="space-y-8 mt-8">
-          <ModelSelector types={types} models={models} />
-          <TemperatureSelector defaultValue={[0.56]} />
-          <MaxLengthSelector defaultValue={[256]} />
-          <TopPSelector defaultValue={[0.9]} />
-        </div>
-      </div>
+      )}
     </div>
   );
 }

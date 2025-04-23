@@ -52,7 +52,7 @@ export default function AuthForm({ submit_text, auth_flow }: AuthFormPropsI) {
 
   return (
     <div>
-      <Form {...form}>
+      {/*<Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
           <FormField
             control={form.control}
@@ -82,20 +82,20 @@ export default function AuthForm({ submit_text, auth_flow }: AuthFormPropsI) {
             </Button>
           </div>
         </form>
-      </Form>
+      </Form>*/}
 
       <div className="space-y-8 mt-8">
-        <div className="relative">
+        {/* <div className="relative">
           <div className="absolute inset-0 flex items-center">
             <span className="w-full border-t" />
           </div>
           <div className="relative flex justify-center text-xs uppercase">
-            <span className="bg-background px-2 text-muted-foreground">Or continue with</span>
+           <span className="bg-background px-2 text-muted-foreground">Or continue with</span>
           </div>
-        </div>
+        </div>*/}
         <Button onClick={handleGoogleSignIn} variant="outline" className="w-full">
           <Icons.Google />
-          <span className="ml-2 font-semibold">Sign in with Google</span>
+          <span className="ml-2 font-semibold">Connexion avec Google</span>
         </Button>
       </div>
     </div>

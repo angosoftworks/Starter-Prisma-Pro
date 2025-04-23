@@ -8,7 +8,6 @@ export default async function UserDashboard() {
   return (
     <div>
       <MyRoles roles={roles} />
-      <PlaceHolder />
     </div>
   );
 }

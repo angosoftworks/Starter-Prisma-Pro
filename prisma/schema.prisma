@@ -51,6 +51,7 @@ model User {
   todo         Todo[]
   Role         Role[]
   Organization Organization[]
+  blueprints Blueprint[]
 
   @@unique([id, email])
   @@map(name: "users")
@@ -100,6 +101,7 @@ model Organization {
   Role         Role[]
   Todo         Todo[]
   Invite       Invite[]
+  blueprints Blueprint[]
 
   @@unique([id, name])
   @@map(name: "organizations")
@@ -130,9 +132,14 @@ model Invite {
 }
 
 model Blueprint {
-  id        String   @id @default(cuid())
-  userId    String
-  name      String
-  dsl       String   // Le contenu brut du blueprint
-  createdAt DateTime @default(now())
+  id              String   @id @default(cuid())
+  name            String
+  dsl             String   // le contenu exporté
+  userId          String
+  organizationId       String   // correspond à organization.id
+
+  createdAt       DateTime @default(now())
+
+  user            User     @relation(fields: [userId], references: [id])
+  organization         Organization @relation(fields: [organizationId], references: [id])
 }

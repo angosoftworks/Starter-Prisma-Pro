@@ -15,10 +15,10 @@ export default function Signup() {
     <div className="md:w-96">
       <Card className="bg-background-light dark:bg-background-dark">
         <CardHeader className="space-y-1">
-          <CardTitle className="text-2xl">Create an account</CardTitle>
-          <CardDescription>
+          <CardTitle className="text-2xl">Créer un compte</CardTitle>
+          {/*<CardDescription>
             Enter your email and password below to create your account
-          </CardDescription>
+          </CardDescription>*/}
         </CardHeader>
         <CardContent>
           <AuthForm submit_text="Signup with Email" auth_flow="signup" />
@@ -26,9 +26,9 @@ export default function Signup() {
         <CardFooter>
           <div className="flex flex-col">
             <div className="text-center text-sm text-gray-500">
-              Already a member?{' '}
+              Déjà membre ?{' '}
               <Link href="/auth/login" className="leading-7 text-indigo-600 hover:text-indigo-500">
-                Login here.
+                Connectez-vous ici.
               </Link>
             </div>
           </div>

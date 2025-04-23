@@ -5,45 +5,50 @@ import BarChart from '../../_PageSections/charts/Bar';
 import PieChart from '../../_PageSections/charts/Pie';
 import { RecentSales } from '../../_PageSections/RecentSales';
 import { DocShare } from '../../_PageSections/DocShare';
+import { DashboardHeader } from '../../_PageSections/DashboardHeader';
+import { ScoreCard } from '../../_PageSections/ScoreCard';
+import { ModuleList } from '../../_PageSections/ModuleList';
+import { ScanHistory } from '../../_PageSections/ScanHistory';
+import { ClientQuickActions } from '../../_PageSections/ClientQuickActions';
 
 const Dashboard = () => {
   return (
     <div className="w-11/12 space-y-6">
-      <div className="grid gap-2 md:grid-cols-2 lg:grid-cols-3">
-        <SummaryCard
-          card_title={'Revenue'}
-          icon={<Icons.CircleDollarSign />}
-          content_main={45596}
-          content_secondary={'+6.1% from last month'}
-        />
-        <SummaryCard
-          card_title={'Subscriptions'}
-          icon={<Icons.Users />}
-          content_main={10298}
-          content_secondary={'+18.1% from last month'}
-        />
-        <SummaryCard
-          card_title={'Posts'}
-          icon={<Icons.ScreenShare />}
-          content_main={28353}
-          content_secondary={'+10.1% from last month'}
-        />
-      </div>
-      <div>
-        <ComposeChart />
-      </div>
-      <div className="grid gap-4 grid-cols-1  xl:grid-cols-4">
-        <div className="md:col-span-3">
-          <BarChart />
-        </div>
-        <div className="md:col-span-1">
-          <PieChart />
-        </div>
-      </div>
-      <div className="grid gap-6 grid-cols-1 xl:grid-cols-2">
-        <RecentSales />
-        <DocShare />
-      </div>
+      <DashboardHeader 
+  name="My Dashboard"
+  status="Corrigé"
+  lastScan={new Date()} 
+/>
+<ScoreCard 
+  score={85} 
+  diff={5} 
+  metrics={{ accuracy: 92, speed: 88 }} 
+/>
+<ModuleList
+  modules={[
+    { name: "Analyse syntaxique", score: 85 },
+    { name: "Sécurité", score: 92 },
+    { name: "Performance", score: 76 },
+  ]}
+/>
+<ScanHistory
+  history={[
+    {
+      date: new Date("2024-04-01T10:00:00"),
+      type: "Scan antivirus",
+      scoreBefore: 75,
+      scoreAfter: 90,
+    },
+    {
+      date: new Date("2024-04-15T14:30:00"),
+      type: "Audit sécurité",
+      scoreBefore: 90,
+      scoreAfter: 93,
+    },
+  ]}
+/>
+
+<ClientQuickActions />
     </div>
   );
 };
