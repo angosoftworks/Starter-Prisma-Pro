@@ -24,17 +24,17 @@ const MainCard = () => {
     <section className="flex flex-col py-8 mx-4 md:max-w-[64rem] md:py-12 lg:mb-16">
       <div className="mx-auto flex w-full flex-col gap-4 md:max-w-[58rem] mb-8">
         <h2 className="font-heading text-3xl leading-[1.1] sm:text-3xl md:text-6xl">
-          Industry Leading Pricing
+          Des tarifs à faire pâlir l'industrie
         </h2>
         <p className="max-w-[85%] leading-normal text-muted-foreground sm:text-lg sm:leading-7">
-          Unlock all the features for your project.
+          Débloque le plein potentiel de ton projet.
         </p>
       </div>
       <Separator />
-      <div className="font-heading text-3xl mt-8 mb-4 md:text-4xl">Our Most Popular Plan:</div>
+      <div className="font-heading text-3xl mt-8 mb-4 md:text-4xl">Notre offre la plus populaire :</div>
       <div className="grid w-full items-start gap-10 rounded-lg border p-10 md:grid-cols-[1fr_200px]">
         <div className="grid gap-6">
-          <h3 className="text-xl font-bold sm:text-2xl">What&apos;s included in the {name} plan</h3>
+          <h3 className="text-xl font-bold sm:text-2xl">À quoi me donne droit le plan {name} ?</h3>
           <ul className="grid gap-3 text-sm text-muted-foreground sm:grid-cols-2">
             {features.map((feature) => (
               <li key={feature} className="flex items-center">
@@ -46,10 +46,10 @@ const MainCard = () => {
         <div className="flex flex-col gap-4 text-center">
           <div>
             <h3 className="text-7xl font-bold">${price}</h3>
-            <p className="text-sm font-medium text-muted-foreground">Billed {interval}</p>
+            <p className="text-sm font-medium text-muted-foreground">Facturé {interval}</p>
           </div>
           <Link href="/auth/signup" className={cn(buttonVariants({ size: 'lg' }))}>
-            Get Started
+            Souscrire
           </Link>
         </div>
       </div>
@@ -78,12 +78,12 @@ const Pricing = () => {
 
       <div className="">
         <div className="font-heading text-3xl mt-8 mb-16 text-center underline underline-offset-8 md:text-4xl">
-          All Plans
+          Toutes les offres
         </div>
         <div className="flex justify-center mb-12">
-          <div className="text-sm font-bold mr-2">Monthly</div>
+          <div className="text-sm font-bold mr-2">Mensuel</div>
           <Switch onClick={changeTimeInterval} />
-          <div className="text-sm font-bold ml-3">Yearly</div>
+          <div className="text-sm font-bold ml-3">Annuel</div>
         </div>
 
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">

@@ -1,6 +1,6 @@
 export enum IntervalE {
-  MONTHLY = 'Monthly',
-  YEARLY = 'Yearly'
+  MONTHLY = 'mensuellement',
+  YEARLY = 'annuellement'
 }
 
 export enum AuthProviderE {

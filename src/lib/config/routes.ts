@@ -22,7 +22,7 @@ const routes = {
     ]
   },
   routes_marketing: [
-    { title: 'Pricing', link: '/pricing' },
+    { title: 'Tarifs', link: '/pricing' },
     { title: 'FAQ', link: '/faq' },
     { title: 'Blog', link: '/blog' }
   ],

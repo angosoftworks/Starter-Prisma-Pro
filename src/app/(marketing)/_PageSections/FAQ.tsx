@@ -13,7 +13,7 @@ export default function FAQ() {
   return (
     <div className="w-[42rem] min-h-screen">
       <h1 className=" text-xl md:text-3xl font-bold text-center my-12 ">
-        Frequently Asked Questions
+        Questions fréquentes
       </h1>
       <Accordion type="multiple">
         {faqs.map((item, index) => (

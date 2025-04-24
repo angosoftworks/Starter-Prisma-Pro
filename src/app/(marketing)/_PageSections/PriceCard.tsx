@@ -53,7 +53,7 @@ const PriceCard = ({ product, timeInterval }: PriceCardProps) => {
     >
       {plan.isPopular && (
         <div className="px-3 py-1 text-sm text-white bg-gradient-to-r from-blue-400 to-blue-700 rounded-full inline-block absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-          Popular
+          Populaire
         </div>
       )}
       <CardHeader className="flex flex-col items-center">
@@ -63,7 +63,7 @@ const PriceCard = ({ product, timeInterval }: PriceCardProps) => {
       <CardContent className="flex flex-col items-center">
         <div className="flex flex-col items-center mt-2 mb-6">
           <h4 className="text-5xl font-bold">${plan?.price}</h4>
-          <div className="text-sm font-medium text-muted-foreground">Billed {timeInterval}</div>
+          <div className="text-sm font-medium text-muted-foreground">Facturé {timeInterval}</div>
         </div>
         <ul className="flex flex-col space-y-4">
           {features.map((feature) => (
@@ -75,7 +75,7 @@ const PriceCard = ({ product, timeInterval }: PriceCardProps) => {
       </CardContent>
       <CardFooter>
         <Link href="/auth/signup" className={cn(buttonVariants({ size: 'lg' }))}>
-          Get Started
+          Souscrire
         </Link>
       </CardFooter>
     </Card>
